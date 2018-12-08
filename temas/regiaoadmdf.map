@@ -1,0 +1,337 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 40
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select geom,ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_desc,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    METADATA
+      "cache"	"sim"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"C�digo,Nome,Prefixo"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "UTFDATA"	""
+      "ITENS"	"ra_ses,ra_ses_desc,ra_prefixo"
+      "TIP" "ra_ses_desc,ra_prefixo"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Regi�es administrativas do GDF"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+      "UTFDATA" "ra_ses_desc"
+    END # METADATA
+    NAME "regiaoadmdf"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Brasília"
+      EXPRESSION ('[ra_ses]'eq'1')
+      STYLE
+        COLOR 233 37 17
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Asa Sul"
+      EXPRESSION ('[ra_ses]'eq'100')
+      STYLE
+        COLOR 13 114 199
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Asa Norte"
+      EXPRESSION ('[ra_ses]'eq'101')
+      STYLE
+        COLOR 106 75 7
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Brazlândia"
+      EXPRESSION ('[ra_ses]'eq'4')
+      STYLE
+        COLOR 49 232 58
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Ceilândia"
+      EXPRESSION ('[ra_ses]'eq'9')
+      STYLE
+        COLOR 166 227 130
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Fercal"
+      EXPRESSION ('[ra_ses]'eq'31')
+      STYLE
+        COLOR 155 150 155
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Gama"
+      EXPRESSION ('[ra_ses]'eq'2')
+      STYLE
+        COLOR 124 31 194
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Guará"
+      EXPRESSION ('[ra_ses]'eq'10')
+      STYLE
+        COLOR 44 22 4
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Itapoã"
+      EXPRESSION ('[ra_ses]'eq'28')
+      STYLE
+        COLOR 162 52 159
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Jardim Botânico"
+      EXPRESSION ('[ra_ses]'eq'27')
+      STYLE
+        COLOR 18 128 219
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Lago Norte"
+      EXPRESSION ('[ra_ses]'eq'18')
+      STYLE
+        COLOR 103 13 74
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Lago Sul"
+      EXPRESSION ('[ra_ses]'eq'16')
+      STYLE
+        COLOR 91 217 89
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Candangolândia"
+      EXPRESSION ('[ra_ses]'eq'19')
+      STYLE
+        COLOR 147 76 75
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Paranoá"
+      EXPRESSION ('[ra_ses]'eq'7')
+      STYLE
+        COLOR 86 177 214
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Park Way"
+      EXPRESSION ('[ra_ses]'eq'24')
+      STYLE
+        COLOR 233 103 90
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Planaltina"
+      EXPRESSION ('[ra_ses]'eq'6')
+      STYLE
+        COLOR 229 107 227
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Recanto das Emas"
+      EXPRESSION ('[ra_ses]'eq'15')
+      STYLE
+        COLOR 204 174 36
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Riacho Fundo II"
+      EXPRESSION ('[ra_ses]'eq'21')
+      STYLE
+        COLOR 178 110 202
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Samambaia"
+      EXPRESSION ('[ra_ses]'eq'12')
+      STYLE
+        COLOR 205 237 230
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Santa Maria"
+      EXPRESSION ('[ra_ses]'eq'13')
+      STYLE
+        COLOR 118 148 237
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "São Sebastião"
+      EXPRESSION ('[ra_ses]'eq'14')
+      STYLE
+        COLOR 155 228 149
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Sobradinho"
+      EXPRESSION ('[ra_ses]'eq'5')
+      STYLE
+        COLOR 224 9 4
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Sobradinho II"
+      EXPRESSION ('[ra_ses]'eq'26')
+      STYLE
+        COLOR 241 222 57
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Taguatinga"
+      EXPRESSION ('[ra_ses]'eq'3')
+      STYLE
+        COLOR 40 247 140
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Águas Claras"
+      EXPRESSION ('[ra_ses]'eq'20')
+      STYLE
+        COLOR 223 58 5
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Cruzeiro"
+      EXPRESSION ('[ra_ses]'eq'11')
+      STYLE
+        COLOR 79 197 32
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Núcleo Bandeirante"
+      EXPRESSION ('[ra_ses]'eq'8')
+      STYLE
+        COLOR 14 193 221
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Varjão"
+      EXPRESSION ('[ra_ses]'eq'23')
+      STYLE
+        COLOR 47 205 181
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Riacho Fundo"
+      EXPRESSION ('[ra_ses]'eq'17')
+      STYLE
+        COLOR 97 16 213
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Vicente Pires"
+      EXPRESSION ('[ra_ses]'eq'30')
+      STYLE
+        COLOR 126 236 183
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "SCIA/Estrutural"
+      EXPRESSION ('[ra_ses]'eq'25')
+      STYLE
+        COLOR 119 160 237
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "SIA"
+      EXPRESSION ('[ra_ses]'eq'29')
+      STYLE
+        COLOR 56 3 196
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Sudoeste/Octogonal"
+      EXPRESSION ('[ra_ses]'eq'22')
+      STYLE
+        COLOR 199 113 126
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

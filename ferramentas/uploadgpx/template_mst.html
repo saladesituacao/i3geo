@@ -1,0 +1,24 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form accept-charset="utf-8" class="form-horizontal" target="i3GEOuploadgpxiframe" action="{{{locaplic}}}/ferramentas/uploadgpx/upload.php" method="post" ENCTYPE="multipart/form-data">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{arquivoGpx}}}</label>
+            <div class="col-md-6 ">
+                <input required onclick="$(this).parent().find('input[type=file]').click();" class="form-control input-lg" type='text' name="i3GEOuploadgpx" />
+                <input name="i3GEOuploadgpx" onchange="$(this).parent().find('.form-control').val($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                <b class="caret careti"></b>
+            </div>
+        </div>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{projecao}}}</label>
+            <div class="col-md-6">
+                <div id='i3GEOuploadgpxListaepsg'></div>
+            </div>
+        </div>
+        <button name="submit" onclick="i3GEOF.uploadgpx.submete(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{adicmapa}}}
+        </button>
+        <input type='hidden' name='g_sid' value='{{{sid}}}'>
+        <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+    </form>
+    <iframe name=i3GEOuploadgpxiframe style="text-align: left; border: 1px solid rgb(242, 232, 232);" width="98%" height="60px"></iframe>
+</div>

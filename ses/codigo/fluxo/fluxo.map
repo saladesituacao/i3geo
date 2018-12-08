@@ -1,0 +1,127 @@
+MAP
+  FONTSET "../../../symbols/fontes.txt"
+  SYMBOLSET "../../../symbols/simbolos.sym"
+
+  LAYER
+    CONNECTION "sage"
+    CONNECTIONTYPE POSTGIS
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    DATA "linha from (
+select geopara.no_cidade as para, geode.no_cidade as de, (ibge_de * 1000000 + ibge_para) as gid,ocorrencias.*,st_makeline(geode.the_geom2,geopara.the_geom2) as linha
+FROM (
+	select count(*) as numocorrencias, tab.co_bpi_gestor AS ibge_de,tab.co_bpi_ibge AS ibge_para,co_bpi_cmp_ano as ano, co_bpi_cmp_mes as mes
+	from dbaih.tb_bpi_mamografia_servico_atendimento AS tab
+	WHERE tab.co_bpi_gestor = 430510 AND co_bpi_gestor > 0 AND co_bpi_ibge > 0 AND co_bpi_cmp_ano = 2014 AND co_bpi_cmp_mes = 10
+	GROUP BY tab.co_bpi_gestor,tab.co_bpi_ibge,co_bpi_cmp_ano, co_bpi_cmp_mes
+) AS ocorrencias
+LEFT JOIN public.tb_ibge as geode ON geode.ibge = ocorrencias.ibge_de
+LEFT JOIN public.tb_ibge as geopara ON geopara.ibge = ocorrencias.ibge_para    ) as foo using unique gid using srid=4674"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Teste fluxo 2014"
+      "TIP" "de,para,numocorrencias"
+      "ITENS" "de,para,numocorrencias"
+      "ITENSDESC" "de,para,quantidade"
+    END # METADATA
+    NAME "fluxo"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE LINE
+    CLASS
+      NAME ">= 1 e < que 5"
+      EXPRESSION (([numocorrencias]>=1)and([numocorrencias]<5))
+      STYLE
+        COLOR 255 255 0
+        WIDTH 1
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME ">= 5 e < que 10"
+      EXPRESSION (([numocorrencias]>=5)and([numocorrencias]<10))
+      STYLE
+        COLOR 255 255 0
+        WIDTH 2
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME ">= 10 e < que 20"
+      EXPRESSION (([numocorrencias]>=10)and([numocorrencias]<20))
+      STYLE
+        COLOR 255 200 0
+        WIDTH 2
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+     CLASS
+      NAME ">= 20"
+      EXPRESSION (([numocorrencias]>=20))
+      STYLE
+        COLOR 255 85 0
+        WIDTH 3
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+
+
+  END # LAYER
+
+END # MAP
+

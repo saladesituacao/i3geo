@@ -1,0 +1,118 @@
+Vídeos tutoriais - Série i3Geo
+
+Camadas
+
+Sala de Situação - SES/DF
+
+videos_tutoriais_serie_i3Geo_camadas
+
+
+Olá
+
+No vídeo anterior vimos as funcionalidades básicas de navegação
+principalmente essas que ficam disponíveis nessa barra lateral aqui
+
+
+Agora vamos ver como podemos alterar o conteúdo que é mostrado no mapa.
+
+Aqui no nosso mapa estamos vendo apenas os elementos básicos, como as estradas, ruas
+e os nomes dos lugares, mas podemos mudar isso
+
+Para isso iremos utilizar as funcionalidades que estão disponíveis nessa guia móvel aqui
+
+Veja que temos quatro ícones. O primeiro abre uma lista de ferramentas de uso menos comum
+
+O segundo abre a lista de camadas
+
+O terceiro abre o catálogo, que veremos em um próximo vídeo
+
+E o último abre um tutorial interativo sobre o mapa.
+
+-----------------------------
+
+Vamos explorar um pouco essa guia com as camadas.
+
+Na parte superior temos um ícone que permite fechar a guia
+
+Ao lado, um ícone que na verdade é um atalho para outra guia.
+Podemos usá-lo para evitarmos ter de fechar a guia e abrir a outra.
+
+Esse ícone mais à esquerda é um menu de opções
+quando clicamos, veremos isso logo mais.
+
+Voltando então, temos abaixo dessa faixa azul, uma lista de itens que chamamos de camadas.
+
+Esse termo "camada" faz referência a uma pilha, como se tivéssemos várias folhas de papel transparentes
+
+E assim podemos ir ligando e desligando as camadas clicando nesse quadradinho
+
+Eu vou ligar as unidades de saúde e as regiões de saúde
+
+Agora temos camadas "ligadas" que são essas que aparecem "ticadas"
+
+Vejam que pode demorar um pouco para cada camada aparecer,
+e essa demora depende um pouco da velocidade da conexão com a internet.
+
+-----------------------------
+
+A ordem das camadas na lista é importante já que o desenho é feito de baixo para cima
+
+Isso faz com que em alguns casos uma camada esconda a outra
+
+Se isso acontecer, podemos alterar a ordem, basta clicar e arrastar
+
+
+No final da lista de camadas temos as "Camadas de fundo"
+
+Clicando nesse ícone podemos expandir esse item para vermos as camadas de fundo disponíveis.
+
+A diferença entre essas camadas e as outras é que elas são fixas e não permitem muitos ajustes
+
+Podemos no máximo alterar a opacidade
+
+-----------------------------
+
+A primeira camada da lista não está atrelada a nenhum conjunto de dados
+
+Usamos para fazer desenhos sobre o mapa
+
+-----------------------------
+
+Ao lado de cada camada temos ainda um ícone que nos mostra uma série de opções que atuam sobre a camada
+em foco
+
+Podemos alterar a opacidade
+Visualizar parcialmente a camada
+
+Ver a tabela com os dados associados a cada elemento
+
+Modificar a legenda
+
+E excluir a camada
+note que só estamos excluindo a camada do mapa. Poderemos incluí-la novamente usando o catálogo
+
+-----------------------------
+
+Voltando então ao ícone de opções aqui de cima
+
+Vamos ver apenas as mais importantes
+
+Podemos ligar e desligar todas as camadas de uma vez e também
+
+Alterar a opacidade geral do mapa
+
+Bom, terminamos aqui. Nos próximos vídeos veremos como salvar um mapa, imprimir, 
+explorar os dados e muito mais.
+
+Até lá.
+
+
+
+
+
+
+
+
+
+
+

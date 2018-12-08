@@ -1,0 +1,54 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+      NAME "refdin"
+      TYPE RASTER
+      STATUS DEFAULT
+      CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&"
+      #CONNECTION "https://neo.sci.gsfc.nasa.gov/servlet/FGDCMetadata?datasetId=BlueMarbleNG&"
+      #CONNECTION "http://labs.metacarta.com/wms/vmap0"
+      CONNECTIONTYPE WMS
+      METADATA
+        "wms_srs"	"EPSG:4326"
+        "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+        "wms_name"	"base"
+        #"wms_name"	"BlueMarbleNG"
+        #"wms_name"	"basic"
+        "wms_formatlist"	"image/png"
+        "wms_format"	"image/png"
+        "wms_connectiontimeout"	"20"
+        "wms_server_version"	"1.1.1"
+        "wms_styles"	"default"
+      END
+	  TRANSPARENCY 100
+END
+#
+# se preferir usar esse LAYER, comente o anterior e descomente esse
+#
+#LAYER
+#	DATA "/var/www/i3geo/aplicmap/dados/mundo"
+#	NAME "refdin"
+#	STATUS DEFAULT
+#	TEMPLATE "none.htm"
+#	TYPE POLYGON
+#	UNITS METERS
+#	CLASS
+#		NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
+#		STYLE
+#			COLOR 230 230 230
+#			OUTLINECOLOR 255 255 255
+#		END
+#	END
+#END
+
+LAYER
+	NAME "refdinrect"
+	TYPE line
+	STATUS off
+	CLASS
+		NAME " "
+		COLOR 255 0 0
+	END
+END
+END

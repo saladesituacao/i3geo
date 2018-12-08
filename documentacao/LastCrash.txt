@@ -1,0 +1,18 @@
+Crash Message:
+
+   The first content line in C:\ms4w\Apache\htdocs\i3geo\documentacao\Languages.txt must be the Format: line.
+
+Natural Docs version Development Release 02-10-2007 (1.35 base)
+Perl version 5.8.8 on MSWin32
+
+Command Line:
+
+   -xi C:\ms4w\Apache\htdocs\i3geo\classesjs\jsobjects -xi C:\ms4w\Apache\htdocs\i3geo\classesjs\cpaint -xi C:\ms4w\Apache\htdocs\i3geo\classesphp\lews -xi C:\ms4w\Apache\htdocs\i3geo\ajuda -xi C:\ms4w\Apache\htdocs\i3geo\css -xi C:\ms4w\Apache\htdocs\i3geo\documentacao -xi C:\ms4w\Apache\htdocs\i3geo\exemplos\atlas -xi C:\ms4w\Apache\htdocs\i3geo\ferramentas -xi C:\ms4w\Apache\htdocs\i3geo\imagens -xi C:\ms4w\Apache\htdocs\i3geo\images -xi C:\ms4w\Apache\htdocs\i3geo\licenciamento -xi C:\ms4w\Apache\htdocs\i3geo\pacotes -xi C:\ms4w\Apache\htdocs\i3geo\symbols -xi C:\ms4w\Apache\htdocs\i3geo\temas -i C:\ms4w\Apache\htdocs\i3geo -o HTML C:\ms4w\Apache\htdocs\i3geo\documentacao -p C:\ms4w\Apache\htdocs\i3geo\documentacao -r
+
+Stack Trace:
+
+   NaturalDocs::Error::CatchDeath, called from
+   NaturalDocs::ConfigFile::Open, line 163, called from
+   NaturalDocs::Languages::LoadFile, line 335, called from
+   NaturalDocs::Languages::Load, line 273, called from
+   (eval), line 316 of NaturalDocs

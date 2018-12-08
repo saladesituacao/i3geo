@@ -1,0 +1,61 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "user=guest_sala password= dbname=dbspo host=10.1.2.25 port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom from (
+		SELECT
+		st_geomfromtext('POINT(' || dbgeral.tb_estab_geo.long || ' ' || dbgeral.tb_estab_geo.lat || ')', 4326) as the_geom,
+		'Unidade Básica de Saúde - '||dbsismob.tb_sismob_unid_func.no_unidade as nome,
+		dbgeral.tb_ibge.uf
+		||' ,'
+		||dbgeral.tb_ibge.cidade
+		||' ,'
+		||dbacoes_saude.tb_cnes_estabelecimento.no_logradouro
+		||' ,'||dbacoes_saude.tb_cnes_estabelecimento.no_bairro as desc,
+		tb_sismob_unid_func.co_cnes as cnes
+		FROM
+		dbsismob.tb_sismob_unid_func
+		INNER JOIN dbacoes_saude.tb_cnes_estabelecimento ON
+			dbsismob.tb_sismob_unid_func.co_cnes = dbacoes_saude.tb_cnes_estabelecimento.co_cnes
+		INNER JOIN dbgeral.tb_ibge
+			ON dbsismob.tb_sismob_unid_func.co_ibge = dbgeral.tb_ibge.ibge
+		INNER JOIN dbgeral.tb_estab_geo
+			ON dbsismob.tb_sismob_unid_func.co_cnes = dbgeral.tb_estab_geo.co_cnes
+				WHERE dbsismob.tb_sismob_unid_func.co_sismob_programa = 1 limit 100
+		) as foo using unique cnes using srid=4326"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"sim"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "download"	"SIM"
+      "arquivokmz"	""
+      "arquivodownload"	""
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"Teste UBS kml"
+      "convcaracter"	""
+    END # METADATA
+    NAME "_lubs"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 0
+        OFFSET 0 0
+        OUTLINECOLOR 255 0 0
+        SYMBOL "p0"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

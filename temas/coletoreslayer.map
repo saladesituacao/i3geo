@@ -1,0 +1,41 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    COMPOSITE
+      OPACITY 0
+    END # COMPOSITE
+    DATA "geom from (SELECT geom,'false' AS status, cnes,cnes_desc,local,cod_coletor,desc_tipo_unidade_ses,logradouro,bairro,complement FROM  st_stage.tab_coletores ORDER BY cod_coletor) as foo using unique cod_coletor using srid=4674"
+    METADATA
+      "cache"	"nao"
+      #"CLASSE"	"nao"
+      "permitekmz"	"SIM"
+      "permitedownload"	"SIM"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "convcaracter"	"SIM"
+      "TEMA"	"Coletores de ponto"
+      "UTFDATA"	"cnes_desc"
+      "TIP"	"cod_coletor,cnes,cnes_desc,local,logradouro,bairro,complement"
+      "ITENS"	"cod_coletor,cnes,cnes_desc,local,logradouro,bairro,complement"
+      "ITENSDESC" "<span style=color:navy >Código do coletor</span>,<span style=color:navy >CNES</span>,<span style=color:navy >Unidade</span>,<span style=color:navy >Local</span>,<span style=color:navy >Logradouro</span>,<span style=color:navy >Bairro</span>,<span style=color:navy >Complemento</span>"
+    END # METADATA
+    NAME "coletoreslayer"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS #
+      NAME ""
+      STYLE
+        SIZE 12
+        SYMBOL "ponto"
+        COLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+

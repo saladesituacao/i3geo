@@ -1,0 +1,46 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 70
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nome_estab_cnes_completo,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE ba.indica_sus = 'S' AND atend_odont is not null) as foo using unique cod_cnes using srid=4674"
+    METADATA
+      "cache"	"sim"
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "TILES"	"SIM"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "permitedownload"	"SIM"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "convcaracter"	"SIM"
+      "TEMA"	"Unidades de saúde com atendimento odontológico"
+      "cortepixels"	"20"
+      "IDENTIFICA"	"nao"
+    END # METADATA
+    NAME "unidadesodonto"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        COLOR 255 187 0
+        OUTLINECOLOR 255 0 0
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

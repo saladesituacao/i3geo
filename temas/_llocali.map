@@ -1,0 +1,88 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "TIP"	"TIPO,NOMELOC,ANOCRIA"
+      "cache"	"sim"
+      "CLASSE"	"SIM"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "olopacity"	""
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "permitekmz"	"sim"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "ITENSLINK"	",,,"
+      "TILES"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "nomeoriginal"	""
+      "olstatus"	""
+      "permitedownload"	"sim"
+      "LTEMPOFORMATODATA"	"iso8601"
+      "FILTROORIGINAL"	""
+      "permitecomentario"	"SIM"
+      "DATAORIGINAL"	""
+      "PLUGINI3GEO"	""
+      "metaestat"	""
+      "download"	"SIM"
+      "itembuscarapida"	"NOMELOC"
+      "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "transitioneffect"	"NAO"
+      "TEMA"	"Localidades (usar com timeline) para teste"
+      "cortepixels"	"40"
+      "identifica"	"sim"
+      "LTEMPOCONVENCODE"	"SIM"
+      "storymap"	""
+    END # METADATA
+    NAME "_llocali"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Vila"
+      EXPRESSION ('[TIPO]'eq'Vila')
+      STYLE
+        COLOR 250 193 4
+        SIZE 20
+        SYMBOL "http://localhost/i3geo/imagens/google/condominium.png"
+      END
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Cidade"
+      EXPRESSION ('[TIPO]'eq'Cidade')
+      STYLE
+        COLOR 62 9 41
+        OFFSET 0 -10
+        SIZE 20
+        SYMBOL "http://localhost/i3geo/imagens/google/condominium1.png"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Capital"
+      EXPRESSION ('[TIPO]'eq'Capital')
+      STYLE
+        COLOR 112 203 244
+        SIZE 9
+        SYMBOL "vila"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

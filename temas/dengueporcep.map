@@ -1,0 +1,61 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 70
+    END # COMPOSITE
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (SELECT cep,geom,id,dengue.casosdengue FROM geo.abrangecep JOIN (select count(*) AS casosdengue, nu_cep FROM geo.tab_dengue WHERE nu_cep is not null group by nu_cep order by casosdengue ) AS dengue ON geo.abrangecep.cep = dengue.nu_cep ) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Casos de dengue por CEP"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "dengueporcep"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "> 0 e <= 1"
+      EXPRESSION (([casosdengue]>0)and([casosdengue]<=1))
+      STYLE
+        COLOR 255 197 0
+        OUTLINECOLOR 238 16 16
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 1 e <= 2"
+      EXPRESSION (([casosdengue]>1)and([casosdengue]<=2))
+      STYLE
+        COLOR 255 138 0
+        OUTLINECOLOR 238 16 16
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 2"
+      EXPRESSION ([casosdengue]>2)
+      STYLE
+        COLOR 255 80 0
+        OUTLINECOLOR 238 16 16
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

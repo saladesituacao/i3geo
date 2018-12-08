@@ -1,0 +1,185 @@
+MAP
+	#
+	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
+	#
+	FONTSET "/var/www_ses_19/i3geo/ses/symbols/fontes.txt"
+	SYMBOLSET "/var/www_ses_19/i3geo/ses/symbols/simbolosv7.sym"
+	SHAPEPATH "/var/www/i3geo/aplicmap/dados"
+	IMAGECOLOR 255 255 255
+	MAXSIZE 4096
+	#
+	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
+	#Esse tipo nao e adequado para imagens raster, mas o i3geo muda automaticamente
+	#para png1 quando um arquivo raster e adicionado ao mapa
+	#
+	IMAGETYPE AGG_Q
+	#Brasil
+	EXTENT -180 -90 180 90
+	SIZE 500 500
+	STATUS ON
+	UNITS DD
+	#
+	#tambem e utilizado pelo i3Geo para gerar prefixos em algumas ferramentas, como download
+	#
+	NAME "sesdf"
+	#
+	#utilize o agg apenas com mapserver 5x
+OUTPUTFORMAT
+		NAME "geojson"
+		DRIVER "OGR/GEOJSON"
+		#MIMETYPE "application/json; subtype=geojson"
+		FORMATOPTION "STORAGE=memory"
+		FORMATOPTION "FORM=SIMPLE"
+	END
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+		DRIVER AGG/PNG
+		IMAGEMODE RGB
+		FORMATOPTION "QUANTIZE_FORCE=ON"
+		FORMATOPTION "QUANTIZE_DITHER=OFF"
+		FORMATOPTION "QUANTIZE_COLORS=256"
+		FORMATOPTION "INTERLACE=OFF"
+	END
+
+	#OUTPUTFORMAT
+		#	NAME svg
+		#	MIMETYPE "image/svg+xml"
+		#	DRIVER cairo/svg
+			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		#END
+
+	OUTPUTFORMAT
+			NAME jpeg
+			DRIVER "AGG/JPEG"
+			MIMETYPE "image/jpeg"
+			IMAGEMODE RGB
+			EXTENSION jpg
+			FORMATOPTION "INTERLACE=OFF"
+	END
+
+	OUTPUTFORMAT
+		NAME png1
+		MIMETYPE image/png
+		DRIVER AGG/PNG
+		EXTENSION png
+		IMAGEMODE RGB
+		TRANSPARENT FALSE
+		FORMATOPTION "INTERLACE=OFF"
+	END
+
+	OUTPUTFORMAT
+		NAME png2
+		MIMETYPE image/png
+		DRIVER AGG/PNG
+		EXTENSION png
+		IMAGEMODE PC256
+		TRANSPARENT TRUE
+		FORMATOPTION "INTERLACE=OFF"
+	END
+
+
+	PROJECTION
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+	END
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 12 10
+		KEYSPACING 5 5
+		LABEL
+			SIZE 7
+			FONT "verdana"
+			TYPE truetype
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 -2
+			PARTIALS TRUE
+		END
+		POSITION LL
+		STATUS off
+		#edite o caminho se a aplicacao for movida de lugar
+		#TEMPLATE "/var/www/i3geo/aplicmap/legenda.htm"
+	END
+	QUERYMAP
+		#OUTLINECOLOR 255 0 0
+		COLOR 0 255 255
+		SIZE 480 500
+		STATUS on
+		STYLE hilite
+	END
+	REFERENCE
+		COLOR -1 -1 -1
+		EXTENT -75.5728 -37.4751 -30.525 7.57273
+		#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
+		#edite o caminho se a aplicacao for movida de lugar
+		IMAGE "/var/www/i3geo/imagens/referencia1.png"
+		OUTLINECOLOR -1 -1 -1
+		SIZE 150 150
+		STATUS off
+		MARKER "ref"
+		MARKERSIZE 8
+		MINBOXSIZE 8
+		MAXBOXSIZE 145
+	END
+	SCALEBAR
+		BACKGROUNDCOLOR 200 200 200
+		COLOR 0 0 0
+		INTERVALS 5
+		LABEL
+			SIZE TINY
+			TYPE BITMAP
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 0
+			PARTIALS TRUE
+		END
+		POSITION LR
+		SIZE 200 2
+		STATUS embed
+		STYLE 0
+		TRANSPARENT FALSE
+		UNITS KILOMETERS
+	END
+
+	WEB
+		IMAGEPATH "/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+		#nao coloque texto com acentuacao aqui
+		METADATA
+			"ows_country"	"Brasil"
+			"ows_keywordlist"	"saude"
+			"ows_context_fid"	"i3geoses"
+			"ows_city"	"Brasilia"
+			"ows_contactperson"	"Web Master"
+			"ows_addresstype"	"uri"
+			"ows_context_version"	"1.1.1"
+			"wms_getcapabilities_version"	"1.1.1"
+			"ows_abstract"	"Webservices da Secretaria Estadual de Saude do DF"
+			"ows_contactposition"	"Administrador do sitio web"
+			"ows_stateorprovince"	"DF"
+			"ows_contactorganization"	"Sala de Situacao"
+			"ows_name"	"i3geoogcses"
+			"ows_accessconstraints"	"vedado o uso comercial"
+			"ows_fees"	"none"
+			"ows_contactelectronicmailaddress"	"salasituacao@saude.df.gov.br"
+			"ows_getcontext_enabled"	"1"
+			"ows_namespace_uri"	"http://www.omsug.ca/osgis2004"
+			"ows_address"	"http://salasit.saude.df.gov.br/"
+			"ows_postcode"	""
+			"ows_enable_request" "*"
+			"ows_sld_enabled" "true"
+			"wms_feature_info_mime_type" "application/json"
+		END
+		QUERYFORMAT text/html
+		LEGENDFORMAT text/html
+		BROWSEFORMAT text/html
+		TEMPLATE "none.htm"
+	END
+
+END

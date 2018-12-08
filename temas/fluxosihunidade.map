@@ -1,0 +1,51 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (
+SELECT ST_MakeLine(c.geom,st_centroid(u.geom)) AS geom, s.i_estab_cnes, s.i_cep_res, i_dt_internacao, row_number() OVER() AS id
+FROM st_stage.tab_rd AS s
+JOIN dbauxiliares_geo.cep AS c ON c.cep = s.i_cep_res
+JOIN dbauxiliares.tb_unidade AS u ON s.i_estab_cnes = u.cnes::text
+WHERE s.i_estab_cnes::int = 0/*cocnesunidade*/ AND date(i_dt_internacao) BETWEEN date('/*iniano-inimes-inidia*/') AND date('/*fimano-fimmes-fimdia*/')
+    ) as foo using unique id using srid=4674"
+    METADATA
+      "cache"	"NAO"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"NAO"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "permitedownload"	"NAO"
+      "METAESTAT"	""
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","janela":{"w":"300px","h":"300px"},"parametros":[{"titulo" : "Unidade de saúde","chave" : "/*cocnesunidade*/","tipo" : "select","valores" : "","prog" : "ses/rest/unidadesdesaude/listai3geo/hospitais"},{"titulo" : "Ano inicial (inclusive)","chave" : "/*iniano","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "Mês","chave" : "inimes","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12","prog" : ""},{"titulo" : "Dia","chave" : "inidia*/","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31","prog" : ""},{"titulo" : "Ano final (inclusive)","chave" : "/*fimano","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "Mês","chave" : "fimmes","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12","prog" : ""},{"titulo" : "Dia","chave" : "fimdia*/","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31","prog" : ""}]}'
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Fluxo DF-DF para uma unidade de saúde considerando o CEP de residência e data de internação"
+    END # METADATA
+    NAME "fluxosihunidade"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 100 100 100
+        SYMBOL "linha"
+      END # STYLE
+	  STYLE
+	    GEOMTRANSFORM "end"
+	    SYMBOL "endarrow"
+	    COLOR 100 100 100
+	    SIZE 7
+	    ANGLE auto
+	  END
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

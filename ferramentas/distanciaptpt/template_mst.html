@@ -1,0 +1,56 @@
+<div id='{{idContainer}}' class='container' style='width:auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div id='i3GEOdistanciaptptresultado'>
+        <div id='i3GEOF.distanciaptpt.t0'>
+            <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/distanciaptpt/exemplo.png' />
+            <h5>{{{ajuda}}}</h5>
+            <h5>{{{ajuda2}}}</h5>
+            <h5>{{{ajuda3}}}</h5>
+        </div>
+        <div id='i3GEOF.distanciaptpt.t1'>
+            <form class="form-horizontal">
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{temaOrigem}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEOdistanciaptptSelTemasOrigem'></div>
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{temaDestino}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEOdistanciaptptSelTemasDestino'></div>
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{distMax}}}</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='text' id='i3GEOFdistanciaptptdistancia' value='100000' />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id='i3GEOF.distanciaptpt.t2'>
+            <label>{{{selecionaAtributos}}}</label>
+            <form class="form-horizontal">
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{atributoOrigem}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEOondeItensTemaOrigem'></div>
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{atributoDestino}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEOondeItensTemaDestino'></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id='i3GEOF.distanciaptpt.t3'>
+            <div class='text-center'>
+                <button onclick="i3GEOF.distanciaptpt.get(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{calcula}}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

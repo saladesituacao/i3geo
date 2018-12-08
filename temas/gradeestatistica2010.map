@@ -1,0 +1,52 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM geo.grade_estatistica_ibge_df) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	"SIM"
+      "CLASSE"	"SIM"
+      "olopacity"	""
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "TILES"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.28673551833 -16.059202744711 -47.304700725558 -15.491231533109"
+      "nomeoriginal"	""
+      "olstatus"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "metaestat"	""
+      "DATAORIGINAL"	""
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Grade estatística IBGE 2010"
+      "cortepixels"	""
+      "identifica"	"sim"
+    END # METADATA
+    NAME "gradeestatistica2010"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        OUTLINECOLOR 36 34 34
+        SIZE 12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

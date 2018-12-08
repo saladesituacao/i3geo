@@ -1,0 +1,47 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 40
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    METADATA
+      "cache"	"sim"
+      "TIP"	"txt_nome_ubs"
+      "ITENS" "txt_nome_ubs,cnes"
+      "ITENSDESC" "UBS,CNES"
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"SIM"
+      "permiteogc"	"SIM"
+      "permitekml"	"SIM"
+      "TEMA"	"Área de abrangência das UBS"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "abrangenciaubs"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        OUTLINECOLOR 200 200 200
+        WIDTH 4
+      END # STYLE
+      STYLE
+        COLOR 100 100 100
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

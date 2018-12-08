@@ -1,0 +1,232 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Métodos utilizados nas aplicações de geoprocessamento que utilizam o software i3Geo",
+    "version": "1.0.0",
+    "title": "SES API Geo"
+  },
+  "basePath": "/i3geo/ses/rest",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/endereco/busca/{search}": {
+      "get": {
+        "summary": "Busca um endereço no webservice da CODEPLAN e retorna sua coordenada geográfica",
+        "description": "",
+        "tags": [
+          "Endereço"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "search",
+            "required": true,
+            "type": "string",
+            "description": "Endereço"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/geojson/ra_ses": {
+      "get": {
+        "summary": "Dados geo no formato Geojson",
+        "description": "",
+        "tags": [
+          "Geojson"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/geojson/regioes_de_saude2018": {
+      "get": {
+        "summary": "Dados geo no formato Geojson",
+        "description": "",
+        "tags": [
+          "Geojson"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/geojson/regioes_de_saude": {
+      "get": {
+        "summary": "Dados geo no formato Geojson",
+        "description": "",
+        "tags": [
+          "Geojson"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/sih/listagrupos": {
+      "get": {
+        "summary": "Lista os grupos de procedimentos",
+        "description": "",
+        "tags": [
+          "SIH"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/sih/listamunicipios": {
+      "get": {
+        "summary": "Lista os municípios que constam no SIH considerando a residência",
+        "description": "",
+        "tags": [
+          "SIH"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/regioesdesaude/lista": {
+      "get": {
+        "summary": "Lista as regiões de saúde",
+        "description": "Regiões são unidades territoriais que possuem delimitação conhecida armazenada na forma de objetos geográficos.",
+        "tags": [
+          "Regiões de saúde"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/regioesdesaude/{codigo_reg}/wkt": {
+      "get": {
+        "summary": "Lista a geometria de uma região de saúde",
+        "description": "O objeto geográfico é informado no formato WKT",
+        "tags": [
+          "Regiões de saúde"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "codigo_reg",
+            "required": true,
+            "type": "string",
+            "description": "Código da região de saúde"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/unidadesdesaude/lista": {
+      "get": {
+        "summary": "Lista as unidades de saúde",
+        "description": "Lista de unidades de saúde públicas do DF, incluindo a coordenada",
+        "tags": [
+          "Unidades de saúde"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/unidadesdesaude/listai3geo/hospitais": {
+      "get": {
+        "summary": "Lista os hospitais no formato i3Geo",
+        "description": "Lista os hospitais públicos do DF no formato JSON utilizado pelo i3Geo",
+        "tags": [
+          "Unidades de saúde"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/unidadesdesaude/abrangenciaubs/{cnes}/wkt": {
+      "get": {
+        "summary": "Geometria de uma área de abrangência de uma UBS",
+        "description": "O objeto geográfico é informado no formato WKT",
+        "tags": [
+          "Unidades de saúde",
+          "UBS"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cnes",
+            "required": true,
+            "type": "string",
+            "description": "Código CNES da UBS"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 70
+    END # COMPOSITE
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM geo.abrangecep) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"sim"
+      "TIP"	"cep"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"cep"
+      "TILES"	"SIM"
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"NAO"
+      "itembuscarapida"	""
+      "ITENS"	"cep"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Áreas de abrangência dos CEP"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "abrangecep"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 233 216 216
+        OUTLINECOLOR 18 17 17
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

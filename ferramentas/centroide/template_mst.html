@@ -1,0 +1,27 @@
+<div id='{{idContainer}}' class='container' style='width:auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOcentroideresultado'>
+            <div id='i3GEOF.centroide.t0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/centroide/exemplo.png' />
+                <h5>{{{ajuda}}}</h5>
+            </div>
+            <div id='i3GEOF.centroide.t1'>
+                <form class="form-horizontal">
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOcentroideSelTemas'></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.centroide.t2'>
+                <div class='text-center'>
+                    <button onclick="i3GEOF.centroide.get(this)" class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaCentroide}}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

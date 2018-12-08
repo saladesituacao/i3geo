@@ -1,0 +1,54 @@
+MAP
+#utilizado tambem em ogc.php
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    METADATA
+      "CACHE"	"nao"
+      "DESCRIPTION"	"Grid"
+      "permitekmz"	"nao"
+      "TILES"	"nao"
+      "permitedownload"	"nao"
+      "download"	"nao"
+      "permitekml"	"nao"
+      "permiteogc"	"sim"
+      "TEMA"	"Grade DMS"
+    END # METADATA
+    #nao mude o nome desse layer pois e utilizado em ogc.php
+    NAME "gridg"
+    PROJECTION
+      "proj=longlat"
+      "ellps=WGS84"
+      "datum=WGS84"
+      "no_defs"
+    END # PROJECTION
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME "Graticule"
+      LABEL
+        FONT "arial"
+        SIZE 8
+        BUFFER 2
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+        PARTIALS FALSE
+        POSITION CC
+        SHADOWSIZE 1 1
+        TYPE TRUETYPE
+      END # LABEL
+      STYLE
+        COLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    GRID
+      LABELFORMAT "DDMMSS"
+      MAXINTERVAL 10
+      MININTERVAL 10
+    END # GRID
+  END # LAYER
+
+END # MAP
+

@@ -1,0 +1,51 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select geom,id,munic_res,munic_res_desc,munic_res_uf FROM dbauxiliares.tb_municipio) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"sim"
+      "TIP"	"munic_res_desc,munic_res,munic_res_uf"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Município,Código,UF"
+      "UTFDATA" "munic_res_desc"
+      "TILES"	"SIM"
+      "arquivotemaoriginal"	""
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "itembuscarapida"	""
+      "ITENS"	"munic_res_desc,munic_res,munic_res_uf"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Limites municipais 2016"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "municipios2016"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        OUTLINECOLOR 125 89 6
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

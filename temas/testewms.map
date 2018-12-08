@@ -1,0 +1,33 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+LAYER
+    CONNECTION "https://www.agritempo.gov.br/geoserver/ows?"
+    CONNECTIONTYPE WMS
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "TEXTO"	"NAO"
+      "wms_force_separate_request"	"1"
+      "wms_name"	"agritempo:BR.TMAXH"
+      "formatosinfo"	"text/plain"
+      "legendawms"	"http://www.geoservicos.ibge.gov.br/geoserver/wms?&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=CREN:GeomorfologiaSE23&format=image/png"
+      "wms_formatlist"	"image/png"
+      "wms_format"	"image/png"
+      "wms_connectiontimeout"	"0"
+      "wms_tile"	""
+      "tema"	"Teste wms"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	""
+    END # METADATA
+    NAME "testewms"
+    OFFSITE 255 255 255
+    STATUS OFF
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+  END # LAYER
+
+END # MAP

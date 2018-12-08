@@ -1,0 +1,35 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT ba.class_regiao, CASE WHEN ba.farmacia is not null THEN 'sim' ELSE 'nao' END AS farmacia,CASE WHEN ba.atend_odont is not null THEN 'sim' ELSE 'nao' END AS atend_odont, CASE WHEN ba.porta_aberta = 't' THEN 'sim' ELSE 'nao' END AS porta_aberta,ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nomecompleto,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE geom is not null AND ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6,4,5,7,36,39,40,42,62,76,43,50,67,68,76,81,82,69,70,73,79,80)) as foo using unique cod_cnes using srid=4674"
+    METADATA
+      "cache"	"sim"
+      "CLASSE"	"NAO"
+      "permitekmz"	"SIM"
+      "permitedownload"	"SIM"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "convcaracter"	"SIM"
+      "TEMA"	"Unidades de saúde (rede pública) para a funcionalidade destaque"
+    END # METADATA
+    NAME "destaquelayer"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS #
+      NAME ""
+      STYLE
+        SIZE 12
+        SYMBOL "ponto"
+        COLOR 255 0 0
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+

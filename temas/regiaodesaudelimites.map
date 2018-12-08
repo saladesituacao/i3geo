@@ -1,0 +1,57 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 80
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select class_regiao,class_regiao_desc,geom FROM dbauxiliares.tb_class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "TILES"	"SIM"
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Limites das regiões de saúde (superintendências)"
+      "IDENTIFICA"	"sim"
+
+    END # METADATA
+    NAME "regiaodesaudelimites"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        OUTLINECOLOR 86 74 247
+        WIDTH 4
+      END # STYLE
+      STYLE
+        OUTLINECOLOR 255 255 0
+        WIDTH 2
+      END # STYLE
+
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

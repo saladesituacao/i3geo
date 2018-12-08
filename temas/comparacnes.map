@@ -1,0 +1,31 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "linha from (SELECT st_makeline(bb.geom,bb.geom_cnes) as linha,cnes_desc,bb.cnes,st_distance(bb.geom::geography,bb.geom_cnes::geography) as distancia FROM dbauxiliares.tb_unidade as bb WHERE bb.indica_sus = 'S' AND st_distance(bb.geom::geography,bb.geom_cnes::geography) > 10
+) as foo using unique cnes using srid=4674"
+    METADATA
+      "TIP"	"cnes_desc"
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "TEMA"	"comparacnes"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "comparacnes"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        width 3
+        COLOR 255 0 0
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+
