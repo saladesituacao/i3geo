@@ -5,7 +5,7 @@
                 <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/animagif/exemplo.png' />
                 <h5>{{{descricao}}}</h5>
             </div>
-            <div id='i3GEOF.animagif.t1'>
+            <div id='i3GEOFanimagift1'>
                 <form class="form-horizontal">
                     <div class='form-group label-fixed condensed'>
                         <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
@@ -13,21 +13,21 @@
                             <div id='i3GEOFanimagifSelTemas'></div>
                         </div>
                     </div>
-                        <div class="checkbox text-left">
-                            <label>
-                                <input checked id='ativaAoAdic' type="checkbox">
-                                <span class="checkbox-material noprint"> <span class="check"></span>
-                                </span> {{{ativaAoAdic}}}
-                            </label>
-                        </div>
-                        <div class="checkbox text-left">
-                            <label>
-                                <input checked id='execAoAdic' type="checkbox">
-                                <span class="checkbox-material noprint"> <span class="check"></span>
-                                </span> {{{execAoAdic}}}
-                            </label>
-                        </div>
                 </form>
+                <div class="checkbox text-left {{{login}}}">
+                    <label>
+                        <input id='ativaAoAdic' type="checkbox">
+                        <span class="checkbox-material noprint"> <span class="check"></span>
+                        </span> {{{ativaAoAdic}}}
+                    </label>
+                </div>
+                <div class="checkbox text-left {{{login}}}">
+                    <label>
+                        <input id='execAoAdic' type="checkbox">
+                        <span class="checkbox-material noprint"> <span class="check"></span>
+                        </span> {{{execAoAdic}}}
+                    </label>
+                </div>
             </div>
             <div id='i3GEOF.animagif.t2'>
                 <form class="form-horizontal">
@@ -134,10 +134,10 @@
                     <button onclick='i3GEOF.animagif.ativa(this)' class='btn btn-primary btn-sm btn-raised'>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{geragif}}}
                     </button>
-                    <button onclick='i3GEOF.animagif.salvaParametros(this)' class='btn btn-primary btn-sm btn-raised '>
+                    <button onclick='i3GEOF.animagif.salvaParametros(this)' class='{{{login}}} btn btn-primary btn-sm btn-raised '>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{salvaParametros}}}
                     </button>
-                    <button onclick='i3GEOF.animagif.removeParametros(this)' class='btn btn-primary btn-sm btn-raised '>
+                    <button onclick='i3GEOF.animagif.removeParametros(this)' class='{{{login}}} btn btn-primary btn-sm btn-raised '>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeParametros}}}
                     </button>
                 </div>

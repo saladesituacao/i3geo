@@ -714,17 +714,17 @@ i3GEO.mapa =
 		"i3GEOF.imprimir.start()");
 	    },
 	    /**
-	     * Function: mostraExten
+	     * Function: mostraexten
 	     *
 	     * Abre a janela de dialogo da ferramenta que mostra a extensao geografica atual do mapa
 	     */
-	    mostraExten : function() {
+	    mostraexten : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.mostraExten()",
+			"i3GEO.mapa.dialogo.mostraexten()",
 			"mostraexten",
-			"mostraExten",
+			"mostraexten",
 			"dependencias.php",
-		"i3GEOF.mostraExten.iniciaJanelaFlutuante()");
+		"i3GEOF.mostraexten.start()");
 	    },
 	    /**
 	     * Function: outputformat
@@ -1245,11 +1245,6 @@ i3GEO.mapa =
 		}
 		//caso seja um vetor
 		var pixel = i3geoOL.getPixelFromCoordinate([x,y]);
-
-		    if (typeof (console) !== 'undefined')
-			console.info(pixel);
-
-
 		var html = [];
 		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
 		    if (typeof (console) !== 'undefined')

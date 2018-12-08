@@ -1,4 +1,5 @@
 <?php
+//https://www.mediawiki.org/wiki/API:Main_page
 include(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
@@ -7,7 +8,9 @@ $usuarioGeonames = "i3geo";
 require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
-$ret = $_GET["ret"];
+$ret = explode(" ",$_GET["ret"]);
+$x = $ret[0]*1 + (($ret[2]*1 - $ret[0]*1) / 2);
+$y = $ret[1]*1 + (($ret[3]*1 - $ret[1]*1) / 2);
 require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 $cp = new cpaint();
@@ -16,39 +19,52 @@ $cp->start();
 $cp->return_data();
 function listaartigos()
 {
-	global $ret, $cp, $usuarioGeonames;
+	global $x,$y, $cp, $usuarioGeonames;
 	$e = explode(" ",$ret);
-	$url = "http://api.geonames.org/wikipediaBoundingBox?username=".$usuarioGeonames."&style=full&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=20";
-	//echo $url;exit;
-	$xml = simplexml_load_file($url."&lang=pt");
-	$conta = 0;
-	$fim = array();
-	$resultado = "";
-	foreach($xml->entry as $e)
-	{
-		$r = $e->xpath('title');
-		if (function_exists(mb_convert_encoding))
-		{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}
-		$resultado .= "<h4>".$r."</h4> ";
-
-		//$r = $e->xpath('feature');
-		//if (function_exists(mb_convert_encoding))
-		//{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}
-		//$resultado .=  "<span style=color:red >".$r."</span><br>";
-
-		$r = $e->xpath('summary');
-		if (function_exists(mb_convert_encoding))
-		{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}
-		$resultado .=  "<h5>" . $r . "</h5>";
-
-		$r = $e->xpath('wikipediaUrl');
-		if (function_exists(mb_convert_encoding))
-		{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}
-		$resultado .=  "<a href='".$r."' target=blank >abrir Wikpedia</a><br>";
-		$resultado .=  "<hr>";
+	$url = "https://pt.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=".$y."|".$x."&gsradius=10000&gslimit=10&format=json";
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	//curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+	//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	//curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false);
+	if (isset($i3geo_proxy_server) && $i3geo_proxy_server != "") {
+	    curl_setopt($ch, CURLOPT_PROXY, $i3geo_proxy_server);
 	}
-	if ($resultado == "")
-	{$resultado = "<span style=color:red >Nada encontrado</span><br><hr>";}
-	$cp->set_data($resultado);
+	$resultado = curl_exec($ch);
+	$resultado = json_decode($resultado,false);
+	$resultado = $resultado->query->geosearch;
+	$html = [];
+	foreach($resultado as $r){
+	    $html[] = "<div onmouseover='i3GEOF.wiki.mostraxy(".$r->lon.",".$r->lat.")' onmouseout='i3GEOF.wiki.escondexy()'><h4>".$r->title."</h4> ";
+	    $html[] = "<a href='http://pt.wikipedia.org/wiki?curid=".$r->pageid."' target=blank >abrir Wikpedia</a><br>";
+	    $html[] = "<hr></div>";
+	}
+	if(count($html) == 0){
+	    $cp->set_data("<span style=color:red >Nada encontrado</span><br><hr>");
+	} else {
+	   $cp->set_data(implode(" ",$html));
+	}
+/*
+array(10) {
+  [0]=>
+  object(stdClass)#6 (7) {
+    ["pageid"]=>
+    int(49169990)
+    ["ns"]=>
+    int(0)
+    ["title"]=>
+    string(58) "ServiÃ§o Brasileiro de Apoio Ã s Micro e Pequenas Empresas"
+    ["lat"]=>
+    float(-15.816)
+    ["lon"]=>
+    float(-47.8882)
+    ["dist"]=>
+    float(1309.3)
+    ["primary"]=>
+    string(0) ""
+  }
+ */
 }
 ?>

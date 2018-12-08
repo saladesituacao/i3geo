@@ -36,12 +36,16 @@ i3GEOF.animagif = {
 	    i3f = this,
 	    hash = {};
 	    hash = {
+		    login: "hidden",
 		    locaplic: i3GEO.configura.locaplic,
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    mapext: i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
+		hash.login = "";
+	    }
 	    i3f.renderFunction.call(
 		    this,
 		    {
@@ -62,7 +66,7 @@ i3GEOF.animagif = {
 	    i3GEO.util.proximoAnterior("","i3GEOF.animagif.t1()","","i3GEOF.animagif.t0","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t1: function(){
-	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t0()","i3GEOF.animagif.t2()","","i3GEOF.animagif.t1","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t0()","i3GEOF.animagif.t2()","","i3GEOFanimagift1","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t2: function(){
 	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t1()","i3GEOF.animagif.t3()","","i3GEOF.animagif.t2","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
@@ -227,20 +231,21 @@ i3GEOF.animagif = {
 		prog: i3GEO.configura.locaplic + "/ferramentas/storymap/exec.php"
 	    });
 	},
-	removeParametros: function(){
-	    if(i3GEOF.animagif.aguarde.visibility == "visible"){
-		return;
-	    }
-	    p = i3GEO.configura.locaplic + "/ferramentas/animagif/manutencao.php";
-	    par = "&g_sid=" + i3GEO.configura.sid
-	    + "&tema=" + i3GEOF.animagif.tema
-	    + "&funcao=remove";
-
-	    retorno = function(retorno) {
-		i3GEOF.animagif.aguarde.visibility = "hidden";
+	removeParametros: function(btn){
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": i3GEOF.animagif.tema,
+		    "g_sid": i3GEO.configura.sid,
+		    "funcao": "remove"
 	    };
-	    i3GEOF.animagif.aguarde.visibility = "visible";
-	    cpJSON.call(p, "foo", retorno, par);
+	    i3f.post({
+		snackbar: true,
+		btn: btn,
+		par: par,
+		refresh: false,
+		prog: i3GEO.configura.locaplic + "/ferramentas/animagif/exec.php"
+	    });
 	},
 	ativa : function(btn) {
 	    var p = this._parameters,
