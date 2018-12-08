@@ -1,0 +1,87 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{intervalo}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' name='intervalo' value='2' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{cor}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='corlinha' name='corlinha' value='' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{largura}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' name='larguralinha' value='1' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{tipoLinha}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name="tipolinha">
+                    <option value='linha'>{{{solido}}}</option>
+                    <option value='ferrovia-line2'>{{{tracejado}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{textos}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name="incluitexto">
+                    <option value='sim'>{{{sim}}}</option>
+                    <option value='nao'>{{{nao}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{tamanhoTexto}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' name='tamanhotexto' value='10' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{fonteTexto}}}</label>
+            <div class="col-md-6">
+                <div id='i3GEOgradecoordfontef'></div>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{corMascara}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='mascara' name='mascara' value='' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{corSombra}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='shadowcolor' name='shadowcolor' value='' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{deslocamentoSombra}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' name='shadowsizex' value='0' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{deslocamentoSombra}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' name='shadowsizey' value='0' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{corTexto}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='cortexto' name='cortexto' value='' />
+            </div>
+        </div>
+    </form>
+    <div class='text-center'>
+        <button onclick="i3GEOF.gradecoord.get(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaGrade}}}
+        </button>
+    </div>
+</div>

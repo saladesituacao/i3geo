@@ -1,0 +1,98 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (select * from geo.unidades_de_saude ) as foo using unique id using srid=4674"
+    LABELMAXSCALEDENOM 35000
+    METADATA
+      "TIP"	"nome,regiao_de_saude,endereco"
+      "cache"	"sim"
+      "CLASSE"	"SIM"
+      "olopacity"	""
+      "permitekmz"	"SIM"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Nome,Região de saúde,Endereço"
+      "ITENSLINK"	","
+      "TILES"	"SIM"
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "nomeoriginal"	""
+      "olstatus"	""
+      "permitedownload"	"SIM"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "itembuscarapida"	""
+      "ITENS"	"nome,regiao_de_saude,endereco"
+      "permiteogc"	"SIM"
+      "permitekml"	"SIM"
+      "TEMA"	"Unidades de saúde públicas por tipo"
+      "convcaracter"	"SIM"
+      "cortepixels"	"25"
+      "IDENTIFICA"	"sim"
+      "UTFDATA" "nome_fantasia"
+    END # METADATA
+    NAME "unidadesportipoprincipais"
+    PROCESSING "LABEL_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    LABELCACHE ON
+    CLASS
+      NAME "UPA"
+      EXPRESSION ('[tipo_unidade]'eq'UPA')
+      STYLE
+        SIZE 25
+        SYMBOL "upa"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "UBS"
+      EXPRESSION ('[tipo_unidade]'eq'UBS' OR '[tipo_unidade]'eq'UBS Rural' OR '[tipo_unidade]'eq'UBS Prisional')
+      STYLE
+        SIZE 25
+        SYMBOL "ubs"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "VigilÃ¢ncia em SaÃºde"
+      EXPRESSION ('[tipo_unidade]'eq'VigilÃ¢ncia em SaÃºde')
+      STYLE
+        SIZE 25
+        SYMBOL "unidade1-azul"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Hospital"
+      EXPRESSION ('[tipo_unidade]'eq'Hospital')
+      STYLE
+        SIZE 25
+        SYMBOL "hospital-2"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Outras"
+      STYLE
+        SIZE 12
+        SYMBOL "ponto"
+        COLOR 255 100 100
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

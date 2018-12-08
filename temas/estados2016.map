@@ -1,0 +1,52 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select id,geom,estado_desc,sigla_uf, sigla_uf_desc FROM dbauxiliares.tb_uf) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"sim"
+      "TIP"	"Estado"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Estado,Código,Sigla"
+      "TILES"	"SIM"
+      "ITENSLINK"	",,"
+      "arquivotemaoriginal"	""
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "itembuscarapida"	""
+      "ITENS"	"estado_desc,sigla_uf,sigla_uf_desc"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Limites estaduais 2016"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "estados2016"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        OUTLINECOLOR 250 221 31
+        WIDTH 2
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

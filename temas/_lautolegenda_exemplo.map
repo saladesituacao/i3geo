@@ -1,0 +1,38 @@
+						MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "biomas.shp"
+    METADATA
+      "cache"	"SIM"
+      "ltempoitemdescricao"	""
+      "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
+      "ltempoitemtip"	""
+      "permitekmz"	"nao"
+      "ITENSDESC"	"Nome"
+      "CLASSESNOME"	"CD_LEGENDA"
+      "permitedownload"	"sim"
+      "CLASSESITEM"	"ID"
+      "CLASSESCOR"	"COR"
+      "ITENS"	"CD_LEGENDA"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"_Teste de geração automática de classes em dados vetoriais"
+    END # METADATA
+    NAME "_lautolegenda_exemplo"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      STYLE
+        ANGLE 0
+        OFFSET 0 0
+        OUTLINECOLOR 250 50 50
+      END # STYLE
+    END # CLASS
+  END # LAYER
+END # MAP
+					

@@ -1,0 +1,14 @@
+<div id='{{idContainer}}' class='container-fluid container-tools text-left'>
+	<h5>{{{ajudaDesktop}}}</h5>
+	<h5>{{{ajudaWms}}}</h5>
+	<h5>{{{ajudaWmc}}}</h5>
+	<a href='{{{nomewmc}}}' target='_blank'>{{{wmc}}}</a>
+	<h5>
+		<b>WMS: </b>
+	</h5>
+	<a href='{{{nomewms}}}' target='_blank'>{{{nomewms}}}</a>
+	<br>
+	<a href='{{{nomewms}}}&request=getcapabilities&version=1.1.0&service=wms' target=blank>{{{testa}}} GetCapabilities</a>
+	<br>
+	<a href='{{{nomewms}}}&request=getmap&version=1.1.0&service=wms&WIDTH={{{w}}}&HEIGHT={{{h}}}&BBOX={{{bbox}}}' target=blank>{{{testa}}} getMap</a>
+</div>

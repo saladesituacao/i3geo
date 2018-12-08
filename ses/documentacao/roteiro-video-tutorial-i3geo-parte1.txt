@@ -1,0 +1,111 @@
+Vídeos tutoriais - Série i3Geo
+
+Navegação
+
+Sala de Situação - SES
+
+videos_tutoriais_serie_i3Geo_navegacao
+
+
+Olá
+
+Eu vou mostrar nesse vídeo as funcionalidades básicas de navegação que podemos utilizar nos mapas
+interativos da sala de situação
+
+Esse mapa que estamos vendo é o mais simples que temos disponível
+
+Nele nós vemos apenas o que chamamos de mapa base
+que mostra os arruamentos, as cidades e os limites políticos
+
+Margeando o mapa nós temos os elementos que permitem:
+
+- localizar lugares
+- navegar pelo mapa
+- e abrir a legenda
+
+Aqui na parte inferior é mostrada a escala gráfica e numérica
+
+E a indicação das coordenadas da posição do mouse - longitude e latitude
+
+À direita da tela nós temos ícones cujas funcionalidades iremos abordar em outros vídeos.
+
+------------------
+
+O básico da navegação é aproximar/afastar e deslocar a área visível
+
+E a maneira mais fácil de fazer isso é usando a roda do mouse para afastar e aproximar
+
+O deslocamento é feito clicando e arrastando.
+
+Em dispositivos como smartfones, essas operações são feitas usando movimentos com os dedos
+
+Observe que a barra de escala muda conforme navegamos.
+
+------------------- 
+
+Vamos ver com mais detalhes os ícones da barra de navegação
+
+essa que fica na parte superior esquerda
+
+Aqui nós temos o mapa de referência
+
+que mostra a mesma área visível mas em uma outra escala
+
+isso nos dá uma noção melhor da localização da área que estamos vendo,
+
+principalmente quando nos aproximamos muito do terreno
+
+Os ícones de + e - fazem o mesmo que a roda do mouse
+
+o que é útil em situações em que o mouse não está disponível ou acessível
+
+Para voltarmos ao enquadramento utilizamos esse ícone
+
+---------------------
+
+Ao lado temos a opção de zoom por box, que permite aproximar uma região específica do mapa
+
+Esses dois ícones permitem usar o histórico de navegação
+
+O último ícone à esquerda ativa a localização de uma coordenada obtida a partir
+da localização do computador que está em uso
+
+E o último ícone é muito útil quando queremos capturar a tela do computador
+
+Veja que após ser clicado os elementos marginais do mapa ficam escondidos
+
+Voltando a aparecer quando posicionamos o mouse sobre um desses elementos
+
+--------------------
+
+Eu deixei por último o ícone que fica no canto superior esquerdo
+
+Que mostra opções de uso menos frequente
+
+Vejam como funcionam
+
+
+Vimos então as opções de navegação.
+
+Nos próximos vídeos abordaremos as funcionalidades que permitem adicionar camadas ao mapa.
+
+até lá.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

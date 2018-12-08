@@ -1,0 +1,47 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT CASE WHEN ba.porta_aberta = 't' THEN 'sim' ELSE 'nao' END AS porta_aberta,ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nomecompleto,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE geom is not null AND ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (67) ) as foo using unique cod_cnes using srid=4674"
+    METADATA
+      "TIP"	"tipo_unidade,nomecompleto"
+      "cache"	"sim"
+      "cacheprefixo" "und"
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "ITENSDESC"	"CNES,Sigla,Nome,Tipo,Porta aberta"
+      "TILES"	"SIM"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "permitedownload"	"SIM"
+      "UTFDATA"	"nome_estab_cnes"
+      "ITENS"	"cod_cnes,nome_estab_cnes,nomecompleto,tipo_unidade,porta_aberta"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "convcaracter"	"SIM"
+      "TEMA"	"LACEN"
+      "cortepixels"	"20"
+      "IDENTIFICA"	"sim"
+      "FUNCOESJS" '[{"tipo":"registro","titulo":"Ficha da unidade","script":"../ses/codigo/fichaunidade.js","funcao":"fichaunidade","parametros":["cod_cnes"]}]'
+    END # METADATA
+    NAME "undlacen"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        SIZE 25
+        SYMBOL "laboratory"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+

@@ -1,0 +1,15 @@
+<defaults>
+<version>2.0.2</version>
+<maxrecords>10</maxrecords>
+<startposition>1</startposition>
+<outputformat>application/xml</outputformat>
+<outputschema>http://www.opengis.net/cat/csw/2.0.2</outputschema>
+<resulttype>results</resulttype>
+<propertyname>AnyText</propertyname>
+<literal></literal>
+<sortby></sortby>
+<sortorder>ASC</sortorder>
+<id></id>
+<lowerCorner></lowerCorner>
+<upperCorner></upperCorner>
+</defaults>

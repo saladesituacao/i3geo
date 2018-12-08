@@ -1,0 +1,91 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (
+SELECT g.geom,g.id,g.sigla_uf_desc,COALESCE(s.num_internacao,0) AS num_internacao FROM dbauxiliares.tb_uf AS g
+LEFT JOIN
+(
+ SELECT left(i_munic_res,2) AS uf,count(*) AS num_internacao
+ FROM st_stage.tab_rd
+ WHERE left(i_munic_res,2) != '53' AND date(i_dt_internacao) BETWEEN date('/*iniano-inimes-inidia*/') AND date('/*fimano-fimmes-fimdia*/')  GROUP BY left(i_munic_res,2)
+) AS s
+ON g.sigla_uf = s.uf
+) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"nao"
+      "permitedownload"	"NAO"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Quantidade de autorizações de internações por Estado (polígonos)"
+      "IDENTIFICA"	"sim"
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","janela":{"w":"300px","h":"300px"},"parametros":[{"titulo" : "Ano inicial (inclusive)","chave" : "/*iniano","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "Mês","chave" : "inimes","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12","prog" : ""},{"titulo" : "Dia","chave" : "inidia*/","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31","prog" : ""},{"titulo" : "Ano final (inclusive)","chave" : "/*fimano","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "Mês","chave" : "fimmes","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12","prog" : ""},{"titulo" : "Dia","chave" : "fimdia*/","tipo" : "select","valores" : "01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31","prog" : ""}]}'
+    END # METADATA
+    NAME "fluxossihinternacaoestadopol"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "= 0"
+      EXPRESSION ([num_internacao]=0)
+      STYLE
+        COLOR 254 237 222
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 0 e <= que 10"
+      EXPRESSION (([num_internacao]>0)and([num_internacao]<=10))
+      STYLE
+        COLOR 253 190 133
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 10 e <= que 20"
+      EXPRESSION (([num_internacao]>10)and([num_internacao]<=20))
+      STYLE
+        COLOR 253 141 60
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME ">20 e <= que 100"
+      EXPRESSION (([num_internacao]>20)and([num_internacao]<=100))
+      STYLE
+        COLOR 230 85 13
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 100"
+      EXPRESSION ([num_internacao]>100)
+      STYLE
+        COLOR 166 54 3
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+
+
+
+
+
+
+

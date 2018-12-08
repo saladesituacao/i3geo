@@ -1,0 +1,135 @@
+<div id='{{idContainer}}' class='container' style='width:auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOgradepontosresultado'></div>
+        <div id='i3GEOgradepontosfim'></div>
+    </div>
+</div>
+<!-- telas do ajudante -->
+<script id="i3GEOgradepontosT0" type="x-tmpl-mustache">
+    <img class="img-rounded" style="margin: 5px;" src='{{{locaplic}}}/ferramentas/gradepontos/exemplo.png' />
+    <h5>{{{ajuda}}}</h5>
+    <h5>{{{ajuda2}}}</h5>
+    <h5>{{{ajuda3}}}</h5>
+    <div class="checkbox text-left">
+        <label>
+            <input id='i3GEOgradepontosProj' type="checkbox">
+            <span class="checkbox-material noprint">
+                <span class="check"></span>
+            </span>
+            {{{projMercator}}}
+        </label>
+    </div>
+</script>
+<script id="i3GEOgradepontosT1a" type="x-tmpl-mustache">
+<label>{{{distancia}}}</label>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosxg" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepontosxg' value='100000' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosyg" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepontosyg' value='100000' />
+        </div>
+    </div>
+</div>
+</script>
+<script id="i3GEOgradepontosT1b" type="x-tmpl-mustache">
+<label>{{{distancia}}}</label>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosxg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosxg' value='1' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosxm" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosxm' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosxs" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosxs' value='00.00' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosyg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosyg' value='1' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosym" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosym' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosys" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosys' value='00.00' />
+        </div>
+    </div>
+</div>
+</script>
+<script id="i3GEOgradepontosT2" type="x-tmpl-mustache">
+<label>{{{coord}}}</label>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosixg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosixg' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosixm" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosixm' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosixs" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosixs' value='00.00' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosiyg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosiyg' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosiym" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosiym' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosiys" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepontosiys' value='00.00' />
+        </div>
+    </div>
+</div>
+</script>
+<script id="i3GEOgradepontosT3" type="x-tmpl-mustache">
+<label>{{{numeroPontos}}}</label>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosnptx" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepontosnptx' value='10' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepontosnpty" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepontosnpty' value='10' />
+        </div>
+    </div>
+</div>
+</script>
+<script id="i3GEOgradepontosT4" type="x-tmpl-mustache">
+<div class='text-center' >
+<button onclick="i3GEOF.gradepontos.get(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaGrade}}}</button>
+</div>
+</script>

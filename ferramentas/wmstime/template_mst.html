@@ -1,0 +1,52 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <div class='container-fluid' style="display:block" id='i3GEO{{namespace}}guia1obj'>
+        <form class="form-horizontal">
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{2}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='anoInicio' value='{{values.anoInicio}}' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{3}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='anoFim' value='{{values.anoFim}}' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{4}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='mesInicio' value='{{values.mesInicio}}' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{5}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='mesFim' value='{{values.mesFim}}' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{6}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='diaInicio' value='{{values.diaInicio}}' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{7}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='diaFim' value='{{values.diaFim}}' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{8}}}</label>
+                <div class="col-md-6">
+                    <select class="form-control" name="umaImagemPor">
+                    {{{divumaImagemPor}}}
+                    </select><b class="caret careti"></b>
+                </div>
+            </div>
+        </form>
+        <button onclick='i3GEOF.wmstime.addLayer()' class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>  {{{9}}}</button>
+        <br> <br>
+    </div>
+</div>

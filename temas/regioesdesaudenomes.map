@@ -1,0 +1,49 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 80
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select class_regiao,class_regiao_desc,geom FROM dbauxiliares.tb_class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Nomes das regiões de saúde (superintendências)"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "regioesdesaudenomes"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION AUTO
+        SHADOWSIZE 1 1
+        TEXT "[class_regiao_desc]"
+      END # LABEL
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+

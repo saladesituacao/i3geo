@@ -1,0 +1,75 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 80
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (SELECT geom,r.class_regiao,r.class_regiao_desc, pop.populacao_total FROM dbauxiliares.tb_class_regiao AS r JOIN ( SELECT SUM(cast (qtd_total as INTEGER)) as populacao_total,regiao_saude FROM st_stage.tab_populacao WHERE faixa_etaria <> '0_4_anos' AND ano = '2017' GROUP BY regiao_saude ) AS pop ON pop.regiao_saude = r.class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "TIP"	"class_regiao_desc,populacao_total"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"Região,População"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "UTFDATA"	""
+      "ITENS"	"class_regiao_desc,populacao_total"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"População por região de saúde em 2017"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "popregiao2017"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "<= 297.000"
+      EXPRESSION ([populacao_total]<=297000)
+      STYLE
+        COLOR 255 255 204
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 297.000 e <= 387.000"
+      EXPRESSION (([populacao_total]>297000)and([populacao_total]<=387000))
+      STYLE
+        COLOR 194 230 153
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 387.000 e <= 540.000"
+      EXPRESSION (([populacao_total]>387000)and([populacao_total]<=540000))
+      STYLE
+        COLOR 120 198 121
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 540.000"
+      EXPRESSION ([populacao_total]>540000)
+      STYLE
+        COLOR 35 132 67
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

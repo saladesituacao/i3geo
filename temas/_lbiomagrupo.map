@@ -1,0 +1,75 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
+    CONNECTION ""
+    DATA "biomas.shp"
+    METADATA
+      "cache"	"NAO"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "permitedownload"	"NAO"
+      "permitecomentario"	"NAO"
+      "escondido"	"NAO"
+      "transitioneffect"	"NAO"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Biomas shapefile (acentua??o)"
+      "aplicaextensao"	"NAO"
+    END # METADATA
+    NAME "_lbiomagrupo"
+    PROCESSING "ITEMS=CD_LEGENDA"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "CAATINGA"
+      EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
+      STYLE
+        COLOR 21 44 114
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "PAMPA"
+      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
+      STYLE
+        COLOR 225 189 199
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "CERRADO"
+      EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
+      STYLE
+        COLOR 17 235 39
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "PANTANAL"
+      EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
+      STYLE
+        COLOR 242 192 145
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "AMAZONIA"
+      EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
+      STYLE
+        COLOR 149 120 37
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "MATA ATLANTICA"
+      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
+      STYLE
+        COLOR 208 160 125
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

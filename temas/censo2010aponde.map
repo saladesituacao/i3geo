@@ -1,0 +1,53 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM geo.censo_2010_areasdeponderacao) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "TIP"	"cd_aponde"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Código,Nome"
+      "TILES"	"SIM"
+      "ITENSLINK"	","
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "itembuscarapida"	""
+      "ITENS"	"cd_aponde,nome_aponde"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Áreas de ponderação do censo 2010"
+      "convcaracter"	"SIM"
+      "identifica"	"sim"
+    END # METADATA
+    NAME "censo2010aponde"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        OUTLINECOLOR 132 64 19
+        SIZE 12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

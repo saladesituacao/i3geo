@@ -1,0 +1,71 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (SELECT geom,ra.ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_nome, pop.populacao_total FROM dbauxiliares.tb_ra_ses AS ra JOIN ( SELECT SUM(cast (qtd_total as INTEGER)) as populacao_total,ra_ses FROM st_stage.tab_populacao WHERE faixa_etaria <> '0_4_anos' AND ano = '2017' GROUP BY ra_ses ) AS pop ON pop.ra_ses = ra.ra_ses WHERE ra.id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TIP" "ra_ses_nome,populacao_total"
+      "ITENSDESC"	"RA,População"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "UTFDATA"	""
+      "ITENS"	"ra_ses_nome,populacao_total"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"População por RA em 2017"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "popra2017"
+    OPACITY 80
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "<= 35.000"
+      EXPRESSION ([populacao_total]<=35000)
+      STYLE
+        COLOR 255 250 250
+        OUTLINECOLOR 255 255 212
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 35.000 e <= 65.000"
+      EXPRESSION (([populacao_total]>35000)and([populacao_total]<=65000))
+      STYLE
+        COLOR 254 217 142
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 65.000 e <= 133.000"
+      EXPRESSION (([populacao_total]>65000)and([populacao_total]<=133000))
+      STYLE
+        COLOR 254 153 41
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "> 133.000"
+      EXPRESSION ([populacao_total]>133000)
+      STYLE
+        COLOR 217 95 14
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

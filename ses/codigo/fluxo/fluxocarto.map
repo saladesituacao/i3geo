@@ -1,0 +1,57 @@
+MAP
+  FONTSET "../../../symbols/fontes.txt"
+  SYMBOLSET "../../../symbols/simbolos.sym"
+
+  LAYER
+    CONNECTION "sage"
+    CONNECTIONTYPE POSTGIS
+    DATA ""
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Teste fluxo 2014"
+      "TIP" "gid,nome,numocorrencias"
+      "ITENS" "gid,nome,numocorrencias"
+      "ITENSDESC" "Código,Nome,quantidade"
+    END # METADATA
+    NAME "fluxocarto"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    OPACITY 60
+    CLASS
+      NAME ">= 1 e < que 100"
+      EXPRESSION (([numocorrencias]>=1)and([numocorrencias]<100))
+      STYLE
+        COLOR 200 240 250
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME ">= 100 e < que 500"
+      EXPRESSION (([numocorrencias]>=100)and([numocorrencias]<500))
+      STYLE
+        COLOR 138 214 246
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+      CLASS
+      NAME ">= 500 e < que 1000"
+      EXPRESSION (([numocorrencias]>=500)and([numocorrencias]<1000))
+      STYLE
+        COLOR 115 150 232
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+     CLASS
+      NAME ">= 1000"
+      EXPRESSION (([numocorrencias]>=1000))
+      STYLE
+        COLOR 91 86 242
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+     END # CLASS
+
+  END # LAYER
+
+END # MAP
+

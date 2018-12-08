@@ -1,0 +1,48 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 40
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select geom,ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_desc,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Nomes das regiões administrativas do GDF"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"nao"
+    END # METADATA
+    NAME "regiaoadmdfnomes"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 0
+        POSITION AUTO
+        SHADOWSIZE 1 1
+        TEXT "[ra_ses_desc]"
+      END # LABEL
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+

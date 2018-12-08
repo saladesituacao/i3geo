@@ -1,0 +1,50 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM geo.df_pdad_2013) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "olopacity"	""
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "TILES"	"SIM"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "nomeoriginal"	""
+      "olstatus"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "metaestat"	""
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Distrito Federal"
+      "identifica"	"sim"
+    END # METADATA
+    NAME "distritofederal"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

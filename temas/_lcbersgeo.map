@@ -1,0 +1,31 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "/var/www/geodados/cbersgeo.img"
+    METADATA
+      "cache"	"SIM"
+      "classe"	"NAO"
+      "permitekmz"	"nao"
+      "extensao"	"-47.675168 -12.4736 -44.082638 -10.817411"
+      "permitedownload"	"sim"
+      "DOWNLOAD"	"sim"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "tema"	"_Imagem cbersgeo"
+    END # METADATA
+    NAME "_lcbersgeo"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 255 255
+        OUTLINECOLOR 0 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+END # MAP
+					

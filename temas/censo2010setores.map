@@ -1,0 +1,44 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM dbauxiliares_geo.censo_2010_setores) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "TIP"	"nm_subdist,cd_geocodi"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"Setor,tipo,cd_geocodb,nm_bairro,cd_geocods,Subdistrito,cd_geocodd,nm_distrit,cd_geocodm,nm_municip,nm_micro,nm_meso,Região de saúde"
+      "TILES"	"SIM"
+      "ITENSLINK"	",,,,,,,,,,,,"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "permitedownload"	"NAO"
+      "ITENS"	"cd_geocodi,tipo,cd_geocodb,nm_bairro,cd_geocods,nm_subdist,cd_geocodd,nm_distrit,cd_geocodm,nm_municip,nm_micro,nm_meso,class_regiao"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Setores censitários 2010"
+      "convcaracter"	"SIM"
+      "identifica"	"sim"
+    END # METADATA
+    NAME "censo2010setores"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        OUTLINECOLOR 34 34 107
+        SIZE 12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+
+

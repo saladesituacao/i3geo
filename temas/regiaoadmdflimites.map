@@ -1,0 +1,55 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 40
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select geom,ra_ses,ra_ses_desc,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    METADATA
+      "cache"	"sim"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
+      "TILES"	"SIM"
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Limites das regiões administrativas do GDF"
+    END # METADATA
+    NAME "regiaoadmdflimites"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+
+      STYLE
+        OUTLINECOLOR 0 0 0
+        WIDTH 4
+      END # STYLE
+            STYLE
+        OUTLINECOLOR 255 255 255
+        WIDTH 2
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

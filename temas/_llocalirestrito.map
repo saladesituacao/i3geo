@@ -1,0 +1,38 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    METADATA
+      "TIP"	"TIPO,ANOCRIA,NOMELOC"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "CLASSE"	"SIM"
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "permitekmz"	"nao"
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "permitedownload"	"sim"
+      "itembuscarapida"	"NOMELOC"
+      "transitioneffect"	"NAO"
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
+      "TEMA"	"_Localidades com restrição de acesso"
+    END # METADATA
+    NAME "_llocalirestrito"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Pontos"
+      STYLE
+        ANGLE 0
+        COLOR 255 0 0
+        OFFSET 0 0
+        SIZE 4
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+END # MAP

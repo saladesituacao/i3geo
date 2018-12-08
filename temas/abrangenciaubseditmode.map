@@ -1,0 +1,53 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
+    CONNECTION "abrangencia_app"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    METADATA
+      "TIP"	"txt_nome_ubs"
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"UBS,CNES"
+      "EDITAVEL"	"SIM"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "wkttip"	"SIM"
+      "permitedownload"	"NAO"
+      "ITENS"	"txt_nome_ubs,cnes"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Área de abrangência das UBS Editável"
+      "colunaidunico"	"cod_ubs"
+      "colunageometria"	"geom_abrangencia"
+      "IDENTIFICA"	"sim"
+      "tabelaeditavel"	"tb_abrangenciaubs"
+      "esquematabelaeditavel"	"dbauxiliares"
+    END # METADATA
+    NAME "abrangenciaubseditmode"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        OUTLINECOLOR 255 0 0
+        WIDTH 4
+      END # STYLE
+      STYLE
+        COLOR 200 200 200
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

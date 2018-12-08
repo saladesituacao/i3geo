@@ -1,0 +1,30 @@
+0.6.9 (2018-09-14)
+* Implement support for new-style mapbox style URLs (should have gone with #400)
+
+0.6.8 (2018-07-20)
+* PR #394 Fixes anchor button in editor for Chrome
+* PR #395 Adds localized mock S3 storage for development
+* PR #399 Fixes null slide entries
+* PR #400 Updates for changes to mapbox
+* PR #401 Fixes content link button for Chrome
+* PR #384 Updates zh-tw translation
+* PR #340 Fixes null locations in data
+* PR #402 Fixes image distortion in editor preview
+
+0.6.7 (2017-12-21)
+* PR #361/366 Adds Turkish translation
+
+0.6.6 (2017-09-08)
+* PR #377 Adds Turkish translation
+
+0.6.4 (207-04-06)
+* PR #357 Fixes #351 YouTube link obscured by nav button
+
+0.6.2 (2016-12-13)
+* PR #333 Adds zoomify analytics
+
+0.6.1 (2016-10-14)
+------------------------
+* PR #302 Media fixes including pause of video types when navigating away from slide
+* PR #303 Adds custom map marker upload in editor
+* PR #312 Adds Greek translation to StoryMap editor

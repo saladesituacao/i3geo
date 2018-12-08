@@ -1,0 +1,48 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM geo.segeth_lotes) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"SIM"
+      "TIP"	"end_comp"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"ra,setor,quadra,conjunto,lote,endereco,Endereço,cep,situacao"
+      "TILES"	"SIM"
+      "ITENSLINK"	",,,,,,,,"
+      "extensao"	"-48.243613305131 -16.049823548426 -47.624529535001 -15.598326066976"
+      "permitedownload"	"NAO"
+      "ITENS"	"ra,setor,quadra,conjunto,lote,endereco,end_comp,cep,situacao"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Lotes urbanos (SEGETH)"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "lotessegeth"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 31 27 31
+        OUTLINECOLOR 247 236 236
+        SIZE 12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

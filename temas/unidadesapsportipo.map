@@ -1,0 +1,246 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (select * from geo.unidades_de_saude) as foo using unique id using srid=4674"
+    METADATA
+      "cache"	"sim"
+      "TIP"	"nome_fantasia"
+      "olopacity"	""
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "gmopacity"	""
+      "gmstatus"	""
+      "ITENSDESC"	"Regi�o administrativa,C�digo RA,Nome,CNES,Endere�o,CEP,Tipo"
+      "TILES"	"SIM"
+      "ITENSLINK"	",,,,,,"
+      "arquivotemaoriginal"	""
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "olstatus"	""
+      "nomeoriginal"	""
+      "permitedownload"	"SIM"
+      "FILTROORIGINAL"	""
+      "METAESTAT"	""
+      "DATAORIGINAL"	""
+      "ITENS"	"regiao_adm,cod_ra,nome_fantasia,cnes,endereco,cep,tipo_unidade"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "convcaracter"	"SIM"
+      "TEMA"	"Tipos de unidades de sa�de p�blicas"
+      "cortepixels"	"10"
+      "IDENTIFICA"	"sim"
+      "UTFDATA" "nome_fantasia"
+
+    END # METADATA
+    NAME "unidadesapsportipo"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "CAPS"
+      EXPRESSION ('[tipo_unidade]'eq'CAPS')
+      STYLE
+        COLOR 166 132 135
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Saúde Mental"
+      EXPRESSION ('[tipo_unidade]'eq'Saúde Mental')
+      STYLE
+        COLOR 120 96 29
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Hospital"
+      EXPRESSION ('[tipo_unidade]'eq'Hospital')
+      STYLE
+        COLOR 105 44 183
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "UBS"
+      EXPRESSION ('[tipo_unidade]'eq'UBS')
+      STYLE
+        COLOR 189 225 74
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Hemocentro"
+      EXPRESSION ('[tipo_unidade]'eq'Hemocentro')
+      STYLE
+        COLOR 251 142 212
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Laboratório"
+      EXPRESSION ('[tipo_unidade]'eq'Laboratório')
+      STYLE
+        COLOR 207 18 63
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Vigilância em Saúde"
+      EXPRESSION ('[tipo_unidade]'eq'Vigilância em Saúde')
+      STYLE
+        COLOR 223 243 155
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Diagnose"
+      EXPRESSION ('[tipo_unidade]'eq'Diagnose')
+      STYLE
+        COLOR 204 40 180
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Cerest"
+      EXPRESSION ('[tipo_unidade]'eq'Cerest')
+      STYLE
+        COLOR 235 65 105
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Odontologia"
+      EXPRESSION ('[tipo_unidade]'eq'Odontologia')
+      STYLE
+        COLOR 121 224 255
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Farmácia"
+      EXPRESSION ('[tipo_unidade]'eq'Farmácia')
+      STYLE
+        COLOR 174 110 163
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "UBS Rural"
+      EXPRESSION ('[tipo_unidade]'eq'UBS Rural')
+      STYLE
+        COLOR 75 157 239
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "UPA"
+      EXPRESSION ('[tipo_unidade]'eq'UPA')
+      STYLE
+        COLOR 52 104 232
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "UBS Prisional"
+      EXPRESSION ('[tipo_unidade]'eq'UBS Prisional')
+      STYLE
+        COLOR 200 239 79
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Oficina Ortopédica"
+      EXPRESSION ('[tipo_unidade]'eq'Oficina Ortopédica')
+      STYLE
+        COLOR 27 209 37
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Casa de Parto"
+      EXPRESSION ('[tipo_unidade]'eq'Casa de Parto')
+      STYLE
+        COLOR 15 164 206
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Policlínica"
+      EXPRESSION ('[tipo_unidade]'eq'Policlínica')
+      STYLE
+        COLOR 213 60 118
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Reabilitação"
+      EXPRESSION ('[tipo_unidade]'eq'Reabilitação')
+      STYLE
+        COLOR 101 54 172
+        OUTLINECOLOR 255 255 255
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

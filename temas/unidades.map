@@ -1,0 +1,207 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT st_x(geom) AS longitude, st_y(geom) AS latitude, CASE WHEN ba.porta_aberta = 't' THEN 'sim' ELSE 'nao' END AS porta_aberta,ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nomecompleto,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE geom is not null AND ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6,4,5,7,36,39,40,42,62,76,43,50,67,68,76,81,82,69,70,73,79,80)) as foo using unique cod_cnes using srid=4674"
+    METADATA
+      "TIP"	"tipo_unidade,nomecompleto"
+      "cache"	"sim"
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "ITENSDESC"	"CNES,Sigla,Nome,Tipo,Porta aberta"
+      "TILES"	"SIM"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "permitedownload"	"SIM"
+      "UTFDATA"	"nome_estab_cnes"
+      "ITENS"	"cod_cnes,nome_estab_cnes,nomecompleto,tipo_unidade,porta_aberta"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "convcaracter"	"SIM"
+      "TEMA"	"Unidades de saúde (rede pública)"
+      "cortepixels"	"20"
+      "IDENTIFICA"	"sim"
+      "FUNCOESJS" '[{"tipo":"registro","titulo":"Ficha da unidade","script":"../ses/codigo/fichaunidade.js","funcao":"fichaunidade","parametros":["cod_cnes"]}]'
+    END # METADATA
+    NAME "unidades"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS #
+      NAME "UPA"
+      EXPRESSION ([cod_tipo_unidade] in "73")
+      STYLE
+        SIZE 25
+        SYMBOL "upa"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "UBS"
+      EXPRESSION ([cod_tipo_unidade] in "2,3,6")
+      STYLE
+        SIZE 25
+        SYMBOL "ubs"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Hospital"
+      EXPRESSION ([cod_tipo_unidade] in "5,7")
+      STYLE
+        SIZE 25
+        SYMBOL "hospital-2"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Hospital Dia"
+      EXPRESSION ([cod_tipo_unidade] in "62")
+      STYLE
+        SIZE 25
+        SYMBOL "hospital-3"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Policlínica"
+      EXPRESSION ([cod_tipo_unidade] in "4")
+      STYLE
+        SIZE 25
+        SYMBOL "unidade2-laranja"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Centro de especialidade"
+      EXPRESSION ([cod_tipo_unidade] in "36")
+      STYLE
+        SIZE 25
+        SYMBOL "unidade1-laranja"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "CAPS"
+      EXPRESSION ([cod_tipo_unidade] in "70")
+      STYLE
+        SIZE 25
+        SYMBOL "sozialeeinrichtung"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Apoio Diagnóstico/Terapia"
+      EXPRESSION ([cod_tipo_unidade] in "39")
+      STYLE
+        SIZE 25
+        SYMBOL "therapy"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "SAMU"
+      EXPRESSION ([cod_tipo_unidade] in "42,76")
+      STYLE
+        SIZE 25
+        SYMBOL "ambulance2"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Farmácia"
+      EXPRESSION ([cod_tipo_unidade] in "43")
+      STYLE
+        SIZE 25
+        SYMBOL "medicalstore"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Unidade Móvel Terrestre"
+      EXPRESSION ([cod_tipo_unidade] in "49")
+      STYLE
+        SIZE 25
+        SYMBOL "ambulance3"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Unidade de Vigilância em Saúde"
+      EXPRESSION ([cod_tipo_unidade] in "50")
+      STYLE
+        SIZE 25
+        SYMBOL "police"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "LACEN"
+      EXPRESSION ([cod_tipo_unidade] in "67")
+      STYLE
+        SIZE 25
+        SYMBOL "laboratory"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Hemocentro"
+      EXPRESSION ([cod_tipo_unidade] in "69")
+      STYLE
+        SIZE 25
+        SYMBOL "above_ground"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Oficina Ortopédica"
+      EXPRESSION ([cod_tipo_unidade] in "79")
+      STYLE
+        SIZE 25
+        SYMBOL "hiking2"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Laboratório de Saúde Pública"
+      EXPRESSION ([cod_tipo_unidade] in "80")
+      STYLE
+        SIZE 25
+        SYMBOL "chemistry-2"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Sede da Secretaria de Saúde"
+      EXPRESSION ([cod_tipo_unidade] in "68")
+      STYLE
+        SIZE 25
+        SYMBOL "office-building"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP
+

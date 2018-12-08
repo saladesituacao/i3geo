@@ -1,0 +1,33 @@
+<div id='{{idContainer}}' class='container' style='width:auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOdissolveresultado'>
+            <div id='i3GEOFgradeDePontost0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/dissolve/exemplo.png' />
+                <h5>{{{descricao}}}</h5>
+            </div>
+            <div id='i3GEOF.dissolve.t1'>
+                <form class="form-horizontal">
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOdissolveSelTemas'></div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaItem}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOdissolveDivItem'></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.dissolve.t2'>
+                <div class='text-center'>
+                    <button onclick="i3GEOF.{{namespace}}.get(this)" class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{dissolve}}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

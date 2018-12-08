@@ -1,0 +1,57 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select geom,id,munic_res,munic_res_desc,munic_res_uf FROM dbauxiliares.tb_municipio WHERE ride = 'true' ) as foo USING UNIQUE id USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "TIP"	"munic_res_desc"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"Município"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "permitedownload"	"NAO"
+      "ITENS"	"munic_res_desc"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Região Integrada de Desenvolvimento do Distrito Federal e Entorno - RIDE/DF"
+      "convcaracter"	"SIM"
+      "IDENTIFICA"	"sim"
+    END # METADATA
+    NAME "ridedf2016"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        OUTLINECOLOR 0 0 139
+        WIDTH 4
+      END # STYLE
+      STYLE
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 10
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OUTLINECOLOR 253 249 249
+        POSITION AUTO
+        SHADOWSIZE 1 1
+        TEXT "[munic_res_desc]"
+        PARTIALS false
+        MAXSCALEDENOM 100000000000
+      END # LABEL
+
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP

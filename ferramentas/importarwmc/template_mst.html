@@ -1,0 +1,18 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form accept-charset="utf-8" class="form-horizontal" target="i3GEOimportarwmciframe" action="{{{locaplic}}}/ferramentas/importarwmc/upload.php" method="post" ENCTYPE="multipart/form-data">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">Arquivo WMC</label>
+            <div class="col-md-6 ">
+                <input required onclick="$(this).parent().find('input[type=file]').click();" class="form-control input-lg" type='text' name="i3GEOimportarwmc" />
+                <input name="i3GEOimportarwmc" onchange="$(this).parent().find('.form-control').val($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                <b class="caret careti"></b>
+            </div>
+        </div>
+        <button name="submit" onclick="i3GEOF.importarwmc.submete(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{importar}}}
+        </button>
+        <input type='hidden' name='g_sid' value='{{{sid}}}'>
+        <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+    </form>
+    <iframe name=i3GEOimportarwmciframe style="text-align: left; border: 1px solid rgb(242, 232, 232);" width="98%" height="60px"></iframe>
+</div>

@@ -1,0 +1,115 @@
+MAP
+  FONTSET "../../../symbols/fontes.txt"
+  SYMBOLSET "../../../symbols/simbolos.sym"
+
+  LAYER
+    DATA ""
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Teste fluxo 2014"
+      "TIP" "DE,PARA,VALOR"
+      "ITENS" "DE,PARA,VALOR"
+      "ITENSDESC" "de,para,quantidade"
+    END # METADATA
+    NAME "fluxo"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE LINE
+    CLASS
+      NAME ">= 1 e < que 5"
+      EXPRESSION (([VALOR]>=1)and([VALOR]<5))
+      STYLE
+        COLOR 255 255 0
+        WIDTH 1
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME ">= 5 e < que 10"
+      EXPRESSION (([VALOR]>=5)and([VALOR]<10))
+      STYLE
+        COLOR 255 255 0
+        WIDTH 2
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME ">= 10 e < que 20"
+      EXPRESSION (([VALOR]>=10)and([VALOR]<20))
+      STYLE
+        COLOR 255 200 0
+        WIDTH 2
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+     CLASS
+      NAME ">= 20"
+      EXPRESSION (([VALOR]>=20))
+      STYLE
+        COLOR 255 85 0
+        WIDTH 3
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "start"
+		COLOR 255 0 0
+		OUTLINECOLOR 255 255 255
+		SIZE 6
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+      STYLE
+        GEOMTRANSFORM "end"
+		COLOR 0 0 255
+		SIZE 4
+		ANGLE AUTO
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+
+
+  END # LAYER
+
+END # MAP
+

@@ -1,0 +1,77 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
+    FILTER (([ANOCRIA] = subsano))
+    METADATA
+      "TIP"	"TIPO,NOMELOC,ANOCRIA"
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "LTEMPOITEMINICIO"	"ANOCRIA"
+      "permitekmz"	"nao"
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
+      "LTEMPOITEMTITULO"	"NOMELOC"
+      "tiles"	"sim"
+      "ITENSLINK"	",,,"
+      "permitedownload"	"sim"
+      "LTEMPOFORMATODATA"	"iso8601"
+      "permitecomentario"	"SIM"
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","id":"","ativo":"sim","janela":{"w":"300px","h":"300px","top":"10px","left":"10px"},"parametros":[{"titulo" : "Ano de criação","chave" : "subsano","tipo" : "input","type" : "text","required" : "nao","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "xxx","chave" : "xxx","tipo" : "input","type" : "text","required" : "nao","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","type" : "text","required" : "nao","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","type" : "text","required" : "nao","valores" : "","prog" : ""}]}'
+      "download"	"SIM"
+      "itembuscarapida"	"NOMELOC"
+      "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "transitioneffect"	"SIM"
+      "TEMA"	"Teste de plugin parametrizado com PHP"
+      "cortepixels"	"40"
+      "LTEMPOCONVENCODE"	"SIM"
+      "identifica"	"sim"
+    END # METADATA
+    NAME "_llocaliphp"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Vila"
+      EXPRESSION ('[TIPO]'eq'Vila')
+      STYLE
+        COLOR 250 193 4
+        SIZE 20
+        SYMBOL "/var/www/i3geo/imagens/google/condominium.png"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Cidade"
+      EXPRESSION ('[TIPO]'eq'Cidade')
+      STYLE
+        COLOR 62 9 41
+        OFFSET 0 -10
+        SIZE 20
+        SYMBOL "/var/www/i3geo/imagens/google/condominium1.png"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Capital"
+      EXPRESSION ('[TIPO]'eq'Capital')
+      STYLE
+        COLOR 112 203 244
+        SIZE 6
+        SYMBOL "vila"
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

@@ -1,0 +1,76 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nome_estab_cnes_completo,ba.cod_tipo_unidade,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE ba.class_regiao BETWEEN '1' and '15'
+) as foo using unique cod_cnes using srid=4674"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Distribuição das unidades da rede pública (mapa de calor)"
+      #
+      #se coluna for vazio, sera usado o valor de cada ponto
+      #
+      "PLUGINI3GEO" '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","valorPonto":1,"coluna":"","radius":15,"max":10}}'
+    END # METADATA
+    NAME "unidadesmapadecalor"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    OPACITY 70
+    TYPE POINT
+    UNITS METERS
+    #
+    #voce pode definir os intervalos das classes do mapa entre 0 e 1
+    #para usar as classe altere o METADATA PLUGINI3GEO colocando "tipoGradiente":"" no lugar de "tipoGradiente":"default"
+    #nas classes o NAME corresponde ao limite superior da classe e COLOR indica a cor
+    #
+    CLASS
+      NAME "0.45"
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 0 0 255
+      END
+    END # CLASS
+    CLASS
+      NAME "0.55"
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 0 255 255
+      END
+
+    END # CLASS
+    CLASS
+      NAME "0.65"
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 0 255 0
+      END
+
+    END # CLASS
+    CLASS
+      NAME "0.95"
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 255 255 0
+      END
+
+    END # CLASS
+    CLASS
+      NAME "1"
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 255 0 0
+      END
+
+    END # CLASS
+  END # LAYER
+
+END # MAP
+
