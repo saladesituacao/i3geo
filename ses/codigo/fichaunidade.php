@@ -11,6 +11,12 @@ if(file_exists($foto)){
     $json->list[0]->foto = $_GET["codigo"].".PNG";
     $str = json_encode($json);
 }
+$foto = "../fotosunidades/".$_GET["codigo"].".png";
+if(file_exists($foto)){
+    $json = json_decode($str);
+    $json->list[0]->foto = $_GET["codigo"].".png";
+    $str = json_encode($json);
+}
 if (! @isset($_GET["outputtype"])) {
     header('Access-Control-Allow-Origin: *');
     header("Content-type: application/json");

@@ -1,12 +1,12 @@
 <?php
 //http://localhost:8019/i3geo/ses/appjwt.php?jwt=eyJhbGciOiJzaGExIiwidHlwIjoiSldUIn0.eyJzdWIiOiJlZG1hci5tb3JldHRpIiwiaXNzIjoiV1AiLCJhdWQiOiJlZGl0b3JhYnJhbmdlbmNpYXVicyIsImlhdCI6MTU0MTUxMzA3MiwiZXhwIjoxNTQxNTEzMTMyfQ.2db2a161b2d85be57024b52fa6900df03ce3f5d4
-$secret = "xxxxxxx";
+include("secretappjwt.php");
+$secretappjwt = \ses\secretappjwt\getSecret();
 $decode64 = function ($data) {
     return base64_decode(strtr($data, '-_', '+/') . str_repeat('=', 3 - (3 + strlen($data)) % 4));
 };
-
 $jwt = explode(".", $_POST["jwt"]);
-if (sha1($jwt[0] . $jwt[1] . $secret) != $jwt[2]) {
+if (sha1($jwt[0] . $jwt[1] . $secretappjwt) != $jwt[2]) {
     echo "Acesso n&atilde;o permitido";
     exit();
 }
@@ -22,6 +22,12 @@ if ($payload->sub == "") {
     echo "Acesso n&atilde;o permitido - usuário não definido";
     exit();
 }
+
+define("i3GEOSES","ok");
+// coletores de ponto
+if ($payload->aud == "coletores") {
+    include("coletores.php");
+}
 // edicao dos limites das areas de abrangencia das UBS
 if ($payload->aud == "editorabrangenciaubs") {
     $usuario = "editorabrangenciaubs";
@@ -29,18 +35,10 @@ if ($payload->aud == "editorabrangenciaubs") {
     $login = loginI3geo($usuario, $senha);
     if($login == true){
         ob_clean();
-        //ini_set("session.use_cookies", 0);
-        //setcookie("i3geocodigologin",session_id());
-        //setcookie("i3geousuariologin",$usuario);
-        //setcookie("i3geousuarionome","editorabrangenciaubs");
-        //session_write_close();
-        //echo session_id();exit;
         include("editorabrangenciaubs.phtml");
     } else {
         echo "Erro no login do i3Geo";
     }
-} else {
-    echo "Erro ao definir a aplicação";
 }
 function loginI3geo($usuario, $senha)
 {

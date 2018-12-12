@@ -1,4 +1,8 @@
 <?php
+if(i3GEOSES != "ok"){
+    echo "Voce nao fez login na Sala";
+    exit;
+}
 $corpoconfig = array(
     "legenda" => true,
     "tipoInterface" => "OSM",
