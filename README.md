@@ -38,37 +38,19 @@ A pasta `i3geo/ses/databaseteste` contém os arquivos Postgres `dump` que permit
 
 Em seu database são necessárias as seguintes ROLES:
 
-<pre>
-CREATE ROLE dbsalasituacao LOGIN
-  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-
-CREATE ROLE abrangencia_app LOGIN
-  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-
-CREATE ROLE st_stick LOGIN
-  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-
-CREATE ROLE stage LOGIN
-  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-</pre>
-
 Crie os seguintes databases:
 
 <pre>
 CREATE DATABASE dbsalasituacao
-  WITH OWNER = dbsalasituacao
-       ENCODING = 'UTF8'
+  WITH ENCODING = 'UTF8'
        TABLESPACE = pg_default
        CONNECTION LIMIT = -1;
 
-GRANT CONNECT, TEMPORARY ON DATABASE dbsalasituacao TO public;
-GRANT ALL ON DATABASE dbsalasituacao TO dbsalasituacao;
 </pre>
 
 <pre>
 CREATE DATABASE stage
-  WITH OWNER = stage
-       ENCODING = 'UTF8'
+  WITH ENCODING = 'UTF8'
        TABLESPACE = pg_default
        CONNECTION LIMIT = -1;
 </pre>
@@ -76,14 +58,7 @@ CREATE DATABASE stage
 No database dbauxiliares, crie o esquema stage:
 
 <pre>
-CREATE SCHEMA dbauxiliares
-  AUTHORIZATION stage;
-
-GRANT ALL ON DATABASE stage TO stage;
-GRANT stage TO abrangencia_app;
-ALTER DEFAULT PRIVILEGES
-    GRANT INSERT, SELECT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON TABLES
-    TO stage;
+CREATE SCHEMA dbauxiliares;
 </pre>
 
 Adicione as funcionalidades do Postgis no database stage:
@@ -95,13 +70,7 @@ create extension postgis
 No database dbsalasituacao, crie o esquema geo:
 
 <pre>
-CREATE SCHEMA geo
-  AUTHORIZATION dbsalasituacao;
-
-GRANT USAGE ON SCHEMA geo TO dbsalasituacao;
-GRANT CREATE ON SCHEMA geo TO dbsalasituacao WITH GRANT OPTION;
-GRANT ALL ON SCHEMA geo TO st_stick;
-GRANT ALL ON SCHEMA geo TO stage;
+CREATE SCHEMA geo;
 </pre>
 
 ## Configuração de acesso ao banco de dados

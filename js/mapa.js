@@ -1245,11 +1245,6 @@ i3GEO.mapa =
 		}
 		//caso seja um vetor
 		var pixel = i3geoOL.getPixelFromCoordinate([x,y]);
-
-		    if (typeof (console) !== 'undefined')
-			console.info(pixel);
-
-
 		var html = [];
 		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
 		    if (typeof (console) !== 'undefined')
