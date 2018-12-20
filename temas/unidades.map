@@ -9,6 +9,7 @@ MAP
       "TIP"	"tipo_unidade,nomecompleto"
       "cache"	"sim"
       "CLASSE"	"SIM"
+      "cacheprefixo" "un1"
       "permitekmz"	"SIM"
       "ITENSDESC"	"CNES,Sigla,Nome,Tipo,Porta aberta"
       "TILES"	"SIM"

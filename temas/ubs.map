@@ -9,7 +9,7 @@ MAP
     DATA "geom from (SELECT ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nome_estab_cnes_completo,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6)) as foo using unique cod_cnes using srid=4674"
     METADATA
       "cache"	"sim"
-      "cacheprefixo" "ubs"
+      "cacheprefixo" "ubs1"
       "TIP"	"tipo_unidade,nome_estab_cnes"
       "CLASSE"	"SIM"
       "permitekmz"	"SIM"

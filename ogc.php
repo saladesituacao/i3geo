@@ -40,7 +40,7 @@ tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil
 
 legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 
-	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
+	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
 
 		legenda_imagecolor - cor RGB do fundo da legenda. Quando especificado,  o mapa deixa de ser transparente. Exemplo: &legenda_imagecolor=255,0,0
 
@@ -65,11 +65,11 @@ onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a
 
 escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
 
-	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
+	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
 
 		escala_color - cor RGB dos trechos principais da barra. Exemplo: &escala_color=255,0,0
 
-		escala_backgroundcolor - cor dos trechos secundï¿½rios
+		escala_backgroundcolor - cor dos trechos secundários
 
 		escala_outlinecolor - cor do contorno
 
@@ -93,7 +93,7 @@ grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
 
 	Obs.: a grade utiliza como template o mapfile temas/gridg.map
 
-	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
+	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as características:
 
 		grade_labelformat - formato dos textos indicativos das coordenadas da grade DD|DDMM|DDMMSS|C format string (mais detalhes em http://mapserver.org/mapfile/grid.html#grid )
 
@@ -157,7 +157,7 @@ tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil
 
 legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 
-	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
+	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
 
 		legenda_imagecolor - cor RGB do fundo da legenda. Quando especificado,  o mapa deixa de ser transparente. Exemplo: &legenda_imagecolor=255,0,0
 
@@ -182,11 +182,11 @@ onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a
 
 escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
 
-	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
+	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
 
 		escala_color - cor RGB dos trechos principais da barra. Exemplo: &escala_color=255,0,0
 
-		escala_backgroundcolor - cor dos trechos secundï¿½rios
+		escala_backgroundcolor - cor dos trechos secundários
 
 		escala_outlinecolor - cor do contorno
 
@@ -210,7 +210,7 @@ grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
 
 	Obs.: a grade utiliza como template o mapfile temas/gridg.map
 
-	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
+	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as características:
 
 		grade_labelformat - formato dos textos indicativos das coordenadas da grade DD|DDMM|DDMMSS|C format string (mais detalhes em http://mapserver.org/mapfile/grid.html#grid )
 
@@ -459,7 +459,7 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
 	exit;
 }
 //
-//caso seja uma requisiï¿½ï¿½o WMS com format
+//caso seja uma requisição WMS com format
 //
 $format = $_GET["format"];
 if(strpos(strtolower($format),"kml") !== false){
@@ -1258,7 +1258,7 @@ if(!isset($OUTPUTFORMAT) && !headers_sent()){
 if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"){
 	$arq = $dir_tmp."/".$tema.".json";
 	if(isset($ogrOutput) && $ogrOutput == false){
-	    exportaGeojson();
+		exportaGeojson();
 		exit;
 	}
 	$oMap->owsdispatch($req);
@@ -1711,11 +1711,9 @@ function exportaGeojson(){
 	$layer = $oMap->getlayer(0);
 	$layer->setmetadata("wfs_getfeature_formatlist","geojson");
 	$items = pegaItens($layer,$oMap);
-
 	$layer->querybyrect($oMap->extent);
 	$layer->open();
 	$res_count = $layer->getNumresults();
-
 	$linhas = array();
 
 	$features = array();
