@@ -1,8 +1,8 @@
 # i3GEO/SES-DF
 
-Os mapas interativos utilizados no portal da SES/DF são criados com o software livre i3Geo, versão 8.
+Os mapas interativos utilizados no portal da sala de situação da SES/DF são criados com o software livre i3Geo, versão 8.
 
-O código original não foi alterado, permitindo a atualização sem interferência nos mapas da SES.
+O código original não foi alterado, permitindo a atualização sem interferência nos mapas da sala de situação.
 
 Guia completo sobre instalação e administração do software i3Geo, veja em: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/wikis/home
 
@@ -10,7 +10,7 @@ Sobre segurança: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/wikis/notas-
 
 ## Instalação
 
-O ambiente operacional para uso do i3GEO/SES-DF é construído com Docker (https://hub.docker.com/r/i3geo/software-base/) e o código do software fica disponível no repositório Git.
+O ambiente operacional para uso do i3GEO é construído com Docker (https://hub.docker.com/r/i3geo/software-base/) e o código do software fica disponível no repositório Git.
 
 ## Para instalar em ambiente Linux
 
