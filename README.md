@@ -20,7 +20,7 @@ Faça o clone do código existente no repositório Git em uma pasta em seu siste
 cd ~
 mkdir i3geo
 cd i3geo
-git clone http://git.saude.df.gov.br/gitbucket/git/SUPLANS/i3geo.git .
+git clone https://github.com/saladesituacao/i3geo/i3geo.git .
 docker run -it -p 80:8080 -v $PWD:/var/www/i3geo --rm i3geo/software-base
 </pre>
 
