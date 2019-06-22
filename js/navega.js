@@ -45,7 +45,7 @@ i3GEO.navega =
 	    }
 	    if (i3GEO.Interface.ATUAL === "openlayers") {
 		marcadorZoom = "";
-		i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
+		i3GEO.Interface.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
 	    }
 	},
 	/**
@@ -83,7 +83,7 @@ i3GEO.navega =
 
 	    var l = i3GEO.navega.EXTENSOES.lista,
 	    r = i3GEO.navega.EXTENSOES.redo,
-	    a = i3GEO.parametros.mapexten,
+	    a = i3GEO.mapa.getExtent().string,
 	    e;
 	    if(l.length > 0){
 		if(l.length > 1){
@@ -99,7 +99,7 @@ i3GEO.navega =
 		    }
 		}
 	    } else {
-		l.push(i3GEO.parametros.mapexten);
+		l.push(a);
 	    }
 	},
 	extensaoProximo : function() {
@@ -108,7 +108,7 @@ i3GEO.navega =
 
 	    var l = i3GEO.navega.EXTENSOES.lista,
 	    r = i3GEO.navega.EXTENSOES.redo,
-	    a = i3GEO.parametros.mapexten,
+	    a = i3GEO.mapa.getExtent().string,
 	    e;
 
 	    i3GEO.navega.EXTENSOES.emAcao = true;
@@ -137,8 +137,8 @@ i3GEO.navega =
 	 * {numerico} - latitude
 	 */
 	pan2ponto : function(x, y) {
-	    i3GEO.Interface[i3GEO.Interface.ATUAL].pan2ponto(x, y);
-	    i3GEO.Interface[i3GEO.Interface.ATUAL].recalcPar();
+	    i3GEO.Interface.pan2ponto(x, y);
+	    i3GEO.Interface.recalcPar();
 	},
 	/**
 	 * Function: centroDoMapa
@@ -197,7 +197,7 @@ i3GEO.navega =
 			    xy[0] * 1,
 			    xy[1] * 1,
 			    $i(i3GEO.Interface.IDMAPA),
-			    i3GEO.parametros.mapexten,
+			    i3GEO.mapa.getExtent().string,
 			    i3GEO.parametros.pixelsize);
 		i3GEO.util.criaPin("i3GeoCentroDoMapa", i3GEO.configura.locaplic + '/imagens/alvo.png', '30px', '30px');
 		i3GEO.util.posicionaImagemNoMapa("i3GeoCentroDoMapa", xy[0], xy[1]);
@@ -205,7 +205,7 @@ i3GEO.navega =
 	},
 	removeCookieExtensao : function() {
 	    var nomecookie = "i3geoOLUltimaExtensao";
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    if (i3GEO.Interface.googleLike === true) {
 		nomecookie = "i3geoUltima_ExtensaoOSM";
 	    }
 	    i3GEO.util.insereCookie(nomecookie, "");
@@ -290,34 +290,32 @@ i3GEO.navega =
 	    if (sid !== "") {
 		i3GEO.configura.sid = sid;
 	    }
-	    i3GEO.php.zoomponto(i3GEO.atualiza,x,y,tamanho,simbolo,cor);
-	},
-	/**
-	 * Function: zoompontoIMG
-	 *
-	 * Centraliza o mapa em um ponto de coordenadas medidas na imagem do mapa
-	 *
-	 * Parametros:
-	 *
-	 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-	 *
-	 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-	 *
-	 * {Numeric} - coordenada x da imagem
-	 *
-	 * {Numeric} - coordenada y da imagem
-	 */
-	zoompontoIMG : function(locaplic, sid, x, y) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.navega.zoompontoIMG()");
 
-	    if (locaplic !== "") {
-		i3GEO.configura.locaplic = locaplic;
-	    }
-	    if (sid !== "") {
-		i3GEO.configura.sid = sid;
-	    }
-	    i3GEO.php.pan(i3GEO.atualiza, '', '', x, y);
+	    var retorno = function(retorno) {
+
+		    i3GEO.Interface.pan2ponto(x, y);
+
+		    i3GEO.mapa.refresh();
+	    };
+	    i3GEO.Interface.pan2ponto(x, y);
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    funcao: "zoomponto",
+		    pin: "pin",
+		    xy: x + " " + y,
+		    marca: simbolo,
+		    tamanho: tamanho,
+		    cor: cor
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		}
+	    });
+
 	},
 	/**
 	 * Function: xy2xy
@@ -369,59 +367,6 @@ i3GEO.navega =
 	    }
 	},
 	/**
-	 * Localiza as coordenadas baseadas no n&uacute;mero IP do usu&aacute;rio.
-	 *
-	 * Parametros:
-	 *
-	 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-	 *
-	 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-	 *
-	 * {Function} - fun&ccedil;&atilde;o que ser&aacute; executada ao concluir a chamada AJAX. Essa fun&ccedil;&atilde;o receber&aacute;
-	 * o objeto JSON obtido.
-	 */
-	localizaIP : function(locaplic, sid, funcao) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.navega.localizaIP()");
-
-	    if (locaplic !== "") {
-		i3GEO.configura.locaplic = locaplic;
-	    }
-	    if (sid !== "") {
-		i3GEO.configura.sid = sid;
-	    }
-	    i3GEO.php.localizaIP(funcao);
-	},
-	/**
-	 * Mostra no mapa um ponto baseado na localiza&ccedil;&atilde;o do usu&aacute;rio.
-	 *
-	 * Parametros:
-	 *
-	 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-	 *
-	 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-	 */
-	zoomIP : function(locaplic, sid) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.navega.zoomIP()");
-
-	    try {
-		if (arguments.length > 0) {
-		    i3GEO.configura.locaplic = locaplic;
-		    i3GEO.configura.sid = sid;
-		}
-		var mostraIP = function(retorno) {
-		    if (retorno.data.latitude !== null) {
-			i3GEO.navega.zoomponto(locaplic, sid, retorno.data.longitude, retorno.data.latitude);
-		    } else {
-			i3GEO.janela.tempoMsg("Nao foi possivel identificar a localizacao.");
-		    }
-		};
-		i3GEO.navega.localizaIP(locaplic, sid, mostraIP);
-	    } catch (e) {
-	    }
-	},
-	/**
 	 * Function: zoomExt
 	 *
 	 * Aplica uma nova extens&atilde;o geogr&aacute;fica ao mapa.
@@ -450,15 +395,7 @@ i3GEO.navega =
 	    if (tipoimagem === "") {
 		tipoimagem = "nenhum";
 	    }
-	    // verifica se nao e necessario alterar as coordenadas
-	    ext = i3GEO.util.extGeo2OSM(ext);
-	    i3GEO.php.mudaext(
-		    function(retorno){
-			i3GEO.atualiza(retorno);
-		    },
-		    tipoimagem,
-		    ext
-	    );
+	    i3GEO.Interface.zoom2ext(ext);
 	},
 	/**
 	 * Function: aplicaEscala
@@ -476,13 +413,7 @@ i3GEO.navega =
 	 * {Numeric} - denominador da escala
 	 */
 	aplicaEscala : function(escala) {
-	    if (i3GEO.Interface.ATUAL === "googlemaps") {
-		i3GeoMap.setZoom(i3GEO.Interface.googlemaps.escala2nzoom(escala));
-	    }
-	    if (i3GEO.Interface.ATUAL === "openlayers") {
-		i3geoOL.zoomToScale(escala, true);
-		i3GEO.parametros.mapscale = parseInt(i3geoOL.getScale(),10);
-	    }
+	    i3geoOL.zoomToScale(escala, true);
 	},
 	atualizaEscalaNumerica : function(escala) {
 	    var e = $i("i3GEOescalanum");
@@ -492,12 +423,7 @@ i3GEO.navega =
 	    if (arguments.length === 1) {
 		e.value = $.number(escala,0,$trad("dec"),$trad("mil"));
 	    } else {
-		if (i3GEO.Interface.ATUAL === "googlemaps") {
-		    e.value = parseInt(i3GEO.parametros.mapscale, 10);
-		}
-		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"));
-		}
+		e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"));
 	    }
 	},
 	panFixo : function() {
@@ -505,110 +431,6 @@ i3GEO.navega =
 	},
 	mostraRosaDosVentos : function() {
 	    alert("mostraRosaDosVentos foi depreciado na versao 6.0");
-	},
-	/**
-	 * Section: i3GEO.navega.autoRedesenho
-	 *
-	 * Controla o redesenho autom&aacute;tico do mapa por meio de um temporizador
-	 */
-	autoRedesenho : {
-	    /**
-	     * Propriedade: INTERVALO
-	     *
-	     * Intervalo de tempo, em milisegundos, que ser&aacute; utilizado para disparar o desenho do mapa
-	     *
-	     * Tipo:
-	     *
-	     * {Integer}
-	     *
-	     * Default:
-	     *
-	     * 0
-	     */
-	    INTERVALO : 0,
-	    /**
-	     * Guarda o valor do ID do elemento HTML que receber&aacute; o contador de tempo
-	     *
-	     * Tipo: {String}
-	     */
-	    ID : "tempoRedesenho",
-	    /**
-	     * Function: ativa
-	     *
-	     * Ativa o auto-redesenho do mapa
-	     *
-	     * Parametros:
-	     *
-	     * {String} - id do elemento onde o contador de tempo ser&aacute; mostrado no mapa. Por default, utiliza "tempoRedesenho".
-	     */
-	    ativa : function(id) {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.autoRedesenho.ativa()");
-
-		if (arguments.length === 0) {
-		    id = "tempoRedesenho";
-		}
-		i3GEO.navega.autoRedesenho.ID = id;
-		if (($i(id)) && i3GEO.navega.autoRedesenho.INTERVALO > 0) {
-		    $i(id).style.display = "block";
-		}
-		if (i3GEO.navega.autoRedesenho.INTERVALO > 0) {
-		    i3GEO.navega.tempoRedesenho =
-			setTimeout('i3GEO.navega.autoRedesenho.redesenha()', i3GEO.navega.autoRedesenho.INTERVALO);
-		}
-		if (($i(id)) && (i3GEO.navega.autoRedesenho.INTERVALO > 0)) {
-		    $i(id).innerHTML = i3GEO.navega.autoRedesenho.INTERVALO / 1000;
-		    i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()', 1000);
-		}
-	    },
-	    /**
-	     * Function: desativa
-	     *
-	     * Desativa o auto-redesenho do mapa
-	     */
-	    desativa : function() {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.autoRedesenho.desativa()");
-
-		i3GEO.navega.autoRedesenho.INTERVALO = 0;
-		clearTimeout(i3GEO.navega.tempoRedesenho);
-		clearTimeout(i3GEO.navega.contaTempoRedesenho);
-		i3GEO.navega.tempoRedesenho = "";
-		i3GEO.navega.contaTempoRedesenho = "";
-		if ($i(i3GEO.navega.autoRedesenho.ID)) {
-		    $i(i3GEO.navega.autoRedesenho.ID).style.display = "none";
-		}
-	    },
-	    /**
-	     * Redesenha o mapa quando o contador de tempo chegar a zero
-	     */
-	    redesenha : function() {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.autoRedesenho.redesenha()");
-
-		clearTimeout(i3GEO.navega.tempoRedesenho);
-		clearTimeout(i3GEO.navega.contaTempoRedesenho);
-		switch (i3GEO.Interface.ATUAL) {
-		case "openlayers":
-		    i3GEO.Interface.openlayers.atualizaMapa();
-		    break;
-		case "googlemaps":
-		    i3GEO.Interface.googlemaps.redesenha();
-		    break;
-		default:
-		    i3GEO.atualiza("");
-		}
-		i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
-	    },
-	    /**
-	     * Faz a contagem do tempo
-	     */
-	    contagem : function() {
-		if ($i(i3GEO.navega.autoRedesenho.ID)) {
-		    $i(i3GEO.navega.autoRedesenho.ID).innerHTML = parseInt($i(i3GEO.navega.autoRedesenho.ID).innerHTML, 10) - 1;
-		}
-		i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()', 1000);
-	    }
 	},
 	zoomBox : {
 	    inicia : function() {
@@ -775,7 +597,7 @@ i3GEO.navega =
 			"wiki",
 			"wiki",
 			"dependencias.php",
-		"i3GEOF.wiki.iniciaJanelaFlutuante()");
+		"i3GEOF.wiki.start()");
 	    },
 	    /**
 	     * Function: metar
@@ -836,7 +658,7 @@ i3GEO.navega =
 			"confluence",
 			"confluence",
 			"dependencias.php",
-		"i3GEOF.confluence.iniciaJanelaFlutuante()");
+		"i3GEOF.confluence.start()");
 	    }
 	},
 	atualizaGoogle : function(idgoogle) {
@@ -872,78 +694,5 @@ i3GEO.navega =
 		}
 	    });
 	    return i3GEO.navega.dragZoom.draw;
-	},
-	geolocal: {
-	    _timer: "",
-	    _delay: 500,
-	    _pin: "",
-	    start: function(){
-		if(i3GEO.navega.geolocal._timer != ""){
-		    i3GEO.navega.geolocal.stop();
-		} else {
-		    i3GEO.navega.geolocal.firstPoint();
-		}
-	    },
-	    firstPoint: function(){
-		var retorno = function(position) {
-		    console.log(position);
-		    i3GEO.navega.geolocal.showPoint(position);
-		    i3GEO.navega.geolocal.createTimer();
-		};
-		navigator.geolocation.getCurrentPosition(retorno, i3GEO.navega.geolocal.erro);
-	    },
-	    createTimer: function(){
-		i3GEO.navega.geolocal._timer = setInterval(function() {
-		    i3GEO.navega.geolocal.movePoint();
-		}, i3GEO.navega.geolocal._delay);
-	    },
-	    stop: function(){
-		clearInterval(i3GEO.navega.geolocal._timer);
-		i3GEO.navega.geolocal._timer = "";
-		i3GEO.navega.geolocal.removePoint();
-	    },
-	    showPoint: function(position){
-		var y = position.coords.latitude;
-		var x = position.coords.longitude;
-		i3GEO.navega.pan2ponto(x,y);
-		i3GEO.navega.geolocal._pin = i3GEO.desenho.addPin(
-			x,
-			y,
-			"",
-			"",
-			i3GEO.configura.locaplic + '/imagens/google/confluence.png',
-		"pingeolocal");
-	    },
-	    movePoint: function(position){
-		var retorno = function(position) {
-		    var y = position.coords.latitude;
-		    var x = position.coords.longitude;
-		    //i3GEO.navega.pan2ponto(x,y);
-		    i3GEO.desenho.movePin(i3GEO.navega.geolocal._pin,x,y)
-		};
-		navigator.geolocation.getCurrentPosition(retorno, i3GEO.navega.geolocal.erro);
-	    },
-	    removePoint: function(){
-		i3GEO.desenho.removePins("pingeolocal");
-	    },
-	    erro : function(error) {
-		i3GEO.navega.geolocal.stop();
-		var erro = "";
-		switch (error.code) {
-		case error.PERMISSION_DENIED:
-		    erro = "User denied the request for Geolocation.";
-		    break;
-		case error.POSITION_UNAVAILABLE:
-		    erro = "Location information is unavailable.";
-		    break;
-		case error.TIMEOUT:
-		    erro = "The request to get user location timed out.";
-		    break;
-		case error.UNKNOWN_ERROR:
-		    erro = "An unknown error occurred.";
-		    break;
-		}
-		i3GEO.janela.tempoMsg(erro);
-	    }
 	}
 };

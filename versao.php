@@ -17,5 +17,5 @@ Mudanças nessa versao que impactam as versoes anteriores:
  * TODO Verificar ao fechar versao
  * numero da versao esta correto?
  */
-$mensagemInicia = 'i3GEO V. 8.0';
+$mensagemInicia = 'V. 8.0 alfa';
 ?>

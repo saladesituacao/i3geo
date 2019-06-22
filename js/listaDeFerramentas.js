@@ -196,11 +196,6 @@ i3GEO.listaDeFerramentas = {
 		}
 	    }],
 	    "cartogramas" :[{
-		id : "omenudataFerramentas1e",
-		text : $trad("addcamada"),
-		url : "javascript:i3GEO.mapa.dialogo.cartograma()"
-	    },
-	    {
 		id : "omenudataFerramentas6a",
 		text : $trad("x61"),
 		url : "javascript:i3GEO.mapa.dialogo.filtraregiao()"
@@ -216,29 +211,19 @@ i3GEO.listaDeFerramentas = {
 		url : "javascript:i3GEO.analise.dialogo.linhadotempo()"
 	    },
 	    {
-		id : "omenudataNavegacao2",
-		text : $trad("d15t"),
-		url : "javascript:i3GEO.navega.dialogo.googlemaps()"
-	    },
-	    {
 		id : "omenudataNavegacao4",
 		text : $trad("d8t"),
 		url : "javascript:i3GEO.mapa.dialogo.mostraexten()"
 	    },
 	    {
+		id : "omenudataNavegacao2",
+		text : $trad("d15t"),
+		url : "javascript:i3GEO.navega.dialogo.googlemaps()"
+	    },
+	    {
 		id : "omenudataNavegacaoWiki",
 		text : $trad("d11t"),
 		url : "javascript:i3GEO.navega.dialogo.wiki()"
-	    },
-	    {
-		id : "omenudataNavegacaoMetar",
-		text : $trad("d29"),
-		url : "javascript:i3GEO.navega.dialogo.metar()"
-	    },
-	    {
-		id : "omenudataNavegacaoFotos",
-		text : "Fotos",
-		url : "javascript:i3GEO.navega.dialogo.buscaFotos()"
 	    },
 	    {
 		id : "omenudataNavegacaoConfluence",
@@ -248,17 +233,13 @@ i3GEO.listaDeFerramentas = {
 	    {
 		id : "omenudataFerramentas7a",
 		text : $trad("x64a"),
-		url : "javascript:i3GEO.mapa.dialogo.congelaMapa();"
+		url : "javascript:i3GEO.mapa.dialogo.congelamapa();"
 	    },
 	    {
 		id : "omenudataFerramentas8a",
 		text : $trad("p12"),
-		url : "javascript:i3GEO.mapa.dialogo.autoredesenha()"
-	    },
-	    {
-		id : "omenudataFerramentas10",
-		text : $trad("x93"),
-		url : "javascript:i3GEO.mapa.dialogo.geolocal()"
+		show : "hidden",
+		url : "javascript:i3GEO.timer.mapa.prompt()"
 	    }],
 	    "ferramentasmapa" : [{
 		id : "omenudataFerramentas1a",

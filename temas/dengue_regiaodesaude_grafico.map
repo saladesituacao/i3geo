@@ -1,0 +1,73 @@
+MAP
+#http://localhost:8019/i3geo/ms_criamapa.php?layers=dengue_regiaodesaude_grafico
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (SELECT d.*, r.geom FROM (SELECT i_ano_prim_sintomas,i_regiao_saude_res,sum (i_qtd_casos) AS i_qtd_casos FROM st_stage.tab_dengue AS d WHERE d.i_desc_uf_res = 'DF' AND i_ano_prim_sintomas > '2005' GROUP BY i_ano_prim_sintomas,i_regiao_saude_res) AS d JOIN dbauxiliares.tb_class_regiao AS r ON r.class_regiao = d.i_regiao_saude_res WHERE r.superintendencia = 't' ORDER BY i_ano_prim_sintomas) as foo USING UNIQUE i_regiao_saude_res USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "TILES"	"NAO"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "TEMA"	"Dengue por Regiões de saúde (superintendências)"
+    END # METADATA
+    NAME "dengue_regiaodesaude_grafico"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "1 a 150"
+      EXPRESSION (([i_qtd_casos]>0)and([i_qtd_casos]<=150))
+      STYLE
+        COLOR "#DF9D82"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "151 a 500"
+      EXPRESSION (([i_qtd_casos]>150)and([i_qtd_casos]<=500))
+      STYLE
+        COLOR "#CE7860"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "501 a 1.500"
+      EXPRESSION (([i_qtd_casos]>500)and([i_qtd_casos]<=1500))
+      STYLE
+        COLOR "#B75643"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "1.501 a 3.000"
+      EXPRESSION (([i_qtd_casos]>1500)and([i_qtd_casos]<=3000))
+      STYLE
+        COLOR "#99372A"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "3.001 a 5.000"
+      EXPRESSION (([i_qtd_casos]>3000)and([i_qtd_casos]<=5000))
+      STYLE
+        COLOR "#771C17"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "5.001 e mais"
+      EXPRESSION ([i_qtd_casos]>5000)
+      STYLE
+        COLOR "#530505"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

@@ -1,0 +1,86 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select * FROM st_stage.tab_ivs) as foo USING UNIQUE cd_geocodi1 USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "TIP"	"cd_geocodi1,ivs,categoria,moradores,domicilios"
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "ITENSDESC"	"Setor,IVS,Categoria,Moradores,Domicílios"
+      "TILES"	"SIM"
+      "ITENSLINK"	",,,,"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "permitedownload"	"SIM"
+      "UTFDATA"	""
+      "ITENS"	"cd_geocodi1,ivs,categoria,moradores,domicilios"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "TEMA"	"IVS 2010"
+      "identifica"	"sim"
+      "wkttip"	"SIM"
+    END # METADATA
+    NAME "ivs2010setores"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Não avaliado"
+      EXPRESSION ('[cod_categoria]'eq'1')
+      STYLE
+        COLOR 247 244 249
+        OUTLINECOLOR 240 240 240
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Risco baixo"
+      EXPRESSION ('[cod_categoria]'eq'2')
+      STYLE
+        #COLOR 201 148 199
+        COLOR 0 100 0
+        OUTLINECOLOR 240 240 240
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Risco médio"
+      EXPRESSION ('[cod_categoria]'eq'3')
+      STYLE
+        #COLOR 231 41 138
+        COLOR 255 255 0
+        OUTLINECOLOR 240 240 240
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Risco elevado"
+      EXPRESSION ('[cod_categoria]'eq'4')
+      STYLE
+        #COLOR 152 0 67
+        COLOR 255 165 0
+        OUTLINECOLOR 240 240 240
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "Risco muito elevado"
+      EXPRESSION ('[cod_categoria]'eq'5')
+      STYLE
+        #COLOR 103 0 31
+        COLOR 255 0 0
+        OUTLINECOLOR 240 240 240
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

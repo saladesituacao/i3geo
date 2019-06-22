@@ -101,7 +101,7 @@ i3GEO.janela =
 	    } else {
 		i.mCustomScrollbar(a);
 	    }
-	    */
+	     */
 	},
 	/**
 	 * Executa fun&ccedil;&otilde;es default antes de abrir a janela
@@ -615,6 +615,7 @@ i3GEO.janela =
 	},
 	//http://fezvrasta.github.io/snackbarjs/
 	//styles: snackbar|red
+	//$("#snackbarid").snackbar("hide");
 	snackBar: function({content = "", style = "snackbar", timeout = 4000, htmlAllowed = true, onClose = function(){}}){
 	    $("#snackbar-container").find("div").filter(function(){
 		if($(this).hasClass('snackbar-opened') == false){
@@ -628,7 +629,8 @@ i3GEO.janela =
 		    htmlAllowed: htmlAllowed, // allows HTML as content value
 		    onClose: onClose // callback called when the snackbar gets closed.
 	    };
-	    $.snackbar(options);
+	    var snack = $.snackbar(options);
+	    return snack;
 	},
 	/**
 	 * Function: tempoMsg
@@ -646,22 +648,6 @@ i3GEO.janela =
 		tempo = 4000;
 	    }
 	    i3GEO.janela.snackBar({content: texto, timeout: tempo});
-	    /*
-	    if(!i3GEO.janela.tempoModal){
-		i3GEO.janela.tempoModal = $(
-			Mustache.render(i3GEO.template.janela.msg, {"texto": texto})
-		);
-	    } else {
-		$i("i3GEOMensagemTempoModal").innerHTML = texto;
-	    }
-	    i3GEO.janela.tempoModal.modal("show");
-	    if(!tempo){
-		tempo = 3000;
-	    }
-	    setTimeout(function() {
-		i3GEO.janela.tempoModal.modal("hide");
-	    }, tempo);
-	    */
 	},
 	closeModal: false,
 	//utilizado para mensagens genericas com botao de close
@@ -688,12 +674,13 @@ i3GEO.janela =
 	},
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
-	formModal : function({resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
+	formModal : function({expandable = true, resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
 	    if(css == false){
 		css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'};
 	    }
 	    if(draggable == "enable"){
 		css.cursor = "move";
+		css.right = "auto";
 	    }
 	    if(!i3GEO.janela._formModal){
 		i3GEO.janela._formModal = $(
@@ -714,6 +701,7 @@ i3GEO.janela =
 		i3GEO.janela._formModal.css(css);
 		i3GEO.janela._formModal.draggable(draggable);
 		$(i3GEO.janela._formModal).appendTo("#" + i3GEO.Interface.IDCORPO);
+
 		i3GEO.janela._formModal.find(".expandModal").on("click",function(){
 		    if($(this).data("expanded") == true){
 			$(this).data("expanded",false);
@@ -729,6 +717,11 @@ i3GEO.janela =
 			i3GEO.janela._formModal.css({"top":"0px","left":"0px","width":"100%","height":"100%"});
 		    }
 		});
+	    }
+	    if(expandable == true){
+		i3GEO.janela._formModal.find(".expandModal").css("visibility","visible");
+	    } else {
+		i3GEO.janela._formModal.find(".expandModal").css("visibility","hidden");
 	    }
 	    if(texto == false){
 		i3GEO.janela._formModal.modal("hide");
@@ -847,46 +840,41 @@ i3GEO.janela =
 	 * {function} - (opcional) funcao do botao 2
 	 */
 	confirma : function(pergunta, w, resposta1, resposta2, funcao1, funcao2) {
-	    var b, f1, f2, f3, janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
-	    if (!w || w == "") {
-		w = 300;
-	    }
+	    i3GEO.janela.closeMsg(" ");
+	    var msg = $("#i3GEOMensagemCloseModal");
+
+	    var f1, f2, f3;
+
 	    if (!funcao1 || funcao1 == "") {
 		f1 = function() {
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		    return true;
 		};
 	    } else {
 		f1 = function() {
 		    funcao1.call();
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		};
 	    }
 	    if (!funcao2 || funcao2 == "") {
 		f2 = function() {
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		    return false;
 		};
 	    } else {
 		f2 = function() {
 		    funcao2.call();
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		};
 	    }
 	    f3 = function() {
-		YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		i3GEO.janela.closeMsg();
 	    };
 	    if (!resposta1 || resposta1 == "") {
 		resposta1 = $trad("confirma");
 	    }
-	    if (janela) {
-		janela.destroy();
-	    }
 	    b = [
 		{
-		    text : $trad("x75"),
-		    handler : f3
-		}, {
 		    text : resposta1,
 		    handler : f1
 		}
@@ -897,33 +885,12 @@ i3GEO.janela =
 		    handler : f2
 		});
 	    }
-	    janela = new YAHOO.widget.SimpleDialog("confirma", {
-		width : w + "px",
-		fixedcenter : true,
-		visible : false,
-		draggable : false,
-		zIndex : 100000,
-		textAlign : "left",
-		close : false,
-		modal : false,
-		effect : {
-		    effect : YAHOO.widget.ContainerEffect.FADE,
-		    duration : 0.25
-		},
-		constraintoviewport : true,
-		text : "<h4 class='alertTitulo'>" + pergunta + "</h4>"
-	    });
-	    YAHOO.i3GEO.janela.managerAguarde.register(janela);
-	    janela.setHeader(" ");
-	    //botoes
-	    janela.setFooter("<div class='form-group condensed' id='confirmaFooter'></div>");
-	    janela.render(document.body);
+	    msg.html("<h4 class='alertTitulo'>" + pergunta + "</h4><div class='form-group condensed' id='confirmaFooter'></div>");
 	    var ins = "";
 	    $.each(b, function( index, value ) {
 		ins = Mustache.render(i3GEO.template.botoes.padrao, {style:'margin-right:10px;',text: value.text});
 		$('#confirmaFooter').append($(ins).click(value.handler));
 	    });
-	    janela.show();
 	},
 	/**
 	 * Function: prompt
@@ -963,7 +930,7 @@ i3GEO.janela =
 		funcaoOk.call();
 	    });
 	},
-	alerta : function({html = "", pergunta = pergunta, funcaoOk = funcaoOk, parametros = parametros} ) {
+	alerta : function({html = "", pergunta = "", funcaoOk = false, parametros = false} = {} ) {
 	    var botao = Mustache.render(
 		    i3GEO.template.botoes.padrao,
 		    {
@@ -983,7 +950,9 @@ i3GEO.janela =
 	    i3GEO.janela.closeMsg(text);
 	    $("#i3GEOJanelapromptOk").on("click",parametros,function(){
 		i3GEO.janela.closeMsg();
-		funcaoOk(parametros);
+		if(funcaoOk){
+		    funcaoOk(parametros);
+		}
 	    });
 	},
 	mensagemSimples : function(texto) {

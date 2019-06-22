@@ -293,7 +293,8 @@ class Mapa
             "maxscaledenom",
             "minscaledenom",
             "group",
-            "cacheprefixo"
+            "cacheprefixo",
+            "local"
         );
         foreach ($this->layers as $oLayer) {
             $sel = "nao";
@@ -372,12 +373,21 @@ class Mapa
                 if ($oLayer->getmetadata("ltempoformatodata") !== "") {
                     $ltempo = "sim";
                 }
+                $local = "nao";
+                if($oLayer->getMetaData("TEMALOCAL") != ""){
+                    $local = "sim";
+                }
                 //
                 // verifica se o tema faz cache automatico
                 //
                 $cache = "nao";
                 if (strtoupper($oLayer->getmetadata("cache")) == "SIM") {
                     $cache = "sim";
+                }
+                $temporizador = "";
+                if($oLayer->getmetadata("temporizador") != ""){
+                    $cache = "nao";
+                    $temporizador = $oLayer->getmetadata("temporizador");
                 }
                 $cortepixels = 0;
                 if ($oLayer->getmetadata("cortepixels") != "") {
@@ -520,7 +530,7 @@ class Mapa
                     $wmssrs,
                     $wmstile,
                     $tiles,
-                    $oLayer->getmetadata("temporizador"),
+                    $temporizador,
                     $oLayer->getmetadata("permiteogc"),
                     $oLayer->getmetadata("itembuscarapida"),
                     $usasld,
@@ -540,7 +550,8 @@ class Mapa
                     $oLayer->maxscaledenom,
                     $oLayer->minscaledenom,
                     $oLayer->group,
-                    $oLayer->getmetadata("cacheprefixo")
+                    $oLayer->getmetadata("cacheprefixo"),
+                    $local
                 );
             }
         }
@@ -1385,7 +1396,7 @@ class Mapa
      *
      * $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&atilde;o existir no mapfile atual
      */
-    function ligaDesligaTemas($ligar, $desligar, $adicionar = "nao")
+    function ligaDesligaTemas($ligar="", $desligar="", $adicionar = "nao")
     {
         if (strTolower($adicionar) == "sim") {
             $teste = explode(",", $ligar);
@@ -1451,7 +1462,7 @@ class Mapa
                 }
             }
         }
-        return ("ok");
+        return true;
     }
 
     /*
@@ -1478,10 +1489,11 @@ class Mapa
      * $formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
      * $time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
      * $tile - indica se o WMS e do tipo TILE ou nao (0 ou 1)
+     * &allitens - inclui todos os itens ou nao
      * Include:
      * <wmswfs.php>
      */
-    function adicionatemawms($tema, $servico, $nome, $proj, $formato, $locaplic, $tipo = "", $versao, $nomecamada, $dir_tmp, $imgdir, $imgurl, $tiporep, $suportasld, $formatosinfo = "text/plain", $time = "", $tile = 0)
+    function adicionatemawms($tema, $servico, $nome, $proj, $formato, $locaplic, $tipo = "", $versao, $nomecamada, $dir_tmp, $imgdir, $imgurl, $tiporep, $suportasld, $formatosinfo = "text/plain", $time = "", $tile = 0, $allitens = "nao")
     {
         if ($versao == "") {
             $versao = "1.1.1";
@@ -1533,7 +1545,7 @@ class Mapa
             $layer->set("connectiontype", MS_WMS);
         }
 
-        $epsg = "EPSG:4618";
+        $epsg = "EPSG:4326";
         $e4291 = "nao";
         $ecrs = "nao";
         $pos = str_replace(" ", ",", $proj);
@@ -1543,10 +1555,6 @@ class Mapa
                 $p = explode(":", $p);
                 if ($p[1] == "4326") {
                     $epsg = "EPSG:4326";
-                }
-                if ($p[1] == "4618") {
-                    $epsg = "EPSG:4618";
-                    $e4291 = "sim";
                 }
                 if ($p[1] == "84") {
                     $ecrs = "CRS:84";
@@ -1570,7 +1578,9 @@ class Mapa
         $layer->setmetadata("wms_formatlist", $formato);
         $layer->setmetadata("formatosinfo", $formatosinfo);
         $layer->setmetadata("wms_exceptions_format", "application/vnd.ogc.se_xml");
-        $layer->setmetadata("wms_style", $nome);
+        //$layer->setmetadata("wms_style", $nome);
+        $layer->setmetadata("wms_LAYERS", $tema);
+        $layer->setmetadata("wms_STYLES", "");
         $layer->setmetadata("wms_connectiontimeout", "30");
         $layer->setmetadata("wms_force_separate_request", "1");
         // esse parametro e especifico do i3geo. Se for 1 indica um servico do tipo tile
@@ -1599,6 +1609,10 @@ class Mapa
         $layer->setmetadata("wms_format", $im);
         $layer->setmetadata("wfs", "nao");
         $layer->setmetadata("wfs", "nao");
+        if($allitens == "sim"){
+            $layer->setmetadata("tip", "allitens");
+        }
+
         $c = $layer->offsite;
         $c->setrgb(255, 255, 255);
         $of = $this->mapa->outputformat;

@@ -1,0 +1,35 @@
+MAP
+#localhost:8019/i3geo/ms_criamapa.php?temasa=testedatacriacao&layers=testedatacriacao&interface=osm.phtml
+#dmapas.saude.df.gov.br/i3geo/ms_criamapa.php?temasa=testedatacriacao&layers=testedatacriacao&interface=osm.phtml
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT DISTINCT geom,i_estab_cnes,EXTRACT(YEAR FROM i_vigencia_inicio_hab) AS ano FROM st_stage.tab_cnes_hab cnes JOIN dbauxiliares.tb_unidade ba ON cnes.i_estab_cnes = ba.cnes WHERE i_vigencia_inicio_hab is not null AND geom is not null ORDER BY ano) as foo using unique i_estab_cnes using srid=4674"
+    METADATA
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "extensao"	"-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844"
+      "TEMA"	"Data criação das unidade"
+      "convcaracter"	"SIM"
+      "animagif"	"{'colunat':'ano','tipocolunat':'numero','tempo':'120','w':'800','h':'500','cache':'nao','mapext':'-48.42430114746093 -16.090850830078125 -47.14233398437499 -15.43785095214844','legenda':'nao','transparente':'nao','operador':'lte','nulos':'','auto':'sim','exec':'sim'}"
+    END # METADATA
+    NAME "testedatacriacao"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        SIZE 14
+        SYMBOL "ponto"
+        OUTLINECOLOR 255 255 255
+        COLOR 255 0 0
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+END # MAP

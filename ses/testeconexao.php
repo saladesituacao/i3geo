@@ -1,4 +1,8 @@
 <?php
+exit;
+if(!$_GET["teste"] || $_SERVER['SERVER_NAME'] != "dmapas.saude.df.gov.br"){
+    exit;
+}
 //$dbh usuario somente leitura
 //$dbhw usuario com direito de escrita
 //esse arquivo esta no .git/info/exclude
@@ -24,13 +28,13 @@ try
     $dbh = new PDO('pgsql:dbname='.$_parametros["dbsala"].';user='.$_parametros["usersala"].';password='.$_parametros["passwordsala"].';host='.$_parametros["host"]);
     $dbhw = new PDO('pgsql:dbname='.$_parametros["dbsala"].';user='.$_parametros["userstick"].';password='.$_parametros["passwordstick"].';host='.$_parametros["host"]);
     $dbhstage = new PDO('pgsql:dbname='.$_parametros["dbstage"].';user='.$_parametros["usersala"].';password='.$_parametros["passwordsala"].';host='.$_parametros["host"]);
-    $_parametros = null;
+
 }
 catch (PDOException $e)
 {
     print_r($e);
     die();
 }
-echo "Conexao OK";
-$convUTF = true;
-?>
+echo "Conexao OK<pre>";
+var_dump($_parametros);
+echo 'pgsql:dbname='.$_parametros["dbsala"].';user='.$_parametros["usersala"].';password='.$_parametros["passwordsala"].';host='.$_parametros["host"];

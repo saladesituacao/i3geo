@@ -6,6 +6,7 @@ i3GEO.catalogoInde = {
 	    'idCatalogoNavegacao': 'catalogoNavegacao',
 	    'idOndeMigalha': 'catalogoMigalha'
 	},
+	wait: false,
 	DADOS: "",
 	carregaTemplates: function(){
 	    var t1 = i3GEO.catalogoInde.config.templateDir,
@@ -60,7 +61,7 @@ i3GEO.catalogoInde = {
 		if(url.indexOf("?") == -1){
 		    url = url + "?";
 		}
-		i3GEO.php.adicionaTemaWMS(
+		i3GEO.mapa.adicionaTemaWMS(
 			'',
 			url,
 			layer,
@@ -72,8 +73,6 @@ i3GEO.catalogoInde = {
 			'',
 			'nao',
 			"text/plain",
-			'',
-			'',
 			true
 		);
 	    }
@@ -82,6 +81,11 @@ i3GEO.catalogoInde = {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoInde.inicia");
 
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
+
 	    if(config){
 		$.each( config, function( i,v ) {
 		    i3GEO.catalogoInde.config[i] = v;
@@ -89,6 +93,7 @@ i3GEO.catalogoInde = {
 	    }
 	    i3GEO.catalogoInde.aguarde();
 	    if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
+		i3GEO.catalogoOgc.wait = false;
 		i3GEO.catalogoInde.carregaTemplates();
 		return;
 	    } else {
@@ -106,6 +111,7 @@ i3GEO.catalogoInde = {
 		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
 
 		var lista = function(){
+
 		    var dados = i3GEO.catalogoInde.DADOS;
 		    var clone = [],
 		    t;
@@ -122,11 +128,11 @@ i3GEO.catalogoInde = {
 			    {"data":clone}
 		    );
 		    $("#" + config.idCatalogoNavegacao).html(t);
-
+		    $("#" + i3GEO.catalogoInde.config.idOndeMigalha).show();
 		    $("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).fadeOut( "fast", function(){
-			$("#" + i3GEO.catalogoInde.config.idOndeMigalha).show();
 			$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
 		    });
+		    i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
 		};
 		if(i3GEO.catalogoInde.DADOS == ""){
 		    i3GEO.catalogoInde.aguarde();
@@ -134,13 +140,16 @@ i3GEO.catalogoInde = {
 			    i3GEO.configura.locaplic + "/ferramentas/vinde/buscacamada.php",
 			    {g_sid: i3GEO.configura.sid}
 		    ).done(function(data) {
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.catalogoInde.DADOS = data;
 			lista();
 		    }).fail(function() {
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.janela.closeMsg($trad("erroTpl"));
 			return;
 		    });
 		} else {
+		    i3GEO.catalogoOgc.wait = false;
 		    lista();
 		}
 	    }
@@ -149,6 +158,10 @@ i3GEO.catalogoInde = {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoInde.listaGrupos");
 
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
 	    i3GEO.catalogoInde.MIGALHA.push({"nome": descricao,"onclick":"i3GEO.catalogoInde.listaTemas('" + url + "','" + descricao + "','" + id + "')"});
 	    i3GEO.catalogoInde.atualizaMigalha();
 	    i3GEO.catalogoInde.aguarde();
@@ -171,6 +184,7 @@ i3GEO.catalogoInde = {
 			{"data":clone}
 		);
 		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).html(t);
+		i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
 	    };
 	    $.get(
 		    i3GEO.configura.locaplic + "/ferramentas/vinde/geoservicoget.php",
@@ -179,8 +193,10 @@ i3GEO.catalogoInde = {
 			url: url
 		    }
 	    ).done(function(data) {
+		i3GEO.catalogoOgc.wait = false;
 		lista(data);
 	    }).fail(function() {
+		i3GEO.catalogoOgc.wait = false;
 		i3GEO.janela.closeMsg($trad("erroTpl"));
 		return;
 	    });

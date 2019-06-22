@@ -477,12 +477,13 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		else{
 			$ret = explode(" ",$ret);
 			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
-			//echo "oi";exit;
 		}
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$this->mapa->setProjection($projO);
 		}
-		return("ok");
+		$e = $this->mapa->extent;
+		$ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
+		return($ext);
 	}
 	/*
 	 function: pegaFuncoesJs
@@ -570,7 +571,7 @@ $testa - Testa o filtro e retorna uma imagem.
 		$filtro = str_ireplace("update","",$filtro);
 		$filtro = str_ireplace("delete","",$filtro);
 		foreach($this->indices as $indice){
-			$layer = $this->mapa->getlayer($indice);
+		    $layer = $this->mapa->getlayer($indice);
 			$items = pegaItens($layer);
 			if(!$layer){
 				return "erro";
@@ -618,6 +619,7 @@ $testa - Testa o filtro e retorna uma imagem.
 				    }
 				}
 			}
+
 			$layer->setfilter($filtro);
 			if ($testa == ""){
 				$layer->setMetaData("cache","");
@@ -699,7 +701,7 @@ Muda o metadata CLASSE, invertendo seu valor
 */
 	function inverteStatusLegenda()
 	{
-				//error_reporting(0);
+		//error_reporting(0);
 		$valor = $this->layer->getmetadata("classe");
 		if($valor == "" || strtolower($valor) == "sim")
 		{$valor = "NAO";}
@@ -737,7 +739,7 @@ $valor - Novo nome.
 				$ll->setmetadata("tema",$valor);
 			}
 		}
-		return ("ok");
+		return true;
 	}
 	/*
 	 function: contorno
@@ -912,7 +914,7 @@ $wkt - boolean indicando se $xy e um WKT
 					$e->set("symbol",$marca);
 					$pinlayer->setmetadata("tema","Poligonos inseridos");
 					$pinlayer->set("type",MS_LAYER_POLYGON);
-					$pinlayer->set("opacity","50");
+					$pinlayer->set("opacity",50);
 				break;
 				case "ANNOTATION":
 					//$c->set("status",MS_DELETE);
@@ -1258,9 +1260,11 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 			$ret->project($projInObj, $projOutObj);
 		}
 		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
-			if($this->mapa->getmetadata("interface") == "googlemaps")
+		if($this->mapa->getmetadata("interface") == "googlemaps")
 		{$this->mapa->setProjection($projO);}
-		return("ok");
+		$e = $this->mapa->extent;
+		$ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
+		return($ext);
 	}
 /*
 function: sld

@@ -512,9 +512,8 @@ function gravaDados($dados, $arq)
  *
  * {string}
  */
-function listaTrueType()
+function listaTrueType($locaplic, $imgdir, $dir_tmp)
 {
-    global $locaplic, $imgdir, $dir_tmp;
     if (! file_exists($dir_tmp . "/comum/truetype.inc")) {
         $arq = $locaplic . "/symbols/fontes.txt";
         $h = fopen($arq, "r");
@@ -553,35 +552,7 @@ function listaTrueType()
  */
 function substituiCon($map_file, $postgis_mapa)
 {
-    // error_reporting(0);
     return;
-    if (! empty($postgis_mapa) && (file_exists($map_file))) {
-        if (! @ms_newMapObj($map_file)) {
-            return false;
-        }
-        $objMap = ms_newMapObj($map_file);
-        $numlayers = $objMap->numlayers;
-        for ($i = 0; $i < $numlayers; ++ $i) {
-            $layer = $objMap->getlayer($i);
-            if ($layer->connectiontype == MS_POSTGIS) {
-                $lcon = $layer->connection;
-                if (($lcon == " ") || ($lcon == "") || (in_array($lcon, array_keys($postgis_mapa)))) {
-                    //
-                    // o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
-                    //
-                    if (($lcon == " ") || ($lcon == "")) {
-                        $layer->set("connection", $postgis_mapa);
-                        $layer->setmetadata("CONEXAOORIGINAL", $lcon);
-                    } else {
-                        $layer->set("connection", $postgis_mapa[$lcon]);
-                        $layer->setmetadata("CONEXAOORIGINAL", $lcon);
-                    }
-                }
-            }
-        }
-        $objMap->save($map_file);
-    }
-    return true;
 }
 
 function substituiConObj($objMap, $postgis_mapa)
@@ -1056,6 +1027,7 @@ function pegaItens($layer, $mapa = "")
         }
         $url = $url . "&SERVICE=wfs&VERSION=1.1.0&REQUEST=DescribeFeatureType&TYPENAME=" . $layer->getmetadata("wms_name");
         // $url = "http://ogi.state.ok.us/geoserver/wfs?VERSION=1.1.0&REQUEST=DescribeFeatureType&TYPENAME=okcounties";
+        //echo $url;exit;
         $xml = simplexml_load_file($url);
         if ($xml == false) {
             return array();
@@ -3117,6 +3089,7 @@ function restauraMapaAdmin($id_mapa, $dir_tmp)
         ), "", $mapfile);
         $s = fwrite($baseh, $mapfile);
         fclose($baseh);
+        //echo $base;exit;
         if (@ms_newMapObj($base)) {
             return $base;
         } else {

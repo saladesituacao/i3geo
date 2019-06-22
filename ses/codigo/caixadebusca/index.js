@@ -52,6 +52,7 @@ var caixadebusca = {
 		    },
 		    "Endere&ccedil;o": {
 			display: "nome",
+			minLength: 6,
 			ajax: {
 			    url: "rest/endereco/" + i3GEO.configura.sid + "/busca/{{query}}",
 			    path: "data.categorias"

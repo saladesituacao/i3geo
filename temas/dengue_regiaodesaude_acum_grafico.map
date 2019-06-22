@@ -1,0 +1,98 @@
+MAP
+#http://localhost:8019/i3geo/ms_criamapa.php?layers=dengue_regiaodesaude_grafico
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (SELECT d.*, r.geom FROM (SELECT DISTINCT i_ano_notif, i_regiao_saude_res, sum(i_qtd_casos) OVER (PARTITION BY i_regiao_saude_res ORDER BY i_ano_notif) AS sum_acum FROM st_stage.tab_dengue ORDER  BY i_ano_notif,i_regiao_saude_res ) AS d JOIN dbauxiliares.tb_class_regiao AS r ON r.class_regiao = d.i_regiao_saude_res WHERE r.superintendencia = 't'
+    ) as foo USING UNIQUE i_regiao_saude_res USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "TILES"	"NAO"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "TEMA"	"Dengue por Regiões de saúde (superintendências)"
+    END # METADATA
+    NAME "dengue_regiaodesaude_acum_grafico"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "0 a 150"
+      EXPRESSION ([sum_acum]<=150)
+      STYLE
+        COLOR "#fff7ec"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "151 a 500"
+      EXPRESSION (([sum_acum]>150)and([sum_acum]<=500))
+      STYLE
+        COLOR "#fee8c8"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "501 a 1.500"
+      EXPRESSION (([sum_acum]>500)and([sum_acum]<=1500))
+      STYLE
+        COLOR "#fdd49e"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "1.501 a 3.000"
+      EXPRESSION (([sum_acum]>1500)and([sum_acum]<=3000))
+      STYLE
+        COLOR "#fdbb84"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "3.001 a 5.000"
+      EXPRESSION (([sum_acum]>3000)and([sum_acum]<=5000))
+      STYLE
+        COLOR "#fc8d59"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "5.001 a 7.000"
+      EXPRESSION (([sum_acum]>5000)and([sum_acum]<=7000))
+      STYLE
+        COLOR "#ef6548"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "7.001 a 9.000"
+      EXPRESSION (([sum_acum]>7000)and([sum_acum]<=9000))
+      STYLE
+        COLOR "#d7301f"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "9.001 a 11.000"
+      EXPRESSION (([sum_acum]>9000)and([sum_acum]<=11000))
+      STYLE
+        COLOR "#b30000"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "11.001 e mais"
+      EXPRESSION (([sum_acum]>11000))
+      STYLE
+        COLOR "#7f0000"
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

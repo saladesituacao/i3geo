@@ -1,0 +1,72 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 90
+    END # COMPOSITE
+    DATA "ghsl/ghspopgpw41975glober2015a54009250v10/vectorized.shp"
+    METADATA
+      "cache"	"NAO"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"SIM"
+      "extensao"	"-48.28673551833 -16.059202744711 -47.304700725558 -15.491231533109"
+      "permitedownload"	"NAO"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"GHSL - população, situação em 1975"
+      "identifica"	"sim"
+    END # METADATA
+    NAME "ghspopgpw41975glober2015a54009250v10"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "1 a 11"
+      EXPRESSION ([DN]<=11)
+      STYLE
+        COLOR "#ffffcc"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "12 a 65"
+      EXPRESSION (([DN]>11)and([DN]<=65))
+      STYLE
+        COLOR "#fed976"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "66 a 310"
+      EXPRESSION (([DN]>65)and([DN]<=310))
+      STYLE
+        COLOR "#fd8d3c"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "311 a 1.000"
+      EXPRESSION (([DN]>310)and([DN]<=1000))
+      STYLE
+        COLOR "#fc4e2a"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "1.001 a 2.000"
+      EXPRESSION (([DN]>1000)and([DN]<=2000))
+      STYLE
+        COLOR "#e31a1c"
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "2.001 e mais"
+      EXPRESSION ([DN]>2000)
+      STYLE
+        COLOR "#b10026"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

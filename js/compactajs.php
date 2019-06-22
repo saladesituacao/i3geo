@@ -93,12 +93,14 @@ echo "<pre>";
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+packer("../pacotes/cesium154/Build/CesiumUnminified/Cesium.js","../pacotes/cesium154/Build/CesiumUnminified/Cesium_compacto.js","None");
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
 packer("plugini3geo.js","compactados/plugini3geo_compacto.js","Normal");
 packer("marcador.js","compactados/marcador_compacto.js","Normal");
 packer("login.js","compactados/login_compacto.js","Normal");
 packer("arvoredecamadas.js","compactados/arvoredecamadas_compacto.js","Normal");
 packer("arvoredetemas.js","compactados/arvoredetemas_compacto.js","Normal");
+packer("request.js","compactados/request_compacto.js","Normal");
 packer("util.js","compactados/util_compacto.js","Normal");
 packer("calculo.js","compactados/calculo_compacto.js","Normal");
 packer("maparef.js","compactados/maparef_compacto.js","Normal");
@@ -108,6 +110,7 @@ packer("idioma.js","compactados/idioma_compacto.js","Normal");
 packer("ajuda.js","compactados/ajuda_compacto.js","Normal");
 packer("configura.js","compactados/configura_compacto.js","Normal");
 packer("navega.js","compactados/navega_compacto.js","Normal");
+packer("geolocal.js","compactados/geolocal_compacto.js","Normal");
 packer("coordenadas.js","compactados/coordenadas_compacto.js","Normal");
 packer("eventos.js","compactados/eventos_compacto.js","Normal");
 packer("editor.js","compactados/editor_compacto.js","Normal");
@@ -131,6 +134,7 @@ packer("catalogoSistemas.js","compactados/catalogoSistemas_compacto.js","Normal"
 packer("catalogoDir.js","compactados/catalogoDir_compacto.js","Normal");
 packer("busca.js","compactados/busca_compacto.js","Normal");
 packer("legenda.js","compactados/legenda_compacto.js","Normal");
+packer("timer.js","compactados/timer_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
 //packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
 //packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
@@ -173,13 +177,13 @@ $jsfiles = array(
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-number/jquery.number.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
-//"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
 "../pacotes/nouislider/nouislider.min.js",
 "../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
 "compactados/material.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
+"compactados/request_compacto.js",
 "compactados/mustache.js",
 "compactados/util_compacto.js",
 "compactados/dicionario_compacto.js",
@@ -198,6 +202,7 @@ $jsfiles = array(
 "compactados/guias_compacto.js",
 "compactados/arvoredecamadas_compacto.js",
 "compactados/navega_compacto.js",
+"compactados/geolocal_compacto.js",
 "compactados/eventos_compacto.js",
 "compactados/arvoredetemas_compacto.js",
 "compactados/editor_compacto.js",
@@ -218,6 +223,7 @@ $jsfiles = array(
 "compactados/legenda_compacto.js",
 "compactados/busca_compacto.js",
 "compactados/caixaDeFerramentas_compacto.js",
+"compactados/timer_compacto.js",
 "template.js"
 );
 
@@ -269,41 +275,17 @@ foreach ($cssfiles as $f)
 $abre = fopen("../css/i3geo_ferramentas8.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-//
-//compacta os codigos para o Mashup do OpenLayers
-//
-$jsfiles = array(
-"../pacotes/yui290/build/yahoo/yahoo-min.js",
-"../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
-"../pacotes/yui290/build/dom/dom-min.js",
-"../pacotes/yui290/build/utilities/utilities_compacto.js",
-"../pacotes/yui290/build/container/container_core_compacto.js",
-"../pacotes/yui290/build/menu/menu-min.js",
-"../pacotes/yui290/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui290/build/slider/slider-min.js",
-"../pacotes/yui290/build/animation/animation-min270.js",
-"../pacotes/yui290/build/container/container_compacto.js",
-"../pacotes/yui290/build/element/element-min.js",
-"../pacotes/yui290/build/tabview/tabview-min.js",
-"../pacotes/yui290/build/treeview/treeview_compacto.js",
-"../pacotes/yui290/build/button/button-min.js",
-"../pacotes/yui290/build/carousel/carousel_compacto.js",
-"../pacotes/yui290/build/json/json-min.js",
-"../pacotes/yui290/build/storage/storage-min.js",
-"../pacotes/yui290/build/resize/resize_compacto.js",
-"../pacotes/yui290/build/progressbar/progressbar_compacto.js",
-"../pacotes/yui290/build/selector/selector-min.js",
-"../classesjs/compactados/calculo_compacto.js",
-"../classesjs/compactados/util_compacto.js",
-"../pacotes/openlayers/OpenLayers2131.js",
-"../js/compactados/desenho_compacto.js",
-"../js/compactados/janela_compacto.js",
-"../ferramentas/editorol/editorol_compacto.js",
-"compactados/dicionario_compacto.js",
-"compactados/idioma_compacto.js",
-"compactados/configura_compacto.js",
-"compactados/mustache.js"
-);
+//testa os scripts
+foreach ($jsfiles as $f)
+{
+    //echo "<script>console.log('".$f."');</script>";
+    //echo '<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>';
+    echo '<script src="../pacotes/ol4/ol.js"></script>';
+    echo "<script src='".$f."'></script>";
+}
+
+
+
 function inicia($arquivo)
 {
 	$abre = fopen($arquivo, "r");

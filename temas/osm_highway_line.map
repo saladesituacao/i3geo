@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
     DATA "geom from (select geom,osm_id,highway from geo.planet_osm_line where highway IS NOT NULL) as foo using unique osm_id using srid=4674"
     METADATA

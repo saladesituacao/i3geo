@@ -21,6 +21,7 @@ MAP
       "TEMA"	"Setores censitários 2010"
       "convcaracter"	"SIM"
       "identifica"	"sim"
+      "wkttip"	"SIM"
     END # METADATA
     NAME "censo2010setores"
     PROCESSING "LABEL_NO_CLIP=True"

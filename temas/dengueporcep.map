@@ -5,9 +5,9 @@ MAP
     COMPOSITE
       OPACITY 70
     END # COMPOSITE
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (SELECT cep,geom,id,dengue.casosdengue FROM geo.abrangecep JOIN (select count(*) AS casosdengue, nu_cep FROM geo.tab_dengue WHERE nu_cep is not null group by nu_cep order by casosdengue ) AS dengue ON geo.abrangecep.cep = dengue.nu_cep ) as foo USING UNIQUE id USING SRID=4674"
+    DATA "geom FROM (SELECT cep,geom,id,dengue.casosdengue FROM dbauxiliares_geo.abrangecep JOIN (select count(*) AS casosdengue, nu_cep FROM dbauxiliares_geo.tab_dengue WHERE nu_cep is not null group by nu_cep order by casosdengue ) AS dengue ON geo.abrangecep.cep = dengue.nu_cep ) as foo USING UNIQUE id USING SRID=4674"
     METADATA
       "cache"	"nao"
       "CLASSE"	"SIM"

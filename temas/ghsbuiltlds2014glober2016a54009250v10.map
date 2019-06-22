@@ -1,0 +1,37 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 90
+    END # COMPOSITE
+    DATA "ghsl/ghsbuiltlds2014glober2016a54009250v10/vectorized.shp"
+    METADATA
+      "cache"	"NAO"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"SIM"
+      "extensao"	"-48.28673551833 -16.059202744711 -47.304700725558 -15.491231533109"
+      "permitedownload"	"NAO"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"GHSL - áreas construídas, situação em 2014"
+      "identifica"	"sim"
+    END # METADATA
+    NAME "ghsbuiltlds2014glober2016a54009250v10"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 255 167 127
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

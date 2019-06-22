@@ -12,7 +12,7 @@ MAP
       "cache"	"nao"
       "CLASSE"	"SIM"
       "permitekmz"	"NAO"
-      "TILES"	"SIM"
+      "TILES"	"NAO"
       "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
       "permitedownload"	"NAO"
       "permiteogc"	"NAO"

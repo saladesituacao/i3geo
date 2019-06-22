@@ -5,9 +5,9 @@ MAP
     COMPOSITE
       OPACITY 50
     END # COMPOSITE
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (select * FROM geo.segeth_lotes) as foo USING UNIQUE id USING SRID=4674"
+    DATA "geom FROM (select * FROM dbauxiliares_geo.segeth_lotes) as foo USING UNIQUE id USING SRID=4674"
     METADATA
       "cache"	"SIM"
       "TIP"	"end_comp"

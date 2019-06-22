@@ -165,10 +165,11 @@ if(isset($_GET["exportashp"])){
     echo json_encode($retorno);
 
 } else {
-    $nomecache = $_SESSION["dir_tmp"]."/".sha1($SqlsPorTipo[$tipoorigem].(date("j, n, Y")));
-    if(!file_exists($nomecache)){
+    //$nomecache = $_SESSION["dir_tmp"]."/".sha1($SqlsPorTipo[$tipoorigem].(date("j, n, Y")));
+    //if(!file_exists($nomecache)){
         $resultado = array();
         try {
+            //echo $tipoorigem;exit;
             //echo $SqlsPorTipo[$tipoorigem];exit;
             $q = $dbhstage->query($SqlsPorTipo[$tipoorigem], PDO::FETCH_ASSOC);
             $resultado = $q->fetchAll();
@@ -186,9 +187,52 @@ if(isset($_GET["exportashp"])){
         }
         $resultado = array_group_by($resultado, "codigo_destino");
         $chaves = array_keys($resultado);
-        file_put_contents($nomecache,json_encode(array("totalocorrencias"=>$total[0]["total"],"chaves"=>$chaves,"dados"=>$resultado)));
-    }
+        //file_put_contents($nomecache,json_encode(array("totalocorrencias"=>$total[0]["total"],"chaves"=>$chaves,"dados"=>$resultado)));
+    //}
     ob_clean();
     header("Content-type: application/json");
-    echo file_get_contents($nomecache);
+    //echo file_get_contents($nomecache);
+    echo json_encode(array("totalocorrencias"=>$total[0]["total"],"chaves"=>$chaves,"dados"=>$resultado));
 }
+/*
+SELECT
+unidades.nome_emp AS destino_nomecnes,
+trim(i_desc_sigla_estab_cnes) AS destino_siglacnes,
+i_estab_cnes AS destino_codigocnes,
+left(trim(i_munic_estab_cnes),2) AS destino_codigouf,
+ufestab.sigla_uf_desc AS destino_siglauf,
+i_cod_uf_res AS origem_codigouf,
+trim(i_desc_uf_res) AS origem_siglauf,
+munic.munic_res AS origem_codigoibge,
+i_cep_res AS origem_cep,
+i_ride AS origem_isride,
+i_dt_internacao,
+i_grupo,
+i_subgrupo,
+i_forma_org,
+i_proc_realizado,
+i_desc_tipo_estab_cnes,
+i_desc_regiao_saude AS i_desc_regiao_saude_cnes,
+i_desc_sexo,
+i_faixa_etaria,
+i_desc_tipo_uti,
+i_qtd_diaria_pac,
+i_val_total_aih,
+i_desc_nat_jur,
+i_desc_car_int_atend,
+i_qtd_aih,
+i_proc_alta_complex,
+i_partos,
+i_cirurgias,
+st_x(unidades.geom) AS destino_longitude_cnes,
+st_y(unidades.geom) AS destino_latitude_cnes,
+st_x(ufres.centroide) AS origem_longitude_uf,
+st_y(ufres.centroide) AS origem_latitude_uf,
+st_x(munic.centroide) AS origem_longitude_municipio,
+st_y(munic.centroide) AS origem_latitude_municipio
+FROM st_stage.tab_rd AS rd
+JOIN dbauxiliares.tb_unidade AS unidades ON rd.i_estab_cnes = unidades.cnes::text
+JOIN dbauxiliares.tb_uf AS ufres ON ufres.sigla_uf = i_cod_uf_res
+JOIN dbauxiliares.tb_uf AS ufestab ON ufestab.sigla_uf = left(trim(i_munic_estab_cnes),2)
+JOIN dbauxiliares.tb_municipio AS munic ON munic.munic_res = rd.i_munic_res
+*/

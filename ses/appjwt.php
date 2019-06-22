@@ -40,6 +40,18 @@ if ($payload->aud == "editorabrangenciaubs") {
         echo "Erro no login do i3Geo";
     }
 }
+// edicao dos limites das areas das equipes das UBS
+if ($payload->aud == "editorabrangenciaequipesubs") {
+    $usuario = "editorabrangenciaubs";
+    $senha = "EditorAbrangEnciaUBS0912";
+    $login = loginI3geo($usuario, $senha);
+    if($login == true){
+        ob_clean();
+        include("editorabrangenciaequipesubs.phtml");
+    } else {
+        echo "Erro no login do i3Geo";
+    }
+}
 function loginI3geo($usuario, $senha)
 {
     $teste = autenticaUsuario($usuario, $senha);

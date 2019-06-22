@@ -1,0 +1,72 @@
+MAP
+#http://localhost:8019/i3geo/ms_criamapa.php?layers=aids_regiaodesaude_grafico
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (SELECT d.*, r.geom FROM (SELECT i_ano_diag,i_regiao_saude_res,sum (i_qtd_agravo) AS i_qtd_agravo FROM st_stage.tab_aids_consolidado AS d GROUP BY i_ano_diag,i_regiao_saude_res) AS d JOIN dbauxiliares.tb_class_regiao AS r ON r.class_regiao = d.i_regiao_saude_res WHERE r.superintendencia = 't'    ) as foo USING UNIQUE i_regiao_saude_res USING SRID=4674"
+    METADATA
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "TILES"	"NAO"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "TEMA"	"Aids por Regiões de saúde (superintendências)"
+    END # METADATA
+    NAME "aids_regiaodesaude_grafico"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "1 a 30"
+      EXPRESSION (([i_qtd_agravo]>0)and([i_qtd_agravo]<=30))
+      STYLE
+        COLOR "#DF9D82"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "31 a 60"
+      EXPRESSION (([i_qtd_agravo]>30)and([i_qtd_agravo]<=60))
+      STYLE
+        COLOR "#CE7860"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "61 a 90"
+      EXPRESSION (([i_qtd_agravo]>60)and([i_qtd_agravo]<=90))
+      STYLE
+        COLOR "#B75643"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "91 a 120"
+      EXPRESSION (([i_qtd_agravo]>90)and([i_qtd_agravo]<=120))
+      STYLE
+        COLOR "#99372A"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "121 a 150"
+      EXPRESSION (([i_qtd_agravo]>120)and([i_qtd_agravo]<=150))
+      STYLE
+        COLOR "#771C17"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    CLASS
+      NAME "151 e mais"
+      EXPRESSION ([i_qtd_agravo]>150)
+      STYLE
+        COLOR "#530505"
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+    END # CLASS
+  END # LAYER
+END # MAP
+

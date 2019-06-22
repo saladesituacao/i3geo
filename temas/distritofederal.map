@@ -2,9 +2,9 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (select * FROM geo.df_pdad_2013) as foo USING UNIQUE id USING SRID=4674"
+    DATA "geom FROM (select * FROM dbauxiliares_geo.df_pdad_2013) as foo USING UNIQUE id USING SRID=4674"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"nao"

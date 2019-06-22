@@ -210,14 +210,6 @@ i3GEO.analise =
 		}
 		*/
 	    },
-	    /**
-	     * Function: perfil
-	     *
-	     * Ferramenta perfil
-	     */
-	    perfil : function() {
-		i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.perfil()", "perfil", "perfil");
-	    },
 	    rota : function(){
 		if (i3GEO.Interface.ATUAL !== "googlemaps") {
 		    alert("Operacao disponivel apenas na interface Google Maps");
@@ -305,19 +297,6 @@ i3GEO.analise =
 			"dependencias.php",
 			"i3GEOF.gradehex.start()"
 		);
-	    },
-	    /**
-	     * Function: analisaGeometrias
-	     *
-	     * Ferramenta de an&aacute;lise de geometrias
-	     */
-	    analisaGeometrias : function() {
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.tabela()",
-			"analisageometrias",
-			"analisaGeometrias",
-			"dependencias.php",
-		"i3GEOF.analisaGeometrias.iniciaJanelaFlutuante()");
 	    },
 	    /**
 	     * Function: pontosdistri
@@ -451,21 +430,6 @@ i3GEO.analise =
 			"area",
 			"dependencias.php",
 		"i3GEOF.area.start()");
-	    },
-	    juntamedidasvariavel : function(tema) {
-		if(!tema){
-		    tema = i3GEO.temaAtivo;
-		}
-		var temp = function(){
-		    i3GEOF.juntamedidasvariavel.iniciaJanelaFlutuante(tema);
-		};
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.analise.dialogo.juntamedidasvariavel()",
-			"juntamedidasvariavel",
-			"juntamedidasvariavel",
-			"dependencias.php",
-			temp
-		);
 	    }
 	}
 };

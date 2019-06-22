@@ -3,12 +3,8 @@ $i3geomaster = array();
 $i3geoPermiteLogin = false;
 if ($_SERVER['SERVER_NAME'] == "dmapas.saude.df.gov.br" || $_SERVER['SERVER_NAME'] == "localhost") {
     $i3geoPermiteLogin = true;
+    $i3geomaster = array(array("usuario"=>"adminses", "senha"=>"adminses"));
 }
-/*
- * $i3geomaster = array(
- * array("usuario"=>"adminses", "senha"=>"adminses")
- * );
- */
 
 $i3geoKeys = array(
     "salvaMapfile" => ""
@@ -48,7 +44,7 @@ $i3geoBlFerramentas = array(
     "uploadgpx",
     "uploadkml"
 );
-$ogrOutput = false;
+$ogrOutput = true;
 $saikuUrl = "";
 $saikuConfigDataSource = array();
 $i3georendermode = 0;

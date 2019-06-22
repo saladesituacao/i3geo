@@ -7,12 +7,12 @@ MAP
     END # COMPOSITE
     CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (select geom,ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_desc,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    DATA "geom FROM (select geom,ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_desc,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral' and ra_ses != '1') as foo USING UNIQUE ra_ses USING SRID=4674"
     METADATA
       "cache"	"nao"
       "CLASSE"	"SIM"
       "permitekmz"	"NAO"
-      "TILES"	"SIM"
+      "TILES"	"NAO"
       "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
       "permitedownload"	"NAO"
       "permiteogc"	"NAO"

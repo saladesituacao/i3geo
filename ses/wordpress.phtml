@@ -1,0 +1,24 @@
+<?php
+//
+//utilizado no shortcode do Wordpress que permite incluir um mapa simples
+//em uma pagina
+//
+$corpoconfig = array(
+    "legenda"=>true,
+    "tipoInterface"=>"OSM",
+    "debug"=>""
+);
+include ("corposingle.php");
+?>
+<script>
+<?php include ("corpo_script.php"); ?>
+    //Funcao que sera executada apos a inicializacao do mapa
+    config.afterStart = function() {
+    new ol.control.Zoom({
+        target: $i("i3GEOzoomInOut")
+    }).setMap(i3geoOL);
+    };
+    i3GEO.init(parametrosMapa, config);
+</script>
+</body>
+</html>

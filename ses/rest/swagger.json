@@ -167,6 +167,49 @@
         }
       }
     },
+    "/regioesadm/lista": {
+      "get": {
+        "summary": "Lista as regiões administrativase",
+        "description": "Regiões administrativas são unidades territoriais que possuem delimitação conhecida armazenada na forma de objetos geográficos.",
+        "tags": [
+          "Regiões administrativas"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/regioesadm/{codigo_reg}/wkt": {
+      "get": {
+        "summary": "Lista a geometria de uma região administrativa",
+        "description": "O objeto geográfico é informado no formato WKT",
+        "tags": [
+          "Regiões administrativas"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "codigo_ra",
+            "required": true,
+            "type": "string",
+            "description": "Código da região"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
     "/unidadesdesaude/lista": {
       "get": {
         "summary": "Lista as unidades de saúde",

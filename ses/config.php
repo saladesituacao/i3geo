@@ -5,15 +5,15 @@
 $tipo = filter_var($_GET["tipo"], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 //e necessario definir isso pq os parametros de config ficam mais adiante no script em linha da interface
 if($tipo == "OL"){
-	echo 'i3GEO.Interface.ATUAL = "openlayers";';
-	echo 'i3GEO.Interface.openlayers.googleLike = false;';
+	//echo 'i3GEO.Interface.ATUAL = "openlayers";';
+	echo 'i3GEO.Interface.googleLike = false;';
 }
 if($tipo == "OSM"){
-	echo 'i3GEO.Interface.ATUAL = "openlayers";';
-	echo 'i3GEO.Interface.openlayers.googleLike = true;';
+	//echo 'i3GEO.Interface.ATUAL = "openlayers";';
+	echo 'i3GEO.Interface.googleLike = true;';
 }
 if($tipo == "GM"){
-	echo 'i3GEO.Interface.ATUAL = "googlemaps";';
+	//echo 'i3GEO.Interface.ATUAL = "googlemaps";';
 }
 //para comodidade de nao ter de calcular isso
 $u = basename(dirname(dirname(__FILE__)));
@@ -22,7 +22,7 @@ echo 'i3GeoUrl = i3GEO.util.protocolo() + "://" + window.location.host + "/'.$u.
 i3GEO.janela.ativaAlerta();
 
 (function() {
-	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === false){
+	if(typeof ol != "undefined" && i3GEO.Interface.googleLike === false){
 		var eng = new ol.layer.Tile(
 				{
 					title : "ESRI National Geographic",
@@ -131,10 +131,10 @@ i3GEO.janela.ativaAlerta();
 
 
 
-		i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ mosaico_df_2015_SIRGAS_tms_layer, eng, oce, ims, wsm,
+		i3GEO.Interface.LAYERSADICIONAIS = [ mosaico_df_2015_SIRGAS_tms_layer, eng, oce, ims, wsm,
 		                                                bra];
 	}
-	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === true){
+	if(typeof ol != "undefined" && i3GEO.Interface.googleLike === true){
 			var attribOSMData = 'Map Data: &copy; <a  href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
 			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
 			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
@@ -217,6 +217,6 @@ i3GEO.janela.ativaAlerta();
                         });
 
 
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ mosaico_df_2015_SIRGAS_tms_layer, osm, aquarela, toner, tonerlite, layMapQuestAerial ];
+			i3GEO.Interface.LAYERSADICIONAIS = [ mosaico_df_2015_SIRGAS_tms_layer, osm, aquarela, toner, tonerlite, layMapQuestAerial ];
 	}
 })();

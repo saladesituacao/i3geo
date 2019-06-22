@@ -1,0 +1,29 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 80
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select class_regiao,class_regiao_desc,geom FROM dbauxiliares.tb_class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    NAME "regiaodesaudelimitescinza"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        OUTLINECOLOR 200 200 200
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

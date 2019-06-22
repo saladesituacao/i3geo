@@ -1,0 +1,387 @@
+#http://localhost:8019/i3geo/ses/codigo/printmap.php?map=imprimirubs&cache=nao
+MAP
+	FONTSET "../symbols/fontes.txt"
+	SYMBOLSET "../symbols/simbolos.sym"
+	Symbol
+    	Name "ubs"
+    	Type PIXMAP
+    	Image "/var/www/i3geo/ses/symbols/firstaid.png"
+    	ANCHORPOINT 0.5 1
+  	END
+  	Symbol
+    	Name "rosa200"
+    	Type PIXMAP
+    	FILLED true
+    	Image "/var/www/i3geo/ses/symbols/rosa200.png"
+  	END
+  	Symbol
+    	Name "logogdfvertical"
+    	Type PIXMAP
+    	Image "/var/www/i3geo/ses/symbols/logogdfvertical.png"
+  	END
+  	Symbol
+    	Name "legenda"
+    	Type PIXMAP
+    	Image "/var/www/i3geo/ses/symbols/logogdfvertical.png"
+  	END
+  	CONFIG "MS_NONSQUARE" "NO"
+	SHAPEPATH "/var/www/i3geo/geodados"
+	IMAGECOLOR 255 255 255
+	MAXSIZE 5000
+	IMAGETYPE svg
+	EXTENT -48.2870 -16.05 -47.30 -15.5
+	SIZE 4000 2400
+	STATUS ON
+	UNITS DD
+	NAME "sesdf"
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+		DRIVER AGG/PNG
+		IMAGEMODE RGB
+		FORMATOPTION "QUANTIZE_FORCE=OFF"
+		FORMATOPTION "QUANTIZE_DITHER=OFF"
+		FORMATOPTION "QUANTIZE_COLORS=256"
+		FORMATOPTION "INTERLACE=OFF"
+		FORMATOPTION "COMPRESSION=0"
+	END
+	OUTPUTFORMAT
+			NAME svg
+			MIMETYPE "image/svg+xml"
+			DRIVER cairo/svg
+			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		END
+	PROJECTION
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+	END
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 16 10
+		KEYSPACING 12 8
+		LABEL
+			SIZE large
+			TYPE bitmap
+			BUFFER 0
+			COLOR 0 0 0
+		END
+		POSITION UR
+		STATUS on
+	END
+	SCALEBAR
+		BACKGROUNDCOLOR 200 200 200
+		COLOR 0 0 0
+		INTERVALS 5
+		LABEL
+			SIZE LARGE
+			TYPE BITMAP
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 0
+			PARTIALS TRUE
+		END
+		POSITION LC
+		SIZE 600 15
+		STATUS embed
+		STYLE 0
+		TRANSPARENT FALSE
+		UNITS KILOMETERS
+	END
+	WEB
+		IMAGEPATH "/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+		TEMPLATE ""
+	END
+  LAYER
+    #CONNECTION "http://digisus.saude.gov.br/mapabase/wms?"
+    CONNECTION "http://mapabase.manatustecnologia.com.br/wms?"
+    CONNECTIONTYPE WMS
+    DATA ""
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "wms_name"	"osm"
+      "wms_format"	"image/png"
+      "wms_server_version"	"1.1.0"
+      "wms_style"	"default"
+      "wms_connectiontimeout"	"180"
+    END # METADATA
+    NAME "osm"
+    STATUS default
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 0
+        COLOR 0 0 0
+        OFFSET 0 0
+      END # STYLE
+
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    NAME "abrangenciaubs"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Abrangência da UBS"
+      STYLE
+        OUTLINECOLOR "#ff9900"
+        WIDTH 3
+      END # STYLE
+      STYLE
+        OUTLINECOLOR 255 255 255
+        WIDTH 1
+      END # STYLE
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select class_regiao,class_regiao_desc as nome,geom FROM dbauxiliares.tb_class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    NAME "regiaodesaudelimitescinza"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Região de saúde"
+      STYLE
+        OUTLINECOLOR 0 0 0
+        SIZE 2
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        OFFSET 0 0
+        OUTLINECOLOR -1 -1 -1
+        COLOR 0 0 0
+        POSITION CC
+        TEXT "[nome]"
+        FORCE true
+      END # LABEL
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT ba.cnes_desc as nome,ba.cnes as cod_cnes,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6)) as foo using unique cod_cnes using srid=4674"
+    NAME "ubs"
+    STATUS DEFAULT
+    TYPE point
+    CLASS
+      NAME "Unidade Básica de Saúde (UBS)"
+      STYLE
+        SIZE 16
+        SYMBOL "ubs"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT ba.cnes_desc as nome,ba.cnes as cod_cnes,st_buffer(ba.geom,0.008) as geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6)) as foo using unique cod_cnes using srid=4674"
+    #DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs as nome,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    NAME "ubslabels"
+    STATUS DEFAULT
+    TYPE polygon
+    POSTLABELCACHE false
+    LABELITEM "nome"
+    CLASS
+      LABEL
+        FONT "arial"
+        TYPE truetype
+        SIZE 6
+        #OFFSET 0 4
+        COLOR 0 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION auto
+        SHADOWSIZE 1 1
+        PARTIALS false
+        FORCE false
+        BUFFER 0
+      END # LABEL
+      LEADER
+	      GRIDSTEP 40 # number of pixels between positions that are tested
+	      MAXDISTANCE 300 # distance in pixels that leader text can be drawn
+	      STYLE # normal line styles are supported
+	        COLOR 255 0 0
+	        WIDTH 1
+	      END
+      END
+    END # CLASS
+  END # LAYER
+
+LAYER
+    NAME "grade"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      LABEL
+        SIZE 10
+        OFFSET 0 0
+        POSITION CC
+        SHADOWSIZE 1 1
+      END # LABEL
+      STYLE
+        COLOR 31 165 165
+        MAXSIZE 100
+        MINSIZE 1
+        OUTLINECOLOR 0 0 0
+        SIZE 1
+      END # STYLE
+    END # CLASS
+    GRID
+      LABELFORMAT "DDMMSS"
+      MAXINTERVAL 0.2
+    END # GRID
+  END # LAYER
+
+	LAYER
+		NAME "titulo"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM cc
+		TYPE POINT
+		UNITS METERS
+		CLASS
+	      LABEL
+	        FONT "arial"
+	        SIZE 54
+	        MINDISTANCE 0
+	        MINFEATURESIZE 0
+	        OFFSET 0 0
+	        PARTIALS TRUE
+	        POSITION UR
+	        SHADOWSIZE 1 1
+	      END # LABEL
+	      STYLE
+	        COLOR 255 0 0
+	        OUTLINECOLOR 0 0 0
+	        SIZE 1
+	      END # STYLE
+	    END # CLASS
+		FEATURE
+			POINTS
+				-800 -1140
+			END
+			TEXT "Unidades Básicas de Saúde do Distrito Federal"
+		END
+	END
+	LAYER
+		NAME "creditos"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM ll
+		TYPE POINT
+		UNITS METERS
+		CLASS
+	      LABEL
+	        FONT "arial"
+	        SIZE 12
+	        MINDISTANCE 0
+	        MINFEATURESIZE 0
+	        OFFSET 0 0
+	        PARTIALS TRUE
+	        POSITION UL
+	        SHADOWSIZE 1 1
+	        WRAP 'xx'
+	      END # LABEL
+	      STYLE
+	        COLOR 255 0 0
+	        OUTLINECOLOR 0 0 0
+	        SIZE 1
+	      END # STYLE
+	    END # CLASS
+		FEATURE
+			POINTS
+				500 -10
+			END
+			TEXT "Elaboração: Sala de situação / DGIE / CCSGI / SUPLANS / SES-DFxxBase cartográfica OSM. Softwares Mapserver + i3Geo"
+		END
+	END
+	LAYER
+		NAME "rosadosventos"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM lr
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			STYLE
+				SYMBOL 'ponto'
+				SIZE 150
+				COLOR 255 255 255
+				BACKGROUNDCOLOR 255 255 255
+				OUTLINECOLOR 250 250 250
+				WIDTH 2
+			END
+			STYLE
+				SYMBOL 'rosa200'
+				SIZE 120
+			END
+		END
+		FEATURE
+			POINTS
+				-200 -2130
+			END
+		END
+	END
+	LAYER
+		NAME "logogdfvertical"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM lr
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'logogdfvertical'
+			SIZE 300
+		END
+		FEATURE
+			POINTS
+				-3830 -2130
+			END
+		END
+	END
+	LAYER
+		NAME "legenda"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM ur
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'legenda'
+			SIZE 100
+		END
+		FEATURE
+			POINTS
+				-200 110
+			END
+		END
+	END
+END

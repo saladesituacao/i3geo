@@ -5,7 +5,7 @@ verificaBlFerramentas(basename(dirname(__FILE__)), $i3geoBlFerramentas, false);
 ?>
 <html>
 <head>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=<?php echo $googleApiKey; ?>"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $googleApiKey; ?>"></script>
 <script src="index.js" type="text/javascript"></script>
 
 </head>
@@ -81,7 +81,11 @@ function inicializa(){
         temp = mapexten.split(" ");
         if(x < temp[2] && y < temp[3]){
             if(MARCA === false){
-                MARCA = i3GEO.desenho.addPin(x,y,"","",i3GEO.configura.locaplic+'/imagens/google/confluence.png',"googlemaps");
+                MARCA = i3GEO.desenho.addPin({
+        		    x: x,
+        		    y: y,
+        		    namespace: "googlemaps"
+        		});
             }
             else{
                 i3GEO.desenho.movePin(MARCA,x,y);

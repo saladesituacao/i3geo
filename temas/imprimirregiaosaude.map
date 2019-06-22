@@ -1,0 +1,197 @@
+#http://localhost:8019/i3geo/ses/codigo/printmap.php?map=imprimirregiaosaude&cache=nao
+MAP
+	FONTSET "../symbols/fontes.txt"
+	SYMBOLSET "../symbols/simbolos.sym"
+  	CONFIG "MS_NONSQUARE" "NO"
+	SHAPEPATH "/var/www/i3geo/ses/geodados"
+	IMAGECOLOR 255 255 255
+	MAXSIZE 5000
+	IMAGETYPE svg
+	EXTENT -48.2870 -16.05 -47.30 -15.5
+	SIZE 500 600
+	STATUS ON
+	UNITS DD
+	NAME "sesdf"
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+		DRIVER AGG/PNG
+		IMAGEMODE RGB
+		FORMATOPTION "QUANTIZE_FORCE=OFF"
+		FORMATOPTION "QUANTIZE_DITHER=OFF"
+		FORMATOPTION "QUANTIZE_COLORS=256"
+		FORMATOPTION "INTERLACE=OFF"
+		FORMATOPTION "COMPRESSION=0"
+	END
+	OUTPUTFORMAT
+			NAME svg
+			MIMETYPE "image/svg+xml"
+			DRIVER cairo/svg
+			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		END
+	PROJECTION
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+	END
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 16 16
+		KEYSPACING 12 8
+		LABEL
+			SIZE large
+			TYPE bitmap
+			BUFFER 0
+			COLOR 0 0 0
+		END
+		POSITION UR
+		STATUS on
+	END
+	WEB
+		IMAGEPATH "/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+		TEMPLATE ""
+	END
+	  LAYER
+    COMPOSITE
+      OPACITY 80
+    END # COMPOSITE
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select class_regiao,class_regiao_desc,geom FROM dbauxiliares.tb_class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    NAME "regioesdesaude"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    SYMBOLSCALEDENOM 500000
+    CLASS
+      TITLE "Central"
+      EXPRESSION ('[class_regiao]'eq'2')
+      STYLE
+        COLOR 203 115 203
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 -70
+        POSITION AUTO
+        TEXT "Central"
+      END # LABEL
+    END # CLASS
+    CLASS
+      TITLE "Oeste"
+      EXPRESSION ('[class_regiao]'eq'5')
+      STYLE
+        COLOR 17 166 64
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 0
+        POSITION AUTO
+        TEXT "Oeste"
+      END # LABEL
+    END # CLASS
+    CLASS
+      TITLE "Norte"
+      EXPRESSION ('[class_regiao]'eq'6')
+      STYLE
+        COLOR 2 210 239
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 0
+        POSITION AUTO
+        TEXT "Norte"
+      END # LABEL
+    END # CLASS
+    CLASS
+      TITLE "Sul"
+      EXPRESSION ('[class_regiao]'eq'3')
+      STYLE
+        COLOR 249 110 138
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 10
+        POSITION AUTO
+        TEXT "Sul"
+      END # LABEL
+    END # CLASS
+    CLASS
+      TITLE "Leste"
+      EXPRESSION ('[class_regiao]'eq'7')
+      STYLE
+        COLOR 243 26 74
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 0
+        POSITION AUTO
+        TEXT "Leste"
+      END # LABEL
+    END # CLASS
+    CLASS
+      TITLE "Sudoeste"
+      EXPRESSION ('[class_regiao]'eq'4')
+      STYLE
+        COLOR 122 60 248
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET -20 0
+        POSITION AUTO
+        TEXT "Sudoeste"
+      END # LABEL
+    END # CLASS
+    CLASS
+      NAME "Centro-Sul"
+      EXPRESSION ('[class_regiao]'eq'1')
+      STYLE
+        COLOR 189 247 118
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        MINDISTANCE 1
+        MINFEATURESIZE 0
+        OFFSET 0 15
+        POSITION AUTO
+        TEXT "Centro-Sul"
+      END # LABEL
+    END # CLASS
+  END # LAYER
+    LAYER
+    DATA "viasprincipaisdf_osm.shp"
+    NAME "viasprincipaisdf_osm"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      STYLE
+        COLOR 240 240 240
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END

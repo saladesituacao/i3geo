@@ -1,0 +1,800 @@
+#http://localhost:8019/i3geo/ses/codigo/printmapubs.php?map=imprimirunidadesabrange&cache=nao&codubs=0011258
+
+MAP
+	FONTSET "/var/www/i3geo/symbols/fontes.txt"
+	SYMBOLSET "/var/www/i3geo/symbols/simbolos.sym"
+	  Symbol
+	    Name "upa"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/firstaid1.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "ubs"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/firstaid.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "unidade1-azul"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/unidade1-azul.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "hospital-2"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/hospital-2.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "hospital-3"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/hospital-3.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "hospital-building"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/hospital-building.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "unidade2-laranja"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/unidade2-laranja.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "unidade1-laranja"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/unidade1-laranja.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "sozialeeinrichtung"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/sozialeeinrichtung.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "therapy"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/therapy.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "ambulance2"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/ambulance2.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "medicalstore"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/medicalstore.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "ambulance3"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/ambulance3.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "police"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/police.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "laboratory"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/laboratory.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "office-building"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/office-building.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "above_ground"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/above_ground.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "chemistry-2"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/chemistry-2.png"
+	    ANCHORPOINT 0.5 1
+	  END
+	  Symbol
+	    Name "hiking2"
+	    Type PIXMAP
+	    Image "/var/www/i3geo/ses/symbols/hiking2.png"
+	    ANCHORPOINT 0.5 1
+	  END
+  	Symbol
+    	Name "rosa200"
+    	Type PIXMAP
+    	FILLED true
+    	Image "/var/www/i3geo/ses/symbols/rosa200.png"
+  	END
+  	Symbol
+    	Name "logogdfvertical"
+    	Type PIXMAP
+    	Image "/var/www/i3geo/ses/symbols/logogdfvertical.png"
+  	END
+  	Symbol
+    	Name "legenda"
+    	Type PIXMAP
+    	Image "/var/www/i3geo/ses/symbols/logogdfvertical.png"
+  	END
+  	#CONFIG "MS_NONSQUARE" "NO"
+	SHAPEPATH "/var/www/i3geo/geodados"
+	IMAGECOLOR 255 255 255
+	MAXSIZE 5000
+	IMAGETYPE svg
+	EXTENT -48.2870 -16.05 -47.30 -15.5
+	#SIZE 4000 2400
+	SIZE 3369 2383
+	STATUS ON
+	UNITS DD
+	NAME "sesdf"
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+		DRIVER AGG/PNG
+		IMAGEMODE RGB
+		FORMATOPTION "QUANTIZE_FORCE=OFF"
+		FORMATOPTION "QUANTIZE_DITHER=OFF"
+		FORMATOPTION "QUANTIZE_COLORS=256"
+		FORMATOPTION "INTERLACE=OFF"
+		FORMATOPTION "COMPRESSION=0"
+	END
+	OUTPUTFORMAT
+			NAME svg
+			MIMETYPE "image/svg+xml"
+			DRIVER cairo/svg
+			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		END
+	PROJECTION
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+	END
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 16 10
+		KEYSPACING 12 8
+		LABEL
+			SIZE large
+			TYPE bitmap
+			BUFFER 0
+			COLOR 0 0 0
+		END
+		POSITION UR
+		STATUS on
+	END
+	SCALEBAR
+		BACKGROUNDCOLOR 200 200 200
+		COLOR 0 0 0
+		INTERVALS 5
+		LABEL
+			SIZE LARGE
+			TYPE BITMAP
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 0
+			PARTIALS TRUE
+		END
+		POSITION LC
+		SIZE 600 15
+		STATUS embed
+		STYLE 0
+		TRANSPARENT FALSE
+		UNITS KILOMETERS
+	END
+	WEB
+		IMAGEPATH "/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+		TEMPLATE ""
+	END
+  LAYER
+    #CONNECTION "http://digisus.saude.gov.br/mapabase/wms?"
+    CONNECTION "http://mapabase.manatustecnologia.com.br/wms?"
+    CONNECTIONTYPE WMS
+    DATA ""
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "wms_name"	"osm"
+      "wms_format"	"image/png"
+      "wms_server_version"	"1.1.0"
+      "wms_style"	"default"
+      "wms_connectiontimeout"	"180"
+    END # METADATA
+    NAME "osm"
+    STATUS default
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 0
+        COLOR 0 0 0
+        OFFSET 0 0
+      END # STYLE
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "https://mapas.saude.df.gov.br/i3geo/ses/codigo/dftrans_wms.php?"
+    CONNECTIONTYPE WMS
+    METADATA
+      "tipooriginal"	""
+      "wms_srs"	"EPSG:3857"
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "TIP"	"linha,nome"
+      "CLASSE"	"SIM"
+      "wms_TILED"	"true"
+      "permitekmz"	"NAO"
+      "wfs"	"nao"
+      "TEXTO"	"NAO"
+      "wms_force_separate_request"	"1"
+      "wms_name"	"geonode:Itinerario_de_Linhas"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml,text/xml,application/vnd.ogc.gml/3.1.1,text/xml; subtype=gml/3.1.1,text/html,application/json"
+      "legendawms"	"https://mapas.saude.df.gov.br/i3geo/ses/codigo/dftrans_wms.php?&request=getlegendgraphic&version=1.1.1&service=wms&layer=geonode:Itinerario_de_Linhas&format=image/png"
+      "nomeoriginal"	"geonode:Itinerario_de_Linhas"
+      "wms_LAYERS"	"geonode:Itinerario_de_Linhas"
+      "permitedownload"	"NAO"
+      "wms_formatlist"	"image/png,application/atom xml,application/atom+xml,application/json;type=utfgrid,application/openlayers,application/pdf,application/rss xml,application/rss+xml,application/vnd.google-earth.kml,application/vnd.google-earth.kml xml,application/vnd.google-earth.kml+xml,application/vnd.google-earth.kml+xml;mode=networklink,application/vnd.google-earth.kmz,application/vnd.google-earth.kmz xml,application/vnd.google-earth.kmz+xml,application/vnd.google-earth.kmz;mode=networklink,atom,image/geotiff,image/geotiff8,image/gif,image/gif;subtype=animated,image/jpeg,image/png8,image/png; mode=8bit,image/svg,image/svg xml,image/svg+xml,image/tiff,image/tiff8,image/vnd.jpeg-png,kml,kmz,openlayers,rss,text/html; subtype=openlayers,utfgrid"
+      "wms_format"	"image/png"
+      "wms_styles"	""
+      "ITENS"	"linha,nome"
+      "wms_connectiontimeout"	"30"
+      "wms_tile"	"1"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "tema"	"Itinerário de linhas de ônibus do STPC/DF"
+      "IDENTIFICA"	"SIM"
+      "wms_server_version"	"1.1.1"
+      "wms_crs"	"EPSG:4326"
+    END # METADATA
+    NAME "dftrans_itinerarios"
+    OFFSITE 255 255 255
+    STATUS off
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    NAME "abrangenciaubs"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Abrangência das demais UBS"
+      STYLE
+        OUTLINECOLOR "#ff9900"
+        WIDTH 3
+      END # STYLE
+      STYLE
+        OUTLINECOLOR 255 255 255
+        WIDTH 1
+      END # STYLE
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs WHERE cnes like '%xxxx%')  as foo using unique cod_ubs using srid=4674"
+    NAME "abrangenciaubsemfoco"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Abrangência da UBS"
+      STYLE
+        OUTLINECOLOR "#ff9900"
+        WIDTH 5
+      END # STYLE
+      STYLE
+        OUTLINECOLOR 255 0 0
+        WIDTH 2
+      END # STYLE
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom FROM (select class_regiao,class_regiao_desc as nome,geom FROM dbauxiliares.tb_class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    NAME "regiaodesaudelimitescinza"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Região de saúde"
+      STYLE
+        OUTLINECOLOR 0 0 0
+        SIZE 2
+      END # STYLE
+      LABEL
+        FONT "arial"
+        SIZE 12
+        OFFSET 0 0
+        OUTLINECOLOR -1 -1 -1
+        COLOR 0 0 0
+        POSITION CC
+        TEXT "[nome]"
+        FORCE true
+      END # LABEL
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    #POSTLABELCACHE true
+    #LABELITEM "nome"
+    DATA "geom from (SELECT ba.cnes as cod_cnes,ba.cnes_desc as nome,ba.cnes_desc_geral as nomecompleto,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE geom is not null AND ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6,4,5,7,36,39,40,42,62,76,43,50,67,68,76,81,82,69,70,73,79,80)) as foo using unique cod_cnes using srid=4674"
+    NAME "estabelecimentos"
+    STATUS DEFAULT
+    TYPE POINT
+    UNITS METERS
+    POSTLABELCACHE false
+    LABELITEM "nome"
+    CLASS #
+      NAME "UPA"
+      EXPRESSION ([cod_tipo_unidade] in "73")
+      STYLE
+        SIZE 16
+        SYMBOL "upa"
+      END # STYLE
+      LABEL
+        FONT "arial"
+        TYPE truetype
+        SIZE 6
+        #OFFSET 0 4
+        COLOR 0 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION cc
+        SHADOWSIZE 1 1
+        PARTIALS false
+        FORCE false
+        BUFFER 0
+      END # LABEL
+      LEADER
+	      GRIDSTEP 40 # number of pixels between positions that are tested
+	      MAXDISTANCE 300 # distance in pixels that leader text can be drawn
+	      STYLE # normal line styles are supported
+	        COLOR 255 0 0
+	        WIDTH 1
+	      END
+      END
+    END # CLASS
+    CLASS #
+      NAME "UBS"
+      EXPRESSION ([cod_tipo_unidade] in "2,3,6")
+      STYLE
+        SIZE 16
+        SYMBOL "ubs"
+      END # STYLE
+      LABEL
+        FONT "arial"
+        TYPE truetype
+        SIZE 6
+        #OFFSET 0 4
+        COLOR 0 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION cc
+        SHADOWSIZE 1 1
+        PARTIALS false
+        FORCE false
+        BUFFER 0
+      END # LABEL
+      LEADER
+	      GRIDSTEP 40 # number of pixels between positions that are tested
+	      MAXDISTANCE 600 # distance in pixels that leader text can be drawn
+	      STYLE # normal line styles are supported
+	        COLOR 255 0 0
+	        WIDTH 1
+	      END
+      END
+    END # CLASS
+    CLASS #
+      NAME "Hospital"
+      EXPRESSION ([cod_tipo_unidade] in "5,7")
+      STYLE
+        SIZE 16
+        SYMBOL "hospital-2"
+      END # STYLE
+      LABEL
+        FONT "arial"
+        TYPE truetype
+        SIZE 6
+        #OFFSET 0 4
+        COLOR 0 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION cc
+        SHADOWSIZE 1 1
+        PARTIALS false
+        FORCE false
+        BUFFER 0
+      END # LABEL
+      LEADER
+	      GRIDSTEP 40 # number of pixels between positions that are tested
+	      MAXDISTANCE 300 # distance in pixels that leader text can be drawn
+	      STYLE # normal line styles are supported
+	        COLOR 255 0 0
+	        WIDTH 1
+	      END
+      END
+
+    END # CLASS
+    CLASS #
+      NAME "Hospital Dia"
+      EXPRESSION ([cod_tipo_unidade] in "62")
+      STYLE
+        SIZE 16
+        SYMBOL "hospital-3"
+      END # STYLE
+      LABEL
+        FONT "arial"
+        TYPE truetype
+        SIZE 6
+        #OFFSET 0 4
+        COLOR 0 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION auto
+        SHADOWSIZE 1 1
+        PARTIALS false
+        FORCE false
+        BUFFER 0
+      END # LABEL
+      LEADER
+	      GRIDSTEP 40 # number of pixels between positions that are tested
+	      MAXDISTANCE 300 # distance in pixels that leader text can be drawn
+	      STYLE # normal line styles are supported
+	        COLOR 255 0 0
+	        WIDTH 1
+	      END
+      END
+
+    END # CLASS
+    CLASS #
+      NAME "Policlínica"
+      EXPRESSION ([cod_tipo_unidade] in "4")
+      STYLE
+        SIZE 16
+        SYMBOL "unidade2-laranja"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Centro de especialidade"
+      EXPRESSION ([cod_tipo_unidade] in "36")
+      STYLE
+        SIZE 16
+        SYMBOL "unidade1-laranja"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "CAPS"
+      EXPRESSION ([cod_tipo_unidade] in "70")
+      STYLE
+        SIZE 16
+        SYMBOL "sozialeeinrichtung"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Apoio Diagnóstico/Terapia"
+      EXPRESSION ([cod_tipo_unidade] in "39")
+      STYLE
+        SIZE 16
+        SYMBOL "therapy"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "SAMU"
+      EXPRESSION ([cod_tipo_unidade] in "42,76")
+      STYLE
+        SIZE 16
+        SYMBOL "ambulance2"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Farmácia"
+      EXPRESSION ([cod_tipo_unidade] in "43")
+      STYLE
+        SIZE 16
+        SYMBOL "medicalstore"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Unidade Móvel Terrestre"
+      EXPRESSION ([cod_tipo_unidade] in "49")
+      STYLE
+        SIZE 16
+        SYMBOL "ambulance3"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Unidade de Vigilância em Saúde"
+      EXPRESSION ([cod_tipo_unidade] in "50")
+      STYLE
+        SIZE 16
+        SYMBOL "police"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "LACEN"
+      EXPRESSION ([cod_tipo_unidade] in "67")
+      STYLE
+        SIZE 16
+        SYMBOL "laboratory"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Hemocentro"
+      EXPRESSION ([cod_tipo_unidade] in "69")
+      STYLE
+        SIZE 16
+        SYMBOL "above_ground"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Oficina Ortopédica"
+      EXPRESSION ([cod_tipo_unidade] in "79")
+      STYLE
+        SIZE 16
+        SYMBOL "hiking2"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Laboratório de Saúde Pública"
+      EXPRESSION ([cod_tipo_unidade] in "80")
+      STYLE
+        SIZE 16
+        SYMBOL "chemistry-2"
+
+      END # STYLE
+
+    END # CLASS
+    CLASS #
+      NAME "Sede da Secretaria de Saúde"
+      EXPRESSION ([cod_tipo_unidade] in "68")
+      STYLE
+        SIZE 16
+        SYMBOL "office-building"
+
+      END # STYLE
+
+    END # CLASS
+  END # LAYER
+  LAYER
+    CONNECTION "stage"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom from (SELECT ba.cnes_desc as nome,ba.cnes as cod_cnes,st_buffer(ba.geom,0.008) as geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6,36,62,5,7,73)) as foo using unique cod_cnes using srid=4674"
+    #DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs as nome,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    NAME "ubslabels"
+    STATUS off
+    TYPE polygon
+    POSTLABELCACHE false
+    LABELITEM "nome"
+    CLASS
+      LABEL
+        FONT "arial"
+        TYPE truetype
+        SIZE 6
+        #OFFSET 0 4
+        COLOR 0 0 0
+        OUTLINECOLOR 242 230 230
+        POSITION auto
+        SHADOWSIZE 1 1
+        PARTIALS false
+        FORCE false
+        BUFFER 0
+      END # LABEL
+      LEADER
+	      GRIDSTEP 40 # number of pixels between positions that are tested
+	      MAXDISTANCE 300 # distance in pixels that leader text can be drawn
+	      STYLE # normal line styles are supported
+	        COLOR 255 0 0
+	        WIDTH 1
+	      END
+      END
+    END # CLASS
+  END # LAYER
+
+LAYER
+    NAME "grade"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS DD
+    CLASS
+      LABEL
+        SIZE 10
+        OFFSET 0 0
+        POSITION CC
+        SHADOWSIZE 1 1
+      END # LABEL
+      STYLE
+        COLOR 31 165 165
+        MAXSIZE 100
+        MINSIZE 1
+        OUTLINECOLOR 0 0 0
+        SIZE 1
+      END # STYLE
+    END # CLASS
+    GRID
+      LABELFORMAT "DDMMSS"
+      MAXINTERVAL 0.02
+    END # GRID
+  END # LAYER
+
+	LAYER
+		NAME "titulo"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM uc
+		TYPE POINT
+		UNITS METERS
+		CLASS
+	      LABEL
+	        FONT "arial"
+	        SIZE 54
+	        MINDISTANCE 0
+	        MINFEATURESIZE 0
+	        OFFSET 0 0
+	        PARTIALS TRUE
+	        POSITION CC
+	        SHADOWSIZE 1 1
+	        OUTLINECOLOR 255 255 255
+	      END # LABEL
+	    END # CLASS
+		FEATURE
+			POINTS
+				0 50
+			END
+			TEXT "Rede Pública de Saúde - GDF - "
+		END
+	END
+	LAYER
+		NAME "creditos"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM ll
+		TYPE POINT
+		UNITS METERS
+		CLASS
+	      LABEL
+	        FONT "arial"
+	        SIZE 12
+	        MINDISTANCE 0
+	        MINFEATURESIZE 0
+	        OFFSET 0 0
+	        PARTIALS TRUE
+	        POSITION UL
+	        SHADOWSIZE 1 1
+	        WRAP 'xx'
+	      END # LABEL
+	      STYLE
+	        COLOR 255 0 0
+	        OUTLINECOLOR 0 0 0
+	        SIZE 1
+	      END # STYLE
+	    END # CLASS
+		FEATURE
+			POINTS
+				500 -10
+			END
+			TEXT "Elaboração: Sala de situação / DGIE / CCSGI / SUPLANS / SES-DFxxBase cartográfica OSM. Softwares Mapserver + i3Geo"
+		END
+	END
+	LAYER
+		NAME "rosadosventos"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM ur
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			STYLE
+				SYMBOL 'ponto'
+				SIZE 150
+				COLOR 255 255 255
+				BACKGROUNDCOLOR 255 255 255
+				OUTLINECOLOR 250 250 250
+				WIDTH 2
+			END
+			STYLE
+				SYMBOL 'rosa200'
+				SIZE 120
+			END
+		END
+		FEATURE
+			POINTS
+				-300 160
+			END
+		END
+	END
+	LAYER
+		NAME "logogdfvertical"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM ul
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'logogdfvertical'
+			SIZE 300
+		END
+		FEATURE
+			POINTS
+				190 280
+			END
+		END
+	END
+	LAYER
+		NAME "legenda"
+		SIZEUNITS PIXELS
+		STATUS DEFAULT
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM ur
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'legenda'
+			SIZE 250
+		END
+		FEATURE
+			POINTS
+				-100 160
+			END
+		END
+	END
+END

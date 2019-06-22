@@ -1,0 +1,144 @@
+input[type="color"]::-moz-color-swatch {
+    border: 0px solid grey;
+}
+.corpoFundo {
+	background-color: #00695c !Important;
+}
+.corpoCabecalho {
+	background-color: #003d33 !Important;
+	color: white !Important;
+}
+#fluxoSESContainer.a, #fluxoSESContainer.a:focus, #fluxoSESContainer.a:hover {
+	color: white !Important;
+}
+.adicionaFiltro {
+    cursor: cell;
+}
+.adicionaFiltro:focus, .adicionaFiltro:hover {
+    text-decoration: none;
+}
+.addfilter {
+    top: 3px;
+    cursor: cell;
+    font-size: 1.8rem;
+    margin-left: 3px;
+    opacity: 0.8;
+}
+.fluxoSESlabel {
+	color: white !Important;
+	padding: 0px;
+}
+.addfilterTxt {
+    position: relative;
+    top: 1px;
+    left: 3px;
+}
+div[role="listbox"] {
+	overflow: auto !Important;
+	height: unset !Important;
+	max-height: 300px !Important;
+}
+
+.tree, .tree ul {
+	margin: 0;
+	padding: 0;
+	list-style: none
+}
+
+.tree ul {
+	margin-left: 1em;
+	position: relative
+}
+
+.tree ul ul {
+	margin-left: .5em
+}
+
+.tree ul:before {
+	content: "";
+	display: block;
+	width: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	border-left: 1px solid
+}
+
+.tree li {
+	margin: 0;
+	padding: 0 1em;
+	line-height: 1.8em;
+	color: unset;
+	position: relative
+}
+
+.tree ul li:before {
+	content: "";
+	display: block;
+	width: 10px;
+	height: 0;
+	border-top: 1px solid;
+	margin-top: -1px;
+	position: absolute;
+	top: 1em;
+	left: 0;
+	background-color: unset !Important;
+}
+
+.tree ul li:last-child:before {
+	background: #fff;
+	height: auto;
+	top: 1em;
+	bottom: 0
+}
+
+.indicator {
+	margin-right: 5px;
+    font-size: 1.8rem;
+    opacity: 0.8;
+}
+
+.tree li a {
+	text-decoration: none;
+	color: unset;
+}
+
+.tree li button, .tree li button:active, .tree li button:focus {
+	text-decoration: none;
+	color: unset;
+	border: none;
+	background: transparent;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	outline: 0;
+}
+
+.closefilter {
+	padding-top: 5px;
+	padding-right: 35px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	margin-bottom: 5px;
+	display: inline-block;
+	font-size: 1rem;
+	margin-left: 5px;
+}
+
+.closefilter>button {
+	font-size: 1.5rem;
+}
+
+.table-hover>tbody>tr:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+.loaderLayers {
+    margin: auto;
+}
+
+.bootstrapTable tr {
+    height: 40px;
+}
+.fixed-table-body {
+    height: calc(100% + 10px);
+}

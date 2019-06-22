@@ -30,7 +30,7 @@ i3GEOF.excluirarvore = {
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    idlista: p.idlista,
-		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+		    ...i3GEO.idioma.objetoIdioma(i3GEOF.excluirarvore.dicionario)
 	    };
 	    i3GEOF.excluirarvore.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.lista();
@@ -72,11 +72,9 @@ i3GEOF.excluirarvore = {
 	    });
 	    temp = function(){
 		i3GEO.janela.formModal();
-		i3GEO.atualiza();
-
 	    };
 	    if(excluir.length > 0){
-		i3GEO.php.excluitema(temp,excluir);
+		i3GEO.tema.exclui(excluir,false,temp);
 	    } else {
 		i3GEO.janela.formModal();
 	    }

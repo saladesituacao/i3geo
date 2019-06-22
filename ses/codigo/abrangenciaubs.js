@@ -5,7 +5,7 @@ function abrangenciaubs(x,y,tema,cnes){
     )
     .done(
 	    function(data, status){
-		i3GEO.desenho[i3GEO.Interface.ATUAL].criaLayerGrafico();
+		i3GEO.desenho.criaLayerGrafico();
 		var c = i3GEO.desenho.layergrafico.getSource();
 		var format = new ol.format.WKT();
 		$.each(data.data,function( i, item ) {

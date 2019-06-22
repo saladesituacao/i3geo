@@ -1,0 +1,46 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    CONNECTION "https://mapas.saude.df.gov.br/i3geo/ses/codigo/dftrans_wms.php?"
+    CONNECTIONTYPE WMS
+    METADATA
+      "tipooriginal"	""
+      "wms_srs"	"EPSG:4326"
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "TIP"	"linha,nome"
+      "CLASSE"	"SIM"
+      "wms_TILED"	"true"
+      "permitekmz"	"NAO"
+      "wfs"	"nao"
+      "TEXTO"	"NAO"
+      "wms_force_separate_request"	"1"
+      "wms_name"	"geonode:Itinerario_de_Linhas"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml,text/xml,application/vnd.ogc.gml/3.1.1,text/xml; subtype=gml/3.1.1,text/html,application/json"
+      "legendawms"	"https://mapas.saude.df.gov.br/i3geo/ses/codigo/dftrans_wms.php?&request=getlegendgraphic&version=1.1.1&service=wms&layer=geonode:Itinerario_de_Linhas&format=image/png"
+      "nomeoriginal"	"geonode:Itinerario_de_Linhas"
+      "wms_LAYERS"	"geonode:Itinerario_de_Linhas"
+      "permitedownload"	"NAO"
+      "wms_formatlist"	"image/png,application/atom xml,application/atom+xml,application/json;type=utfgrid,application/openlayers,application/pdf,application/rss xml,application/rss+xml,application/vnd.google-earth.kml,application/vnd.google-earth.kml xml,application/vnd.google-earth.kml+xml,application/vnd.google-earth.kml+xml;mode=networklink,application/vnd.google-earth.kmz,application/vnd.google-earth.kmz xml,application/vnd.google-earth.kmz+xml,application/vnd.google-earth.kmz;mode=networklink,atom,image/geotiff,image/geotiff8,image/gif,image/gif;subtype=animated,image/jpeg,image/png8,image/png; mode=8bit,image/svg,image/svg xml,image/svg+xml,image/tiff,image/tiff8,image/vnd.jpeg-png,kml,kmz,openlayers,rss,text/html; subtype=openlayers,utfgrid"
+      "wms_format"	"image/png"
+      "wms_styles"	""
+      "ITENS"	"linha,nome"
+      "wms_connectiontimeout"	"30"
+      "wms_tile"	"1"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "tema"	"Itinerário de linhas de ônibus do STPC/DF"
+      "IDENTIFICA"	"SIM"
+      "wms_server_version"	"1.1.1"
+      "wms_crs"	"EPSG:4326"
+    END # METADATA
+    NAME "dftrans_itinerarios"
+    OFFSITE 255 255 255
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+  END # LAYER
+
+END # MAP
+

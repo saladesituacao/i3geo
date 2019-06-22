@@ -38,6 +38,7 @@ $app->get('/lista', function (Request $request, Response $response) {
                     $ponto->x,
                     $ponto->y
                 );
+                //$rect = $s->bounds;
                 $nome = $s->values["nome_estab_cnes"];
                 array_push($cat, array(
                     "nome" => $nome,
@@ -49,6 +50,11 @@ $app->get('/lista', function (Request $request, Response $response) {
                     "tipounidade" => $s->values["tipo_unidade"]
                 ));
             }
+            array_multisort(
+                array_map(strtolower, array_column($cat, 'nome')),
+                SORT_ASC,SORT_NATURAL,
+                $cat);
+
             $retorno = (array(
                 "status" => true,
                 "error" => null,
@@ -128,9 +134,7 @@ $app->get('/abrangenciaubs/{cnes}/wkt', function (Request $request, Response $re
         exit();
     }
     try {
-
         $mapObj = ms_newMapObj("../../../temas/abrangenciaubs.map");
-
         $layer = $mapObj->getlayerbyname("abrangenciaubs");
         if($layer->connectiontype == MS_POSTGIS){
             $stringconexao = $postgis_mapa["stage"];
@@ -141,25 +145,34 @@ $app->get('/abrangenciaubs/{cnes}/wkt', function (Request $request, Response $re
         $ret->setextent(-48.2851, -16, -47.30, -15.5);
         $status = $layer->whichShapes($ret);
         $wkt = array();
+        $x = array();
+        $y = array();
         if ($status == 0) {
             while ($s = $layer->nextShape()) {
                 $cnesshapes = explode(",",$s->values["cnes"]);
                 foreach($cnesshapes as $cnesshape){
                     if ($args["cnes"]*1 == $cnesshape*1 ) {
                         $wkt[] = $s->toWkt();
+                        $rect = $s->bounds;
+                        $x[] = $rect->minx;
+                        $x[] = $rect->maxx;
+                        $y[] = $rect->miny;
+                        $y[] = $rect->maxy;
                     }
                 }
             }
             $resultado = (array(
                 "status" => true,
                 "error" => null,
-                "data" => $wkt
+                "data" => $wkt,
+                "boundary" => min($x).",".min($y).",".max($x).",".max($y)
             ));
         } else {
             $resultado = array(
                 "status" => false,
                 "error" => null,
-                "data" => array()
+                "data" => array(),
+                "boundary" => null
             );
         }
     } catch (PDOException $e) {

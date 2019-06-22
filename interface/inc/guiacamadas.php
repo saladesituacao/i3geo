@@ -1,7 +1,7 @@
 
 <!-- camadas existentes no mapa -->
 <div id='guia1obj' data-traduzir="true" style='display: none; height: 100%;'>
-    <div class="i3GEOfechaGuia" style="display: flex;">
+    <div class="i3GeoBgc2 i3GEOfechaGuia" style="display: flex;">
         <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');">
             <span style="vertical-align: middle">{{{iconeMapa}}}</span>
         </button>
@@ -37,6 +37,9 @@
                     </a></li>
                 <li><a onclick="i3GEO.mapa.limpasel({verifica:true})" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-erase"></span> {{{t4}}}
+                    </a></li>
+                <li><a onclick="i3GEO.timer.mapa.prompt()" href="javascript:void(0)">
+                        <span class="glyphicon glyphicon-repeat"></span> {{{p12}}}
                     </a></li>
                 <li role="separator" class="divider"></li>
                 <li><a onclick="i3GEO.mapa.dialogo.salvamapa()" href="javascript:void(0)">

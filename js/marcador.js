@@ -60,11 +60,11 @@ i3GEO.marcador =
 	 * geografica
 	 */
 	armazena : function() {
-	    var coords, point, temp, cookies = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), ext = i3GEO.parametros.mapexten, nome = "Marcador", valor;
+	    var coords, point, temp, cookies = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), ext = i3GEO.mapa.getExtent().string, nome = "Marcador", valor;
 
 	    temp = ext.split(" ");
 	    ext = "";
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    if (i3GEO.Interface.googleLike === true) {
 		point = new ol.geom.Point([temp[0]*1, temp[1]*1]);
 		point.transform("EPSG:3857","EPSG:4326");
 		ext = point.getCoordinates()[0] + " " + point.getCoordinates()[1];
@@ -87,15 +87,6 @@ i3GEO.marcador =
 	},
 	exporta : function() {
 	    i3GEO.util.copyToClipboard(i3GEO.util.pegaCookie("marcadoresDoI3Geo"));
-	},
-	exportaShp : function() {
-	    var c = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), temp = function(retorno) {
-		i3GEO.temaAtivo = retorno.data;
-		i3GEO.atualiza();
-	    };
-	    if (c) {
-		i3GEO.php.marcadores2shp(temp);
-	    }
 	},
 	importa : function() {
 	    var temp = function() {
@@ -168,10 +159,6 @@ i3GEO.marcador =
 		title : $trad("x81"),
 		text: $trad("x81"),
 		onclick : "javascript:i3GEO.marcador.importa()"
-	    }, {
-		title : $trad("x84"),
-		text: $trad("x84"),
-		onclick : "javascript:i3GEO.marcador.exportaShp()"
 	    });
 	    return itens;
 	}

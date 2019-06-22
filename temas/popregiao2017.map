@@ -7,7 +7,7 @@ MAP
     END # COMPOSITE
     CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (SELECT geom,r.class_regiao,r.class_regiao_desc, pop.populacao_total FROM dbauxiliares.tb_class_regiao AS r JOIN ( SELECT SUM(cast (qtd_total as INTEGER)) as populacao_total,regiao_saude FROM st_stage.tab_populacao WHERE faixa_etaria <> '0_4_anos' AND ano = '2017' GROUP BY regiao_saude ) AS pop ON pop.regiao_saude = r.class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
+    DATA "geom FROM (SELECT geom,r.class_regiao,r.class_regiao_desc, pop.populacao_total FROM dbauxiliares.tb_class_regiao AS r JOIN ( SELECT SUM(cast (qtd_total as INTEGER)) as populacao_total,regiao_saude FROM st_stage.tab_populacao_2 WHERE ano = '2017' GROUP BY regiao_saude ) AS pop ON pop.regiao_saude = r.class_regiao WHERE superintendencia = 't') as foo USING UNIQUE class_regiao USING SRID=4674"
     METADATA
       "cache"	"nao"
       "TIP"	"class_regiao_desc,populacao_total"

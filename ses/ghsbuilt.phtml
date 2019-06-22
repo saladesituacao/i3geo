@@ -1,0 +1,102 @@
+<?php
+//
+// utilizado no shortcode do Wordpress para o mapa de assentamentos humanos
+// na pagina população
+// http://desenv.saude.df.gov.br/populacao/
+//
+$corpoconfig = array(
+    "legenda" => true,
+    "tipoInterface" => "OSM",
+    "debug" => ""
+);
+include ("corposingle.php");
+?>
+<style>
+#i3GEOcopyright {
+	display: none;
+}
+
+.a1975.togglebutton label input[type="checkbox"]:checked+.toggle::after
+	{
+	background-color: #7f1919;
+}
+
+.a1990.togglebutton label input[type="checkbox"]:checked+.toggle::after
+	{
+	background-color: #ae4a19;
+}
+
+.a2000.togglebutton label input[type="checkbox"]:checked+.toggle::after
+	{
+	background-color: #fd6419;
+}
+
+.a2014.togglebutton label input[type="checkbox"]:checked+.toggle::after
+	{
+	background-color: #fdae8a;
+}
+
+.togglebutton label input[type="checkbox"]:checked+.toggle {
+	background-color: rgba(191, 191, 191, 0.99);
+}
+#i3GEOzoomInOut {
+    z-index: 10;
+}
+</style>
+<script>
+<?php include ("corpo_script.php"); ?>
+parametrosMapa.layers = {
+    add : [
+        "unidades","ridedf2016",
+        "ghsbuiltlds2014glober2016a54009250v10",
+        "ghsbuiltlds2000glober2016a54009250v10",
+        "ghsbuiltlds1990glober2016a54009250v10",
+        "ghsbuiltlds1975glober2016a54009250v10",
+        "regioesdesaude","regioesdesaudenomes"],
+    on : [],
+    off : ["unidades","ridedf2016",
+        "regioesdesaude","regioesdesaudenomes"]
+};
+//Funcao que sera executada apos a inicializacao do mapa
+config.afterStart = function() {
+    new ol.control.Zoom({
+        target: $i("i3GEOzoomInOut")
+    }).setMap(i3geoOL);
+};
+i3GEO.init(parametrosMapa, config);
+</script>
+<div style="padding:5px; position: absolute; top: 0px; margin: auto; width: 100%; background-color: #fff9;">
+    <div class="a1975 togglebutton text-left" style="display: inline;">
+        <label style="color: black;">
+            <input checked type="checkbox" value="ghsbuiltlds1975glober2016a54009250v10" name="ghsbuiltlds1975glober2016a54009250v10"
+                onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
+            <span class="toggle" style="margin-right: 8px;"></span>1975
+        </label>
+    </div>
+    <div class="a1990 togglebutton text-left" style="display: inline;">
+        <label style="color: black;">
+            <input checked type="checkbox" value="ghsbuiltlds1990glober2016a54009250v10" name="ghsbuiltlds1990glober2016a54009250v10"
+                onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
+            <span class="toggle" style="margin-right: 8px;"></span>1990
+        </label>
+    </div>
+    <div class="a2000 togglebutton text-left" style="display: inline;">
+        <label style="color: black;">
+            <input checked type="checkbox" value="ghsbuiltlds2000glober2016a54009250v10" name="ghsbuiltlds2000glober2016a54009250v10"
+                onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
+            <span class="toggle" style="margin-right: 8px;"></span>2000
+        </label>
+    </div>
+    <div class="a2014 togglebutton text-left" style="display: inline;">
+        <label style="color: black;">
+            <input checked type="checkbox" value="ghsbuiltlds2014glober2016a54009250v10" name="ghsbuiltlds2014glober2016a54009250v10"
+                onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
+            <span class="toggle" style="margin-right: 8px;"></span>2014
+        </label>
+    </div>
+    <div style="display: inline;">
+        <a href=https://ghsl.jrc.ec.europa.eu/data.php target=_blank>Fonte: GHSL</a>
+    </div>
+</div>
+</body>
+</html>

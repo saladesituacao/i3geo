@@ -1,5 +1,5 @@
 <?php
-if(i3GEOSES != "ok"){
+if($_SERVER['SERVER_NAME'] != "localhost" && i3GEOSES != "ok"){
     echo "Voce nao fez login na Sala";
     exit;
 }

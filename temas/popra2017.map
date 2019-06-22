@@ -4,7 +4,7 @@ MAP
   LAYER
     CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (SELECT geom,ra.ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_nome, pop.populacao_total FROM dbauxiliares.tb_ra_ses AS ra JOIN ( SELECT SUM(cast (qtd_total as INTEGER)) as populacao_total,ra_ses FROM st_stage.tab_populacao WHERE faixa_etaria <> '0_4_anos' AND ano = '2017' GROUP BY ra_ses ) AS pop ON pop.ra_ses = ra.ra_ses WHERE ra.id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    DATA "geom FROM (SELECT geom,ra.ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_nome, pop.populacao_total FROM dbauxiliares.tb_ra_ses AS ra JOIN ( SELECT SUM(cast (qtd_total as INTEGER)) as populacao_total,ra_ses FROM st_stage.tab_populacao WHERE faixa_etaria <> '00_04_anos' AND ano = '2017' GROUP BY ra_ses ) AS pop ON pop.ra_ses = ra.ra_ses WHERE ra.id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
     METADATA
       "cache"	"nao"
       "CLASSE"	"SIM"

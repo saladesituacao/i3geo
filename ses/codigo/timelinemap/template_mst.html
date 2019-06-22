@@ -1,0 +1,51 @@
+<div id="{{idagravo}}" style='display: block; padding-left: 50px;'>
+    <div class="row">
+        <div class="col-md-10">
+            <div id='{{{idslide}}}'></div>
+        </div>
+        <div class="col-md-2" style="display: flex">
+            <i title="auto play" onclick='timelinemap.animStart()' style='color: white; cursor: pointer;' class='material-icons'>play_circle_outline</i> <i title="pausa"
+                onclick='timelinemap.animStop()' style='margin-left: 10px; color: white; cursor: pointer;' class='material-icons'>pause</i> <i title="gr&aacute;fico" onclick='timelinemap.barChart()'
+                style='margin-left: 10px; color: white; cursor: pointer;' class='material-icons'>timeline</i>
+            <div class="dropup ">
+                <a title="ajustes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i style='margin-left: 10px; color: white; cursor: pointer;' class="material-icons">tune</i>
+                </a>
+                <ul style="padding: 0px 5px 0px 5px;" class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <div class='form-group label-fixed condensed'>
+                            <label class='control-label' for=''>Intervalo (ms)</label>
+                            <input onchange="timelinemap.setIntervalo(this.value)" class='form-control input-lg' type='number' value='{{intervalo}}' />
+                        </div>
+                    </li>
+                    <li>
+                        <div class='form-group label-fixed condensed'>
+                            <label class='control-label' for=''>Tamanho m&aacute;ximo</label>
+                            <input onchange="timelinemap.setMaxsize(this.value)" class='form-control input-lg' type='number' value='{{maxsize}}' />
+                        </div>
+                    </li>
+                    <li>
+                        <div class='form-group label-fixed condensed'>
+                            <label class='control-label' for=''>Cor</label>
+                            <input onchange="timelinemap.setFillColor(this.value)" class='form-control input-lg' type='color' value='{{cor}}' />
+                        </div>
+                    </li>
+                    <li>
+                        <div class='form-group label-fixed condensed'>
+                            <a href='javascript:void(0)' onclick='timelinemap.togglelistDataset()' class='btn btn-primary btn-sm btn-raised'>Conjuntos de dados</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i onclick='timelinemap.close("{{{nomeagravo}}}")' style='margin-left: 10px; color: white; cursor: pointer;' class='material-icons'>close</i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10" id="{{idchart}}">
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-md-12" id="{{idtitle}}">
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@ MAP
 	#
 	FONTSET "/var/www/i3geo/ses/symbols/fontes.txt"
 	SYMBOLSET "/var/www/i3geo/ses/symbols/simbolosv7.sym"
-	SHAPEPATH "/var/www/i3geo/aplicmap/dados"
+	SHAPEPATH "/var/www/i3geo/ses/geodados"
 	IMAGECOLOR 255 255 255
 	MAXSIZE 4096
 	#
@@ -41,13 +41,13 @@ OUTPUTFORMAT
 		FORMATOPTION "INTERLACE=OFF"
 	END
 
-	#OUTPUTFORMAT
-		#	NAME svg
-		#	MIMETYPE "image/svg+xml"
-		#	DRIVER cairo/svg
+	OUTPUTFORMAT
+			NAME svg
+			MIMETYPE "image/svg+xml"
+			DRIVER cairo/svg
 			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
 			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
-		#END
+		END
 
 	OUTPUTFORMAT
 			NAME jpeg
@@ -141,7 +141,7 @@ OUTPUTFORMAT
 		END
 		POSITION LR
 		SIZE 200 2
-		STATUS embed
+		STATUS OFF
 		STYLE 0
 		TRANSPARENT FALSE
 		UNITS KILOMETERS

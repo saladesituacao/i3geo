@@ -93,7 +93,7 @@ var destaques = {
 		var pixel = i3geoOL.getPixelFromCoordinate(e.coordinate);
 		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
 		    var ei = i3GEO.Interface.INFOOVERLAY.getElement();
-		    if(layer.get("name") == "destaques"){
+		    if(layer && layer.get("name") == "destaques"){
 			ei.style.visibility = "visible";
 			var c = feature.get("nomecompleto");
 			ei.innerHTML += "<span style='display:block;'>" + c + "<span>";

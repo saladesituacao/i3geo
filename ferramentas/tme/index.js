@@ -108,7 +108,7 @@ i3GEOF.tme = {
 				i3GEOF.tme.ativa();
 			    }
 			};
-			i3GEO.php.listaItensTema(temp, i3GEOF.tme._parameters.tema);
+			i3GEO.tema.itens(temp, i3GEOF.tme._parameters.tema);
 		    },
 		    "i3GEOTMEregioeslista",
 		    "",
@@ -125,10 +125,10 @@ i3GEOF.tme = {
 			$i("i3GEOtmetemasComSel").value = i3GEOF.tme._parameters.tema;
 			$i("i3GEOtmetemasComSel").onchange = function(){
 			    var p = i3GEOF.tme._parameters;
-			    p.tema = this.value;
+			    p.tema = $i("i3GEOtmetemasComSel").value;
 			    i3GEOF.tme.comboItensRegioes();
 			    var camada = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[p.tema];
-			    if (camada != "" && camada.ferramentas.tme) {
+			    if (camada && camada != "" && camada.ferramentas.tme) {
 				p.itemnomeregioes = camada.ferramentas.tme.colnome;
 				p.itemdados = camada.ferramentas.tme.colsdata.join(",");
 				if(camada.ferramentas.tme.auto === "sim"){
@@ -160,15 +160,15 @@ i3GEOF.tme = {
 		    "form-control"
 	    );
 	},
-	montaListaItens : function(retorno) {
+	montaListaItens : function(data) {
 	    var p = this._parameters,
 	    i3f = this;
 	    var ins = [], i, n, item, litens,temp = {}, mustache = [];
 	    ins.push("<table>");
-	    n = retorno.data.valores.length;
+	    n = data.valores.length;
 	    for (i = 0; i < n; i++) {
 		temp = {};
-		temp.item = retorno.data.valores[i].item;
+		temp.item = data.valores[i].item;
 		mustache.push(temp);
 	    }
 	    $i("i3GEOtmelistai").innerHTML = Mustache.render(
@@ -344,7 +344,7 @@ i3GEOF.tme = {
 			}
 			if(refresh){
 			    i3GEO.arvoreDeCamadas.CAMADAS = [];
-			    i3GEO.atualiza();
+			    i3GEO.mapa.refresh();
 			    i3GEO.Interface.atualizaTema("", i3GEOF.tme._parameters.tema);
 			}
 			if(fn){

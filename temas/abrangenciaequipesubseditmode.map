@@ -1,0 +1,51 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 80
+    END # COMPOSITE
+    CONNECTION "abrangencia_app"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_equipe from (SELECT geom_equipe,cod_ubs,cod_equipe,equipe FROM dbauxiliares.tb_abrangenciaequipesubs_proposta)  as foo using unique cod_equipe using srid=4674"
+    METADATA
+      "TIP"	"equipe"
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "EDITAVEL"	"SIM"
+      "TILES"	"SIM"
+      "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
+      "wkttip"	"SIM"
+      "permitedownload"	"NAO"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Proposta de áreas de abrangência das equipes das UBS Editável"
+      "colunaidunico"	"cod_equipe"
+      "colunageometria"	"geom_equipe"
+      "IDENTIFICA"	"sim"
+      "tabelaeditavel"	"tb_abrangenciaequipesubs_proposta"
+      "esquematabelaeditavel"	"dbauxiliares"
+    END # METADATA
+    NAME "abrangenciaequipesubseditmode"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        OUTLINECOLOR 0 255 0
+        WIDTH 3
+      END # STYLE
+      STYLE
+        COLOR -1 -1 -1
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

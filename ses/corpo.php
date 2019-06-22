@@ -41,7 +41,7 @@ include ($configInc["inc"] . "/css.php");
 <script src="codigo/bootstrap-table/dist/bootstrap-table.js"></script>
 <script src="codigo/bootstrap-table/dist/locale/bootstrap-table-pt-BR.js"></script>
 <script src="codigo/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
-<script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+<script src="codigo/tableexport.js"></script>
 <style>
 .ol-scale-line::after {
 	display: none;
@@ -141,7 +141,6 @@ include ($configInc["inc"] . "/css.php");
 .aranha>li {
 	display: block;
 }
-
 @media print {
 	.container-minimiza, .container-close, .fixed-table-toolbar {
 		display: none;
@@ -153,43 +152,51 @@ include ($configInc["inc"] . "/css.php");
 }
 
 .destaque-menu {
-    flex-wrap: wrap;
-    width: 30vw;
+	flex-wrap: wrap;
+	width: 30vw;
 }
-.open > .destaque-menu.dropdown-menu{
-    display:flex;
+
+.open>.destaque-menu.dropdown-menu {
+	display: flex;
 }
+
 .destaque-container {
 	position: relative;
 	font: 1rem Lato, Helvetica Neue, Arial, Helvetica, sans-serif;
 }
+
 .destaque-container-pills {
-    display: flex;
-    width: 40vw;
-    flex-wrap: wrap;
+	display: flex;
+	width: 40vw;
+	flex-wrap: wrap;
 }
+
 .filterPill {
-    display:flex;
-    padding: 2px;
-    margin: 2px;
+	display: flex;
+	padding: 2px;
+	margin: 2px;
 }
 
 .destaques-pillColor {
-    color: black !Important;
-    background-color: orange !Important;
-    font-weight: unset !Important;
+	color: black !Important;
+	background-color: orange !Important;
+	font-weight: unset !Important;
 }
 
 #i3GEOToolFormModal .bootstrap-table {
-    height: 80%;
+	height: 80%;
 }
+
 @media ( min-width : 0px) and (max-width:767px) {
-    .hiddenincell, .typeahead__filter {
-        display: none !Important;
-    }
-    .buscaUnidade {
-        width: 240px !Important;
-    }
+	.hiddenincell, .typeahead__filter {
+		display: none !Important;
+	}
+	.buscaUnidade {
+		width: 240px !Important;
+	}
+}
+.snackbar.navy {
+    background-color: navy;
 }
 </style>
 </head>
@@ -209,51 +216,66 @@ include ($configInc["inc"] . "/css.php");
     <?php include($configInc["inc"]."/coordenadas.php");?>
     <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
-        <button class="hidden-xs" onclick="$('.ol-i3GEOcontrols .toggle').toggle();" style="float: left;">
+        <button class="i3GeoBgc1 hidden-xs" onclick="$('.ol-i3GEOcontrols .toggle').toggle();" style="float: left;">
             <i class="material-icons">menu</i>
         </button>
-        <button class="hidden-xs" data-tutorial="referencia" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left; cursor: pointer;">
+        <button class="i3GeoBgc1 hidden-xs" data-tutorial="referencia" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left; cursor: pointer;">
             <i class="material-icons">picture_in_picture</i>
         </button>
-        <button class="hidden-xs toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left; display: none;">
-            <i class="material-icons">grid_on</i>
+        <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d11t}}}" onclick="i3GEO.navega.dialogo.wiki()" style="float: left; cursor: pointer; display: none;">
+            <img style="width: 20px;" src="{{{locaplic}}}/imagens/wwikipedia.png">
         </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d17}}}" onclick="i3GEO.navega.dialogo.confluence()" style="float: left; cursor: pointer; display: none;">
+            <img style="width: 20px;" src="{{{locaplic}}}/imagens/confluence.png">
+        </button>
+
         <br class="hidden-xs">
         <div class="clearfix"></div>
-        <span id="i3GEOzoomInOut" style="cursor: pointer;"></span>
-        <button class="hidden-xs toggle" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor: pointer; display: none;">
-            <i class="material-icons">highlight</i>
-        </button>
-        <br class="hidden-xs">
-        <button class="hidden-xs" title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
-            <i class="material-icons">public</i>
-        </button>
-        <button class="hidden-xs" onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
-            <i class="material-icons">zoom_in</i>
-        </button>
-        <button class="hidden-xs toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor: pointer; display: none;">
-            <i class="material-icons">loupe</i>
-        </button>
-        <br class="hidden-xs">
-        <button class="hidden-xs" title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
-            <i class="material-icons">undo</i>
-        </button>
-        <button class="hidden-xs" title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
-            <i class="material-icons">redo</i>
-        </button>
-        <button class="hidden-xs toggle" data-tutorial="marcador" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)"
-            style="float: left; display: none;">
+        <span class="hidden-xs" id="i3GEOzoomInOut" style="cursor: pointer;"></span>
+        <button class="i3GeoBgc2 hidden-xs toggle" data-tutorial="marcador" title="{{{x79}}}" onclick="i3GEO.marcador.start(this)" style="float: left; display: none;">
             <i class="material-icons">bookmark_border</i>
         </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d15t}}}" onclick="i3GEO.navega.dialogo.googlemaps()" style="float: left; cursor: pointer; display: none;">
+            <img style="width: 20px;" src="{{{locaplic}}}/imagens/googlemaps.png">
+        </button>
+
         <br class="hidden-xs">
-        <button title="GPS" onclick="i3GEO.navega.geolocal.start()" style="float: left; cursor: pointer;">
+        <button class="i3GeoBgc1 hidden-xs" title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
+            <i class="material-icons">public</i>
+        </button>
+        <button class="i3GeoBgc1 hidden-xs" onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
+            <i class="material-icons">zoom_in</i>
+        </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left; display: none;">
+            <i class="material-icons">grid_on</i>
+        </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" style="visibility: hidden; float: left; display: none;"></button>
+
+        <br class="hidden-xs">
+        <button class="i3GeoBgc1 hidden-xs" title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
+            <i class="material-icons">undo</i>
+        </button>
+        <button class="i3GeoBgc1 hidden-xs" title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
+            <i class="material-icons">redo</i>
+        </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor: pointer; display: none;">
+            <i class="material-icons">highlight</i>
+        </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" style="visibility: hidden; float: left; display: none;"></button>
+
+        <br class="hidden-xs">
+        <button class="i3GeoBgc1" title="GPS" onclick="i3GEO.geolocal.start()" style="float: left; cursor: pointer;">
             <i class="material-icons">gps_fixed</i>
         </button>
-        <button title="{{{itensvisib}}}"
-            onclick="i3GEO.mapa.itensvisib(['.buscaUnidade','.panel-heading','.ol-i3GEOcontrols','.iconesGuiaMovel','.ol-attribution button','.escalanumerica','.localizarxy','.i3GEOfechaGuia'])"
+        <button class="i3GeoBgc1" title="{{{itensvisib}}}"
+            onclick="i3GEO.mapa.itensvisib(['.check','.ol-i3GEOcontrols','.iconesGuiaMovel','.ol-attribution button','.escalanumerica','.localizarxy','.i3GEOfechaGuia'])"
             style="float: left; cursor: pointer;">
-            <i class="material-icons">visibility</i>
+            <i class="material-icons">wallpaper</i>
         </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor: pointer; display: none;">
+            <i class="material-icons">loupe</i>
+        </button>
+        <button class="i3GeoBgc2 hidden-xs toggle" style="visibility: hidden; float: left; display: none;"></button>
     </div>
     <?php include($configInc["inc"]."/barraaguarde.php");?>
     <!-- mensagem de copyright -->
@@ -270,7 +292,7 @@ include ($configInc["inc"] . "/css.php");
             if (isset($corpoconfig["iconeGuiaMovel"])) {
                 echo $corpoconfig["iconeGuiaMovel"];
             }
-            if($corpoconfig["legenda"] == true){
+            if ($corpoconfig["legenda"] == true) {
                 include ($configInc["inc"] . "/iconelegenda.php");
             }
             include ($configInc["inc"] . "/iconetutorial.php");
@@ -299,9 +321,6 @@ include ($configInc["inc"] . "/css.php");
                                 <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">
-                                        <span class="glyphicon glyphicon-globe"></span> {{{a15}}}
-                                    </a></li>
                                 <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">
                                         <span class="glyphicon glyphicon-cloud-download"></span> {{{a3}}}
                                     </a></li>
@@ -366,6 +385,23 @@ include ($configInc["inc"] . "/css.php");
                                 </div>
                             </div>
                             <hr>
+                            <!-- lista de wms cadastrados no sistema de administracao -->
+                            <div class="list-group condensed">
+                                <div class="row-content text-left" style="opacity: 0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                                <i class="material-icons" style="vertical-align: text-bottom;">cloud_queue</i> Webservices
+                                            </h4>
+                                        </a>
+                                        <h6>{{{descws}}}</h6>
+                                    </label>
+                                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
                         </div>
                     </div>
                 </div>
@@ -386,18 +422,18 @@ include ($configInc["inc"] . "/css.php");
                 </div>
             </div>
         </form>
-        <div style="width: 120px; padding-left: 10px; text-align:left;" class="typeahead__container destaque-container">
-            <div class="dropdown" style="display:flex;">
-                <button style="font-size: 2rem;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tags</button>
-                <ul class="destaque-menu dropdown-menu dropdown-menu-right">
+        <div style="width: 120px; padding-left: 10px; text-align: left;" class="typeahead__container destaque-container">
+            <div class="dropdown" style="display: flex;">
+                <button class="noprint" style="font-size: 2rem;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tags</button>
+                <ul class="noprint destaque-menu dropdown-menu dropdown-menu-right">
                 </ul>
-                <span class="typeahead__button">
-                        <button onclick="destaques.table.show();" style="padding-bottom: 6px;">
-                            <i class="material-icons" >view_list</i>
-                        </button>
-                    </span>
+                <span class="noprint typeahead__button">
+                    <button onclick="destaques.table.show();" style="padding-bottom: 6px;">
+                        <i class="material-icons">view_list</i>
+                    </button>
+                </span>
             </div>
-            <div class="destaque-container-pills" ></div>
+            <div class="destaque-container-pills"></div>
         </div>
     </div>
     <div class="<?php if($corpoconfig["legenda"] == true){ echo "hidden ";}?>panel panel-default hidden-xs" id="legendaHtmlSESContainer">

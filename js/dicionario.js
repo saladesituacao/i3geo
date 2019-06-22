@@ -1232,16 +1232,9 @@ g_traducao =
                 es : "Ingrese el nuevo valor de escala y haga clic en el bot&oacute;n aplicar para modificar la escala del mapa"
             }
         ],
-        "d11" : [
-            {
-                pt : "Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
-                en : "Search for Wikipedia data in the current extent of the map. Zoom on the map before opening this option. Large regions can slow down searching",
-                es : "Busca datos en Wikipedia de la extensi&oacute;n actual del mapa. Haga zoom en el mapa antes de abrir esta opci&oacute;n. Regiones muy extensas pueden hacer que la b&uacute;squeda sea muy lenta"
-            }
-        ],
         "d11t" : [
             {
-                pt : "buscar na Wikip&eacute;dia",
+                pt : "Buscar na Wikip&eacute;dia",
                 en : "search on Wikipedia",
                 es : "buscar en Wikipedia"
             }
@@ -1281,20 +1274,6 @@ g_traducao =
                 es : "Google Maps"
             }
         ],
-        "d16" : [
-            {
-                pt : "Pesquisa documentos na base de dados Scielo (dados preliminares)",
-                en : "Search documents in the Scielo database (preliminary data)",
-                es : "B&uacute;squeda de documentos en la base de datos Scielo (datos preliminares)"
-            }
-        ],
-        "d16t" : [
-            {
-                pt : "Scielo",
-                en : "Scielo",
-                es : "Scielo"
-            }
-        ],
         "d17" : [
             {
                 pt : "Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de coordenadas observadas em campo",
@@ -1304,9 +1283,9 @@ g_traducao =
         ],
         "d17t" : [
             {
-                pt : "conflu&ecirc;ncias",
-                en : "confluences",
-                es : "confluencias"
+                pt : "Conflu&ecirc;ncias",
+                en : "Confluences",
+                es : "Confluencias"
             }
         ],
         "d18" : [
@@ -2500,6 +2479,13 @@ g_traducao =
                 es : "Seleccione una o m&aacute;s geometr&iacute;as"
             }
         ],
+        "selduas" : [
+            {
+                pt : "Selecione pelo manos duas geometrias",
+                en : "",
+                es : ""
+            }
+        ],
         "atrib" : [
             {
                 pt : "Atributos",
@@ -2584,6 +2570,20 @@ g_traducao =
                 es : "cortar figura"
             }
         ],
+        "splitf" : [
+            {
+                pt : "divide figura",
+                en : "",
+                es : ""
+            }
+        ],
+        "figura" : [
+            {
+                pt : "figura",
+                en : "",
+                es : ""
+            }
+        ],
         "modf" : [
             {
                 pt : "modifica figura",
@@ -2610,6 +2610,20 @@ g_traducao =
                 pt : "trazer para frente",
                 en : "send forward",
                 es : "traer al frente"
+            }
+        ],
+        "agrupa" : [
+            {
+                pt : "agrupa figuras",
+                en : "",
+                es : ""
+            }
+        ],
+        "desagrupa" : [
+            {
+                pt : "desagrupa figuras",
+                en : "",
+                es : ""
             }
         ],
         "studo" : [
@@ -3050,6 +3064,26 @@ g_traducao =
             en : "",
             es : ""
         }],
+        "desLin" : [{
+            pt : "Desenhe uma linha",
+            en : "",
+            es : ""
+        }],
+        "nomemory" : [{
+            pt : "Nada em mem&oacute;ria para colar.",
+            en : "",
+            es : ""
+        }],
+        "pasteatt" : [{
+            pt : "Existem figuras selecionadas. Os atributos em mem&oacute;ria ser&atilde;o colados nessas figuras.",
+            en : "",
+            es : ""
+        }],
+        "pastetonew" : [{
+            pt : "Para colar como uma nova figura, limpe a sele&ccedil;&atilde;o.",
+            en : "",
+            es : ""
+        }],
         "union" : [{
             pt : "Uni&atilde;o",
             en : "",
@@ -3241,9 +3275,72 @@ g_traducao =
         ],
         "addcamada" : [
             {
-                pt : "Aducionar camada ao mapa",
+                pt : "Adicionar camada ao mapa",
                 en : "",
                 es : ""
+            }
+        ],
+        "nadaenc" : [
+            {
+                pt : "Nada encontrado",
+                en : "Nothing found",
+                es : "No se encontr&oacute; nada"
+            }
+        ],
+        "aproxmais" : [
+            {
+                pt : "Aproxime mais",
+                en : "",
+                es : ""
+            }
+        ],
+        "clickparar" : [
+            {
+                pt : "Clique para parar",
+                en : "",
+                es : ""
+            }
+        ],
+        "geolocfalse" : [
+            {
+                pt : "Seu dispositivo n&atilde;o suporta geolocaliza&ccedil;&atilde;o",
+                en : "",
+                es : ""
+            }
+        ],
+        "catatua" : [
+            {
+                pt : "Cat&aacute;logo atualizado",
+                en : "",
+                es : ""
+            }
+        ],
+        "intervalo_s" : [
+            {
+                pt : "Intervalo em segundos",
+                en : "",
+                es : ""
+            }
+        ],
+        "maprefresh" : [
+            {
+                pt : "Mapa atualizado",
+                en : "",
+                es : ""
+            }
+        ],
+        'selecionaTipoLimiteGeog' : [
+            {
+                pt : "Tipo de limite geogr&aacute;fico",
+                en : "Select a geographic boundary type",
+                es : "Seleccione un tipo de l&iacute;mite geogr&aacute;fico"
+            }
+        ],
+        'selecionaTipoClassificacao' : [
+            {
+                pt : "Tipo de classifica&ccedil;&atilde;o",
+                en : "Select a classification type",
+                es : "Seleccione un tipo de clasificaci&oacute;n"
             }
         ]
     };

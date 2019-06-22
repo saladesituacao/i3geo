@@ -1,7 +1,7 @@
 
 <!-- Catalogo de temas -->
 <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left; height: 100%;'>
-    <div class="i3GEOfechaGuia" style="display: flex;">
+    <div class="i3GeoBgc2 i3GEOfechaGuia" style="display: flex;">
         <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
             <span style="vertical-align: middle">{{{iconeCatalogo}}}</span>
         </button>
@@ -41,7 +41,7 @@
     <div class="separadorCabecalhoGuias">&nbsp;</div>
 
     <div style="overflow-y: scroll; height: calc(100% - 45px);">
-        <div id="catalogoMigalha" style="display: block;" data-template="<?php echo $configInc["pathtemplates"];?>/catalogoMigalha.html"></div>
+        <div id="catalogoMigalha" style="display: none;height: 60px;" data-template="<?php echo $configInc["pathtemplates"];?>/catalogoMigalha.html"></div>
         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
         <div id="catalogoNavegacao"></div>
         <!-- Opcoes -->
@@ -59,7 +59,7 @@
                                 </span>
                             </div>
                         </div>
-                         -->
+ -->
             <!-- A lista de menus e uma funcao de i3GEO.guias.CONFIGURA.adiciona
                             Nessa funcao ficam tambem os parametros:
                             "idOndeMenus": "catalogoMenus",

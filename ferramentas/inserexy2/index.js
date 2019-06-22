@@ -84,11 +84,17 @@ i3GEOF.inserexy2 = {
 
 
 	},
-	montaComboLocal: function(sel){
+	montaComboLocal: function(sel,titulo){
 	    i3GEO.util.comboTemas(
 		    "i3GEOinserexy2temasLocais",
-		    function(retorno){
-			$i("i3GEOinserexy2shapefile").innerHTML = retorno.dados;
+		    function(combo){
+			var c = combo._select + combo._option;
+			if(sel != undefined){
+			    c += "<option value='" + sel +"'>" + titulo  + "</option></select><b class='caret careti'></b>";
+			    $i("i3GEOinserexy2shapefile").innerHTML = c;
+			} else {
+			    $i("i3GEOinserexy2shapefile").innerHTML = combo.dados;
+			}
 			if ($i("i3GEOinserexy2temasLocais")){
 			    if(sel){
 				$i("i3GEOinserexy2temasLocais").value = sel;
@@ -137,7 +143,7 @@ i3GEOF.inserexy2 = {
 			    i3GEO.janela.snackBar({content: $trad('feito')});
 			}
 			if(refresh){
-			    i3GEO.atualiza();
+			    i3GEO.mapa.refresh();
 			    i3GEOF.inserexy2.montaComboLocal();			}
 			if(fn){
 			    fn(data);
@@ -160,8 +166,8 @@ i3GEOF.inserexy2 = {
 		i3GEOF.inserexy2.get({
 		    snackbar: false,
 		    fn: function(retorno){
-			i3GEO.atualiza();
-			i3GEOF.inserexy2.montaComboLocal(retorno);
+			i3GEO.mapa.refresh();
+			i3GEOF.inserexy2.montaComboLocal(retorno,$i("i3GEOjanelaprompt").value);
 		    },
 		    btn: btn,
 		    par: {
@@ -326,7 +332,7 @@ i3GEOF.inserexy2 = {
 	    i3GEOF.inserexy2.get({
 		snackbar: true,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: {
@@ -342,7 +348,7 @@ i3GEOF.inserexy2 = {
 	    i3GEOF.inserexy2.get({
 		snackbar: true,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: {

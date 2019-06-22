@@ -1,36 +1,3 @@
-/**
- * Title: PluginI3Geo
- *
- * Implementa os plugins do i3Geo que adicionam camadas especiais ao mapa,
- * normalmente dados vetoriais processados no navegador Web.
- *
- * Namespace:
- *
- * i3GEO.pluginI3geo
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_plugini3geo.js>
- */
-
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
@@ -42,7 +9,6 @@ i3GEO.pluginI3geo =
 	 *
 	 * Utilizado no editor de mapfiles do sistema de administracao
 	 */
-	//XXX criar plugin geojson
 	//XXX criar plugin que aceite um JSON generico
 	PLUGINS : [
 	    {
@@ -82,14 +48,11 @@ i3GEO.pluginI3geo =
 		    console.info("i3GEO.pluginI3geo.inicia()");
 
 		if(camada.plugini3geo){
-		    if (i3GEO.janela) {
-			i3GEO.janela.abreAguarde();
-		    }
 		    // chama a funcao conforme o tipo de plugin e a interface atual
 		    // para cada plugin deve haver um objeto com as funcoes especificas
 		    // para
 		    // cada interface
-		    i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].inicia(camada);
+		    i3GEO.pluginI3geo[camada.plugini3geo.plugin].inicia(camada);
 		}
 	    },
 	    /**
@@ -168,7 +131,7 @@ i3GEO.pluginI3geo =
 	     */
 	    aplicaPropriedades : function(camada) {
 		if (camada.plugini3geo && camada.plugini3geo != "") {
-		    camada = i3GEO.pluginI3geo[camada.plugini3geo.plugin][i3GEO.Interface.ATUAL].aplicaPropriedades(camada);
+		    camada = i3GEO.pluginI3geo[camada.plugini3geo.plugin].aplicaPropriedades(camada);
 		}
 		return camada;
 	    },
@@ -281,89 +244,6 @@ i3GEO.pluginI3geo =
 		clickArvoreDeCamadas : function(nomecamada) {
 		    return false;
 		},
-		googlemaps : {
-		    aplicaPropriedades : function(camada) {
-			camada.sel = "nao";
-			camada.download = "nao";
-			camada.AGUARDALEGENDA = false;
-			camada.temporizador = "";
-			camada.copia = false;
-			camada.procurar = false;
-			camada.toponimia = false;
-			camada.etiquetas = false;
-			camada.tabela = false;
-			camada.grafico = false;
-			camada.destacar = false;
-			camada.wms = false;
-			camada.classe = "SIM";
-			return camada;
-		    },
-		    inicia : function(camada) {
-			if(document.getElementById("i3GeoHeatmapGm"+camada.name)){
-			    i3GEO.janela.fechaAguarde("aguardePlugin");
-			    return;
-			}
-			var nomeScript = "heatmap_script", p = i3GEO.configura.locaplic + "/ferramentas/heatmap/googlemaps_js.php", carregaJs =
-			    "nao", criaLayer;
-			criaLayer = function() {
-			    var heatmap, pontos;
-
-			    heatmap = new HeatmapOverlay(i3GeoMap, camada.name, {
-				"radius" : camada.plugini3geo.parametros.radius,
-				"visible" : true,
-				"opacity" : camada.transparency,
-				"gradient" : heatmap_config.gradient,
-				"legend" : {
-				    "title" : camada.tema,
-				    "position" : "bl",
-				    "offset" : [
-					5, 50
-					]
-				}
-			    });
-			    // i3GeoMap.overlayMapTypes.insertAt(0, heatmap);
-			    pontos = {
-				    max : camada.plugini3geo.parametros.max,
-				    data : heatmap_dados
-			    };
-			    i3GEO.janela.fechaAguarde("aguardePlugin");
-			    heatmap.setDataSet(pontos);
-			    heatmap.ligaCamada = function() {
-				this.liga();
-			    };
-			    heatmap.desLigaCamada = function() {
-				this.desliga();
-			    };
-			    heatmap.removeCamada = function() {
-				this.destroy();
-			    };
-			    heatmap.atualizaCamada = function() {
-				this.draw();
-			    };
-			    i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
-			    heatmap_dados = null;
-			};
-			// se o script nao existir carrega o codigo e os dados
-			// caso contrario, carrega apenas os dados no script
-			if (!$i(nomeScript)) {
-			    carregaJs = "sim";
-			} else {
-			    nomeScript = "";
-			}
-			p +=
-			    "?carregajs=" + carregaJs
-			    + "&layer="
-			    + camada.name
-			    + "&coluna="
-			    + camada.plugini3geo.parametros.coluna
-			    + "&tipoGradiente="
-			    + camada.plugini3geo.parametros.tipoGradiente
-			    + "&g_sid="
-			    + i3GEO.configura.sid
-			    + "&nomevariavel=heatmap_dados&nomevariavelConfig=heatmap_config";
-			i3GEO.util.scriptTag(p, criaLayer, nomeScript);
-		    }
-		},
 		//
 		// O script que adiciona a camada
 		// define os eventos visibilitychanged, moveend e removed
@@ -388,10 +268,13 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.heatmap.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.heatmap.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada, objMapa) {
+			if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.pluginI3geo.inicia heatmap");
+
 			var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php",criaLayer;
 			criaLayer = function() {
 			    if (typeof (console) !== 'undefined')
@@ -545,99 +428,6 @@ i3GEO.pluginI3geo =
 		clickArvoreDeCamadas : function(nomecamada) {
 		    return false;
 		},
-		googlemaps : {
-		    aplicaPropriedades : function(camada) {
-			camada.sel = "nao";
-			camada.download = "nao";
-			camada.AGUARDALEGENDA = false;
-			camada.temporizador = "";
-			camada.copia = false;
-			camada.procurar = false;
-			camada.toponimia = false;
-			camada.etiquetas = false;
-			camada.tabela = false;
-			camada.grafico = false;
-			camada.destacar = false;
-			camada.wms = false;
-			camada.classe = "NAO";
-			return camada;
-		    },
-		    inicia : function(camada) {
-			if(document.getElementById("i3GeoClustermapGm")){
-			    i3GEO.janela.fechaAguarde("aguardePlugin");
-			    return;
-			}
-			var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs =
-			    "nao", criaLayer;
-			criaLayer = function() {
-			    if (typeof (console) !== 'undefined')
-				console.info("i3GEO.pluginI3geo.markercluster.googlemaps.inicia()");
-
-			    var markercluster, marcas, latLng, marker, n, i;
-			    n = markercluster_dados.length;
-			    marcas = [];
-			    for (i = 0; i < n; i++) {
-				latLng = new google.maps.LatLng(markercluster_dados[i].lat, markercluster_dados[i].lng);
-				marker = new google.maps.Marker({
-				    'position' : latLng,
-				    icon : {
-					url : markercluster_config.ponto.url,
-					scaledSize : new google.maps.Size(markercluster_config.ponto.width, markercluster_config.ponto.height)
-				    }
-				});
-				marcas.push(marker);
-			    }
-			    markercluster = new MarkerClusterer(i3GeoMap, marcas, {
-				"gridSize" : parseInt(camada.plugini3geo.parametros.gridSize, 10),
-				"visible" : true,
-				"opacity" : camada.transparency,
-				"name" : camada.name,
-				"styles" : markercluster_config.estilos
-			    });
-			    i3GEO.janela.fechaAguarde("aguardePlugin");
-			    i3GEO.eventos.cliquePerm.ativo = false;
-
-			    markercluster.ligaCamada = function() {
-				i3GEO.pluginI3geo.OBJETOS[camada.name].ready_ = true;
-				i3GEO.pluginI3geo.OBJETOS[camada.name].redraw();
-				i3GEO.eventos.cliquePerm.ativo = false;
-			    };
-			    markercluster.desLigaCamada = function() {
-				i3GEO.pluginI3geo.OBJETOS[camada.name].resetViewport(true);
-				i3GEO.pluginI3geo.OBJETOS[camada.name].ready_ = false;
-				i3GEO.eventos.cliquePerm.ativo = true;
-			    };
-			    markercluster.removeCamada = function() {
-				i3GEO.pluginI3geo.OBJETOS[camada.name].clearMarkers();
-				i3GEO.eventos.cliquePerm.ativo = true;
-			    };
-			    markercluster.atualizaCamada = function() {
-				i3GEO.pluginI3geo.OBJETOS[camada.name].ready_ = true;
-				i3GEO.pluginI3geo.OBJETOS[camada.name].redraw();
-				i3GEO.eventos.cliquePerm.ativo = false;
-			    };
-			    i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
-			    markercluster_dados = null;
-			};
-			// se o script nao existir carrega o codigo e os dados
-			// caso contrario, carrega apenas os dados no script
-			if (!$i(nomeScript)) {
-			    carregaJs = "sim";
-			} else {
-			    nomeScript = "";
-			}
-			p +=
-			    "?carregajs=" + carregaJs
-			    + "&layer="
-			    + camada.name
-			    + "&g_sid="
-			    + i3GEO.configura.sid
-			    + "&tipoEstilos="
-			    + camada.plugini3geo.parametros.tipoEstilos
-			    + "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
-			i3GEO.util.scriptTag(p, criaLayer, nomeScript);
-		    }
-		},
 		openlayers : {
 		    aplicaPropriedades : function(camada) {
 			camada.sel = "nao";
@@ -656,12 +446,12 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.markercluster.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.markercluster.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada, objMapa) {
 			if (typeof (console) !== 'undefined')
-			    console.info("i3GEO.pluginI3geo.markercluster.openlayers.inicia()");
+			    console.info("i3GEO.pluginI3geo.inicia markercluster");
 
 			// para uso com o mashup
 			if (!objMapa) {
@@ -696,7 +486,7 @@ i3GEO.pluginI3geo =
 			    });
 			    var styleCache = {};
 			    var v = true;
-			    if(camada.status === "0"){
+			    if(parseInt(camada.status,10) === 0){
 				v = false;
 			    }
 			    markercluster = new ol.layer.Vector({
@@ -857,48 +647,6 @@ i3GEO.pluginI3geo =
 		clickArvoreDeCamadas : function(nomecamada) {
 		    return false;
 		},
-		googlemaps : {
-		    aplicaPropriedades : function(camada) {
-			camada.sel = "nao";
-			camada.download = "nao";
-			camada.AGUARDALEGENDA = false;
-			camada.temporizador = "";
-			camada.copia = false;
-			camada.procurar = false;
-			camada.toponimia = false;
-			camada.etiquetas = false;
-			camada.tabela = false;
-			camada.grafico = false;
-			camada.destacar = false;
-			camada.wms = false;
-			camada.classe = "NAO";
-			return camada;
-		    },
-		    inicia : function(camada) {
-			var layerkml = new google.maps.KmlLayer(camada.plugini3geo.parametros.url, {
-			    map : i3GeoMap,
-			    preserveViewport : true,
-			    name : camada.name
-			});
-			i3GEO.janela.fechaAguarde("aguardePlugin");
-			layerkml.ligaCamada = function() {
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].setMap(i3GeoMap);
-			};
-			layerkml.desLigaCamada = function() {
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].setMap(null);
-			};
-			layerkml.removeCamada = function() {
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].setMap(null);
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].resetViewport(true);
-			};
-			layerkml.atualizaCamada = function() {
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].setMap(null);
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].resetViewport(true);
-			    i3GEO.pluginI3geo.OBJETOS[camada.name].setMap(i3GeoMap);
-			};
-			i3GEO.pluginI3geo.OBJETOS[camada.name] = layerkml;
-		    }
-		},
 		openlayers : {
 		    aplicaPropriedades : function(camada) {
 			camada.sel = "nao";
@@ -917,12 +665,12 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.layerkml.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.layerkml.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada) {
 			if (typeof (console) !== 'undefined')
-			    console.info("i3GEO.plugin.layerkml.inicia");
+			    console.info("i3GEO.pluginI3geo.inicia layerkml");
 
 			var layerkml, url, temp;
 			url = i3GEO.configura.locaplic + "/ferramentas/layerkml/getkml.php?sid=" + i3GEO.configura.sid + "&tema=" + camada.name;
@@ -1117,16 +865,16 @@ i3GEO.pluginI3geo =
 		},
 		buscaParForm : function(nomecamada,novaCamada) {
 		    var p, cp, temp, s;
-		    temp = function(retorno) {
+		    temp = function(data) {
 			var camada;
-			retorno.data.ativo = "sim";
+			data.ativo = "sim";
 			// pega o objeto camada
 			if (i3GEO.arvoreDeCamadas) {
 			    camada = i3GEO.arvoreDeCamadas.pegaTema(nomecamada);
-			    camada.plugini3geo = retorno.data;
+			    camada.plugini3geo = data;
 			} else {
 			    camada = {
-				    plugini3geo : retorno.data,
+				    plugini3geo : data,
 				    name : nomecamada
 			    };
 			}
@@ -1141,35 +889,30 @@ i3GEO.pluginI3geo =
 		    if (s === undefined) {
 			s = "";
 		    }
-		    // aqui e necessario buscar os parametros do plugin para poder abrir o formulario
-		    p =
-			i3GEO.configura.locaplic + "/ferramentas/parametrossql/exec.php?g_sid="
-			+ s
-			+ "&funcao=PARAMETROSPLUGIN&tema="
-			+ nomecamada;
-		    cp = new cpaint();
-		    cp.set_response_type("JSON");
-		    cp.call(p, "foo", temp);
+		    i3GEO.request.get({
+			snackbar: false,
+			snackbarmsg: false,
+			btn: false,
+			par: {
+				funcao: "PARAMETROSPLUGIN",
+				tema: nomecamada
+			},
+			prog: "/ferramentas/parametrossql/exec.php",
+			fn: temp
+		    });
 		},
 		inicia : function(camada) {
+		    if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.pluginI3geo.inicia parametrossql");
 
 		    i3GEO.janela.fechaAguarde("aguardePlugin");
 		    var iniciaform = function() {
-			i3GEOF.parametrossql.iniciaJanelaFlutuante(camada);
+			i3GEOF.parametrossql.start(camada);
 		    };
 		    i3GEO.util.scriptTag(
 			    (i3GEO.configura.locaplic + "/ferramentas/parametrossql/dependencias.php"),
 			    iniciaform,
 		    "parametrossql_script");
-		},
-		// @TODO permitir que os parametros sejam modificados mesmo depois de terem sido definidos
-		googlemaps : {
-		    inicia : function(camada) {
-			i3GEO.pluginI3geo.parametrossql.inicia(camada);
-		    },
-		    aplicaPropriedades : function(camada) {
-			return camada;
-		    }
 		},
 		openlayers : {
 		    inicia : function(camada) {
@@ -1255,12 +998,13 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.layergeojson.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.layergeojson.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada) {
 			if (typeof (console) !== 'undefined')
-			    console.info("i3GEO.plugin.layergeojson.inicia");
+			    console.info("i3GEO.pluginI3geo.inicia layergeojson");
+
 
 			var layergeojson, url, temp;
 			url = i3GEO.configura.locaplic + "/ferramentas/layergeojson/getgeojson.php?sid=" + i3GEO.configura.sid + "&tema=" + camada.name;

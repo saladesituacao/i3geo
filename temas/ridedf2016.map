@@ -11,7 +11,7 @@ MAP
       "CLASSE"	"SIM"
       "permitekmz"	"NAO"
       "ITENSDESC"	"Município"
-      "TILES"	"SIM"
+      "TILES"	"NAO"
       "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
       "permitedownload"	"NAO"
       "ITENS"	"munic_res_desc"

@@ -12,12 +12,12 @@ include ("corpo.php");
 ?>
 <script>
 <?php include ("corpo_script.php"); ?>
-    //Funcao que sera executada apos a inicializacao do mapa
+
         i3GEO.util.insereCookie("i3geocodigologin","<?php echo session_id();?>",1);
         i3GEO.util.insereCookie("i3GeoLogin","<?php echo session_id();?>",1);
         i3GEO.util.insereCookie("i3geousuariologin","<?php echo @$usuario;?>",1);
         i3GEO.util.insereCookie("i3geousuarionome","editorabrangenciaubs",1);
-
+    //Funcao que sera executada apos a inicializacao do mapa
     config.afterStart = function() {
 
         $i("openlayers").style.backgroundColor = "black";

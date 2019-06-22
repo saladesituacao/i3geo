@@ -2,9 +2,9 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (select * FROM geo.grade_estatistica_ibge_df) as foo USING UNIQUE id USING SRID=4674"
+    DATA "geom FROM (select * FROM dbauxiliares_geo.grade_estatistica_ibge_df) as foo USING UNIQUE id USING SRID=4674"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"SIM"

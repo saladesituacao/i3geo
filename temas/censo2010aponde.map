@@ -2,9 +2,9 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (select * FROM geo.censo_2010_areasdeponderacao) as foo USING UNIQUE id USING SRID=4674"
+    DATA "geom FROM (select * FROM stage.censo_2010_areasdeponderacao) as foo USING UNIQUE id USING SRID=4674"
     METADATA
       "cache"	"nao"
       "TIP"	"cd_aponde"

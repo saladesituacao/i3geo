@@ -791,23 +791,6 @@ i3GEO.util =
 	    }
 	},
 	/**
-	 * Function: adicionaSHP
-	 *
-	 * Inclui um arquivo shapefile no mapa atual como uma nova camada
-	 *
-	 * Parametros:
-	 *
-	 * {String} - caminho completo do shapefile
-	 */
-	adicionaSHP : function(path) {
-	    var temp = path.split(".");
-	    if ((temp[1] === "SHP") || (temp[1] === "shp")) {
-		i3GEO.php.adicionaTemaSHP(i3GEO.atualiza, path);
-	    } else {
-		i3GEO.php.adicionaTemaIMG(i3GEO.atualiza, path);
-	    }
-	},
-	/**
 	 * Function: abreCor
 	 *
 	 * Abre a janela flutuante para escolha de uma cor
@@ -1369,8 +1352,11 @@ i3GEO.util =
 		classe = "form-control";
 	    }
 	    var monta, temp, temp1, temp2;
-	    monta =	function(retorno) {
-		var i, comboTemas = '', n, nomeopt = "", tema;
+	    monta = function(retorno) {
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.util.comboTemas monta combo");
+
+		var i, comboTemas = '', n, nomeopt = "", tema, _select = "", _option = "";
 		if (retorno == undefined || retorno.length == 0 || (retorno.data && retorno.data.length == 0)) {
 		    retorno = {"data": [{"tema":"","nome":"---"}]};
 		    incluiVazio = false;
@@ -1387,9 +1373,10 @@ i3GEO.util =
 			} else {
 			    comboTemas += "<select class='" + classe + "' id='" + id + "' name='" + nome + "'>";
 			}
+			_select = comboTemas;
 			if (incluiVazio === true) {
-			    //comboTemas += "<option value=''>"+$trad("x92")+"</option>";
 			    comboTemas += "<option value=''>---</option>";
+			    _option += "<option value=''>---</option>";
 			}
 			for (i = 0; i < n; i++) {
 			    if (retorno[i].nome) {
@@ -1401,12 +1388,15 @@ i3GEO.util =
 			    }
 			    if (retorno[i].escondido !== "sim") {
 				comboTemas += "<option value=" + tema + " >" + nomeopt + "</option>";
+				_option += "<option value=" + tema + " >" + nomeopt + "</option>";
 			    }
 			}
 			comboTemas += "</select><b class='caret careti'></b>";
 			temp = {
 				dados : comboTemas,
-				tipo : "dados"
+				tipo : "dados",
+				_select : _select,
+				_option: _option
 			};
 		    } else {
 			if (tipoCombo === "poligonosSelecionados" || tipoCombo === "selecionados" || tipoCombo === "pontosSelecionados") {
@@ -1428,50 +1418,33 @@ i3GEO.util =
 		}
 	    };
 	    if (tipoCombo === "ligados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoCombo === "ligadosComTabela") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS);
-		    temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
-		    temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
-		    monta(temp1.concat(temp2));
-		} else {
-		    i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS);
+		temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
+		temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
+		monta(temp1.concat(temp2));
 	    }
 	    if (tipoCombo === "comTabela") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 3, "menor", i3GEO.arvoreDeCamadas.CAMADAS);
-		    temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
-		    temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
-		    monta(temp1.concat(temp2));
-		}
+		temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 3, "menor", i3GEO.arvoreDeCamadas.CAMADAS);
+		temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
+		temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
+		monta(temp1.concat(temp2));
 	    }
 	    if (tipoCombo === "locais") {
-		i3GEO.php.listaTemasEditaveis(monta, i3GEO.configura.locaplic, i3GEO.configura.sid);
+		temp = i3GEO.arvoreDeCamadas.filtraCamadas("local", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS);
+		monta(temp);
 	    }
 	    if (tipoCombo === "editavel") {
 		temp = i3GEO.arvoreDeCamadas.filtraCamadas("editavel", "SIM", "igual", i3GEO.arvoreDeCamadas.CAMADAS);
 		monta(temp);
 	    }
 	    if (tipoCombo === "selecionados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemasComSel(monta, i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoCombo === "raster") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listatemasTipo(monta, "raster", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoCombo === "pontosSelecionados") {
 		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
@@ -1688,25 +1661,13 @@ i3GEO.util =
 		}
 	    };
 	    if (tipoLista === "ligados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoLista === "selecionados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemasComSel(monta, i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoLista === "raster") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listatemasTipo(monta, "raster", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoLista === "polraster") {
 		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
@@ -1784,27 +1745,27 @@ i3GEO.util =
 		nome = "";
 	    }
 
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta combo");
 
 		var ins, temp, i, nm;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins = [];
 		    ins.push("<select class='" + classe + "' " + estilo + " id='" + id + "' name='" + nome + "'>");
 		    ins.push("<option value='' >---</option>");
-		    temp = retorno.data.valores.length;
+		    temp = data.valores.length;
 		    for (i = 0; i < temp; i++) {
-			if (retorno.data.valores[i].tema === tema) {
+			if (data.valores[i].tema === tema) {
 			    if (alias == "sim") {
-				nm = retorno.data.valores[i].alias;
+				nm = data.valores[i].alias;
 				if (nm === "") {
-				    nm = retorno.data.valores[i].item;
+				    nm = data.valores[i].item;
 				}
 			    } else {
-				nm = retorno.data.valores[i].item;
+				nm = data.valores[i].item;
 			    }
-			    ins.push("<option value='" + retorno.data.valores[i].item + "' >" + nm + "</option>");
+			    ins.push("<option value='" + data.valores[i].item + "' >" + nm + "</option>");
 			}
 		    }
 		    ins.push("</select><b class='caret careti' ></b>");
@@ -1822,7 +1783,7 @@ i3GEO.util =
 		    eval("funcao(temp)");
 		}
 	    };
-	    i3GEO.php.listaItensTema(monta, tema);
+	    i3GEO.tema.itens(monta, tema);
 	},
 	/**
 	 * Function: comboValoresItem
@@ -1853,24 +1814,24 @@ i3GEO.util =
 	    if (arguments.length < 6) {
 		classe = "";
 	    }
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta");
 
 		var ins = [], i, pares, j, valoresSort = [];
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins.push("<select class='" + classe + "' id=" + id + " >");
 		    ins.push("<option value='' >---</option>");
-		    if(retorno.data[1].registros){
-			for (i = 0; i < retorno.data[1].registros.length; i++) {
-			    pares = retorno.data[1].registros[i].valores;
+		    if(data[1].registros){
+			for (i = 0; i < data[1].registros.length; i++) {
+			    pares = data[1].registros[i].valores;
 			    for (j = 0; j < pares.length; j++) {
 				valoresSort.push(pares[j].valor);
 			    }
 			}
 		    } else {
-			for (i = 0; i < retorno.data.length; i++) {
-			    valoresSort.push(retorno.data[i]);
+			for (i = 0; i < data.length; i++) {
+			    valoresSort.push(data[i]);
 			}
 		    }
 		    valoresSort.sort();
@@ -1895,7 +1856,7 @@ i3GEO.util =
 		    eval("funcao(temp)");
 		}
 	    };
-	    i3GEO.php.listaValoresItensTema(monta, tema, itemTema);
+	    i3GEO.tema.valoresItem(monta, tema, itemTema);
 	},
 	/**
 	 * Function: comboFontes
@@ -1912,13 +1873,13 @@ i3GEO.util =
 	    if(!classe){
 		classe= "";
 	    }
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		var ins = "", temp, i, dados;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins += "<select name='font' class='" + classe + "' id='" + id + "'>";
 		    ins += "<option value='arial' >arial</option>";
 		    ins += "<option value='bitmap' >bitmap</option>";
-		    dados = retorno.data.split(",");
+		    dados = data.split(",");
 		    temp = dados.length;
 		    for (i = 0; i < temp; i++) {
 			ins += "<option value='" + dados[i] + "' >" + dados[i] + "</option>";
@@ -1930,7 +1891,7 @@ i3GEO.util =
 		    $i(id).value = sel;
 		}
 	    };
-	    i3GEO.php.listaFontesTexto(monta);
+	    i3GEO.mapa.textFont(monta);
 	},
 	/**
 	 * Function: comboSimNao
@@ -1991,29 +1952,29 @@ i3GEO.util =
 		$i(onde).innerHTML = "<span style=color:red;font-size:10px; >" + $trad("x65") + "</span>";
 	    }
 	    var monta =
-		function(retorno) {
+		function(data) {
 		var ins = [], i, temp, n;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    if (ordenacao === "sim") {
 			ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
 		    } else {
 			ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
 		    }
-		    n = retorno.data.valores.length;
+		    n = data.valores.length;
 		    for (i = 0; i < n; i++) {
-			ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + retorno.data.valores[i].tema + "' id='" + prefixo + retorno.data.valores[i].item +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
+			ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + data.valores[i].tema + "' id='" + prefixo + data.valores[i].item +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
 			ins.push("<td><div class='form-group condensed' ><input class='form-control' style='width:" + size
 				+ "' id='"
 				+ prefixo
-				+ retorno.data.valores[i].item
-				+ retorno.data.valores[i].tema
+				+ data.valores[i].item
+				+ data.valores[i].tema
 				+ "' type=text value='"
-				+ retorno.data.valores[i].item
+				+ data.valores[i].item
 				+ "' /></div></td>");
 			if (ordenacao === "sim") {
 			    ins.push("<td><div class='form-group condensed' ><input class='form-control' id='ordem_" + prefixo
-				    + retorno.data.valores[i].item
-				    + retorno.data.valores[i].tema
+				    + data.valores[i].item
+				    + data.valores[i].tema
 				    + "' type=text size='3' value='"
 				    + i
 				    + "' /></div></td>");
@@ -2036,7 +1997,7 @@ i3GEO.util =
 		}
 		funcao.call(this, temp);
 	    };
-	    i3GEO.php.listaItensTema(monta, tema);
+	    i3GEO.tema.itens(monta, tema);
 	},
 	/**
 	 * Function: radioEpsg
@@ -2066,20 +2027,20 @@ i3GEO.util =
 		c = "";
 	    }
 	    var monta =
-		function(retorno) {
+		function(data) {
 		var ins = [], i, n, temp;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins.push("<table class=lista2 >");
-		    n = retorno.data.length;
+		    n = data.length;
 		    for (i = 0; i < n; i++) {
 			ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' " + c
 				+ " name='"
 				+ prefixo
 				+ "EPSG' type=radio value='"
-				+ retorno.data[i].codigo
+				+ data[i].codigo
 				+ "' /></td>");
 			c = "";
-			ins.push("<td>" + retorno.data[i].nome + "</td></tr>");
+			ins.push("<td>" + data[i].nome + "</td></tr>");
 		    }
 		    ins.push("</table>");
 		    ins = ins.join('');
@@ -2095,7 +2056,7 @@ i3GEO.util =
 		}
 		funcao(temp);
 	    };
-	    i3GEO.php.listaEpsg(monta);
+	    i3GEO.mapa.epsgList(monta);
 	},
 	/**
 	 * Function: comboEpsg
@@ -2121,13 +2082,13 @@ i3GEO.util =
 	    if(!valorDefault){
 		valorDefault = "";
 	    }
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		var ins = [], i, n;
-		if (retorno.data !== undefined) {
-		    n = retorno.data.length;
+		if (data !== undefined) {
+		    n = data.length;
 		    ins.push("<select class='form-control' name='" + idCombo + "' id='" + idCombo + "' onChange='" + funcaoOnChange + "(this)' >");
 		    for (i = 0; i < n; i++) {
-			ins.push("<option value='" + retorno.data[i].codigo + "'>" + retorno.data[i].nome + "</option>");
+			ins.push("<option value='" + data[i].codigo + "'>" + data[i].nome + "</option>");
 		    }
 		    ins.push("</select><b class='caret careti' ></b>");
 		    ins = ins.join('');
@@ -2137,7 +2098,7 @@ i3GEO.util =
 		    onde.innerHTML = '<div class=erro >Ocorreu um erro</div>';
 		}
 	    };
-	    i3GEO.php.listaEpsg(monta);
+	    i3GEO.mapa.epsgList(monta);
 	},
 	/**
 	 * Function: proximoAnterior
@@ -2319,112 +2280,7 @@ i3GEO.util =
 
 	    return false;
 	},
-	/**
-	 * Function: abreColourRamp
-	 *
-	 * Abre a janela flutuante para escolha de um degrade de cores
-	 *
-	 * Parametros:
-	 *
-	 * {String} - id do conteudo da janela flutuante que chamou a funcao. Pode ser "" caso o 'elemento' exista em window.document
-	 *
-	 * {String} - id do elemento HTML (um input por exemplo) que recebera os valores da cor selecionada. O evento 'onchange' desse
-	 * elemento sera acionado quando o botao aplicar for clicado
-	 *
-	 * {numerico} - numero de cores default ao abrir o seletor de cores
-	 *
-	 * {string} - (opcional) nome do tema default que sera mostrado no combo de selecao de temas
-	 *
-	 * {string} - (opcional) valor do estilo 'display' que sera aplicado ao combo. Usado para esconder o combo quando se quer apenas a janela de selecao de cores
-	 */
-	abreColourRamp : function(janelaid, elemento, ncores,temaSel, displayComboTemas) {
-	    var janela, ins, novoel, wdocaiframe, temp, fix = false, wsrc =
-		i3GEO.configura.locaplic + "/ferramentas/colourramp/index.php?ncores="
-		+ ncores
-		+ "&doc="
-		+ janelaid
-		+ "&elemento="
-		+ elemento
-		+ "&locaplic="
-		+ i3GEO.configura.locaplic, // +janela+"&elemento="+elemento+"&tipo="+tipo,
-		nx = "", texto = "", id = "i3geo_janelaCorRamp", classe = "hd";
-	    if(!temaSel){
-		temaSel = "";
-	    }
-	    if ($i(id)) {
-		janela = YAHOO.i3GEO.janela.manager.find(id);
-		janela.show();
-		janela.bringToTop();
-		return;
-	    }
-	    ins = '<div id="' + id + '_cabecalho" class="hd" style="left:10px;">';
-	    if (i3GEO && i3GEO.arvoreDeCamadas) {
-		ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px;top:0px;display:none;'>   ------</div>";
-	    }
-	    ins += "&nbsp;&nbsp;&nbsp;" + texto;
-	    ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
-	    ins += '<iframe name="' + id + 'i" id="i3geo_janelaCorRampi" valign="top" ></iframe>';
-	    ins += '</div>';
-	    novoel = document.createElement("div");
-	    novoel.id = "i3geo_janelaCorRamp";
-	    novoel.style.display = "block";
-	    novoel.innerHTML = ins;
-	    if ($i("i3geo")) {
-		$i("i3geo").appendChild(novoel);
-	    } else {
-		document.body.appendChild(novoel);
-	    }
-	    wdocaiframe = $i("i3geo_janelaCorRampi");
-	    wdocaiframe.style.display = "block";
-	    wdocaiframe.src = wsrc;
-	    wdocaiframe.style.height = "400px";
-	    wdocaiframe.style.width = "100%";
-	    wdocaiframe.style.border = "0px solid white";
 
-	    if (nx === "" || nx === "center") {
-		fix = true;
-	    }
-	    janela = new YAHOO.widget.Panel(id, {
-		height : "480px",
-		modal : false,
-		width : "295px",
-		fixedcenter : fix,
-		constraintoviewport : true,
-		visible : true,
-		iframe : false,
-		strings: {close: "<span class='material-icons'>cancel</span>"}
-	    });
-
-	    YAHOO.i3GEO.janela.manager.register(janela);
-	    janela.render();
-	    $i(id + '_cabecalho').className = classe;
-	    if ($i("i3geo_janelaCorRampComboCabeca")) {
-		temp =
-		    function() {
-		    var p, tema = $i("i3geo_janelaCorRampComboCabecaSel").value, funcao = function(retorno) {
-			parent.frames["i3geo_janelaCorRampi"].document.getElementById("ncores").value = retorno.data.length;
-		    };
-		    if (tema !== "") {
-			i3GEO.mapa.ativaTema(tema);
-			// pega o numero de classes nalegenda do tema escolhido
-			p =
-			    i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
-			    + i3GEO.configura.sid
-			    + "&funcao=editalegenda&opcao=edita&tema="
-			    + tema;
-			i3GEO.util.ajaxGet(p, funcao);
-			cp = new cpaint();
-		    }
-		};
-		i3GEO.janela.comboCabecalhoTemasBs(
-			"i3geo_janelaCorRampComboCabeca",
-			"i3geo_janelaCorRampComboCabecaSel",
-			"none",
-			"ligados",
-			temp,
-			temaSel);
-	    }
-	},
 	/**
 	 * Tenta identificar onde os JS do i3Geo estao localizados
 	 *
@@ -2840,12 +2696,13 @@ i3GEO.util =
 	 * Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 	 */
 	extGeo2OSM : function(ext, retornaArray) {
-	    var metrica, point, temp, sep;
+	    var projView = i3geoOL.getView().getProjection().getCode(),
+	    metrica, point, temp, sep;
 	    sep = " ";
 	    if (typeof ext == "object") {
 		return i3GEO.util.projGeo2OSM(ext);
 	    }
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    if (projView != "EPSG:4326") {
 		temp = ext.split(sep);
 		if (temp === 1) {
 		    sep = ",";
@@ -2853,11 +2710,11 @@ i3GEO.util =
 		}
 		if (temp[0] * 1 <= 180 && temp[0] * 1 >= -180) {
 		    point = new ol.geom.Point([temp[0]*1, temp[1]*1]);
-		    metrica = point.transform("EPSG:4326","EPSG:3857");
+		    metrica = point.transform("EPSG:4326",projView);
 		    ext = metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 		    if (temp.length > 2) {
 			point = new ol.geom.Point([temp[2]*1, temp[3]*1]);
-			metrica = point.transform("EPSG:4326","EPSG:3857");
+			metrica = point.transform("EPSG:4326",projView);
 			ext += sep + metrica.getCoordinates()[0] + sep + metrica.getCoordinates()[1];
 		    }
 		}
@@ -2874,12 +2731,13 @@ i3GEO.util =
 	 * Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 	 */
 	extOSM2Geo : function(ext, retornaArray) {
-	    var point, temp, sep;
+	    var projView = i3geoOL.getView().getProjection().getCode(),
+	    point, temp, sep;
 	    sep = " ";
 	    if (typeof ext == "object") {
 		return i3GEO.util.projOSM2Geo(ext);
 	    }
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    if (projView != "EPSG:4326") {
 		temp = ext.split(sep);
 		if (temp === 1) {
 		    sep = ",";
@@ -2887,11 +2745,11 @@ i3GEO.util =
 		}
 		if (temp[0] * 1 >= 180 || temp[0] * 1 <= -180) {
 		    point = new ol.geom.Point([temp[0], temp[1]]);
-		    point.transform("EPSG:3857","EPSG:4326");
+		    point.transform(projView,"EPSG:4326");
 		    ext = point.getCoordinates()[0] + sep + point.getCoordinates()[1];
 		    if (temp.length > 2) {
 			point = new ol.geom.Point([temp[2], temp[3]]);
-			point.transform("EPSG:3857","EPSG:4326");
+			point.transform(projView,"EPSG:4326");
 			ext += sep + point.getCoordinates()[0] + sep + point.getCoordinates()[1];
 		    }
 		}
@@ -2908,9 +2766,10 @@ i3GEO.util =
 	 * Projeta um objeto OpenLayers de OSM para GEO
 	 */
 	projOSM2Geo : function(obj) {
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    var projView = i3geoOL.getView().getProjection().getCode();
+	    if (projView != "EPSG:4326") {
 		var clone = obj.clone();
-		clone.transform("EPSG:3857","EPSG:4326");
+		clone.transform(projView,"EPSG:4326");
 		return clone;
 	    }else{
 		return obj;
@@ -2922,9 +2781,10 @@ i3GEO.util =
 	 * Projeta um objeto OpenLayers de GEO para OSM
 	 */
 	projGeo2OSM : function(obj) {
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    var projView = i3geoOL.getView().getProjection().getCode();
+	    if (projView != "EPSG:4326") {
 		var clone = obj.clone();
-		clone.transform("EPSG:4326","EPSG:3857");
+		clone.transform("EPSG:4326",projView);
 		return clone;
 	    }else{
 		return obj;

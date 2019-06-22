@@ -1,3 +1,17 @@
+/** cores de fundo padronizadas */
+.i3GeoBgc1 {
+	background-color: rgba(0,60,136,.5) !Important;
+}
+.i3GeoBgc1:hover {
+    background-color: rgba(180, 180, 180, 0.7) !Important;
+}
+.i3GeoBgc2 {
+	background-color: rgba(3, 40, 87, 0.5) !Important;
+}
+.i3GeoBgc2:hover {
+    background-color: rgba(180, 180, 180, 0.7) !Important;
+}
+
 /** para ajustar itens de formularios */
 .modal-body .form-group .form-control {
 	color: initial;
@@ -27,8 +41,10 @@
 }
 .form-group .form-control {
 	font-size: 1.5rem;
+	/*
 	color: white;
 	background-color: #477596;
+	*/
 }
 .form-group input[type=number] {
     margin-top: 14px;
@@ -36,13 +52,15 @@
 }
 .form-group select, .form-group input[type=text] {
     margin-top: 6px;
-    margin-bottom: 0px;
+    margin-bottom: 0px !important;
 }
 .modal-body .form-group input[type=text]{
     background-color: #f9f9f9 !Important;
 }
 .form-group label {
+	/*
 	color: white;
+	*/
 }
 .form-group.label-static label.control-label {
 	top: -40px;
@@ -181,6 +199,9 @@
   max-width: 568px;
   cursor: pointer;
   opacity: 0;
+}
+.snackbar.green {
+	background-color: green;
 }
 .snackbar.red {
 	background-color: red;
@@ -375,8 +396,11 @@
 }
 
 #i3GEOoverlayInfo {
-	background-color: white;
-	padding: 5px;
+	background-color: #3c3a3ac7;
+	padding: 2px;
+	color: whitesmoke;
+	border: 0px solid;
+	border-radius: 5px 5px;
 }
 
 [data-toggle*=collapse]:after {
@@ -419,6 +443,11 @@ Barra de botoes de navegacao
 	font-size: 1.5em;
 	margin: 2px;
 	float: left;
+}
+
+.ol-control button:hover {
+    text-decoration: none;
+    background-color: rgba(180, 180, 180, 0.7);
 }
 /*
 Para a barra de rolagem

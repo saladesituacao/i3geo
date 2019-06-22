@@ -7,7 +7,7 @@ MAP
     END # COMPOSITE
     CONNECTION "abrangencia_app"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs)  as foo using unique cod_ubs using srid=4674"
+    DATA "geom_abrangencia from (SELECT geom_abrangencia,cod_ubs,txt_nome_ubs,cnes FROM dbauxiliares.tb_abrangenciaubs_proposta)  as foo using unique cod_ubs using srid=4674"
     METADATA
       "TIP"	"txt_nome_ubs"
       "cache"	"nao"
@@ -23,11 +23,11 @@ MAP
       "permitekml"	"NAO"
       "permiteogc"	"NAO"
       "convcaracter"	"SIM"
-      "TEMA"	"Área de abrangência das UBS Editável"
+      "TEMA"	"Proposta de áreas de abrangência das UBS Editável"
       "colunaidunico"	"cod_ubs"
       "colunageometria"	"geom_abrangencia"
       "IDENTIFICA"	"sim"
-      "tabelaeditavel"	"tb_abrangenciaubs"
+      "tabelaeditavel"	"tb_abrangenciaubs_proposta"
       "esquematabelaeditavel"	"dbauxiliares"
     END # METADATA
     NAME "abrangenciaubseditmode"

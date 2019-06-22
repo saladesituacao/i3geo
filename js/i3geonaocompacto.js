@@ -42,6 +42,7 @@
 	"../pacotes/nouislider/nouislider.min.js",
 	"../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
 	"ini_i3geo.js",
+	"request.js",
 	"util.js",
 	"dicionario.js",
 	"idioma.js",
@@ -59,6 +60,7 @@
 	"guias.js",
 	"arvoredecamadas.js",
 	"navega.js",
+	"geolocal.js",
 	"social.js",
 	"eventos.js",
 	"arvoredetemas.js",
@@ -79,6 +81,7 @@
 	"legenda.js",
 	"busca.js",
 	"template.js",
+	"timer.js",
 	"caixaDeFerramentas.js"
 	);
 	var nocache = new Date().getTime();

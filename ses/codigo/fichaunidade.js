@@ -22,7 +22,7 @@ function fichaunidade(x,y,layer,cnes){
 
 		});
 		if(data.foto){
-			html.push("<img src='fotosunidades/" + data.foto + "'>");
+			html.push("<img style='width:100%' src='fotosunidades/" + data.foto + "'>");
 		    }
 		html.push('</div>');
 		i3GEO.janela.closeMsg(html.join(""));

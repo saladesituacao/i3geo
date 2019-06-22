@@ -4,7 +4,7 @@ MAP
 	#
 	FONTSET "/var/www/html/i3geo/ses/symbols/fontes.txt"
 	SYMBOLSET "/var/www/html/i3geo/ses/symbols/simbolosv7.sym"
-	SHAPEPATH "/var/www/html/i3geo/aplicmap/dados"
+	SHAPEPATH "/var/www/i3geo/ses/geodados"
 	IMAGECOLOR 255 255 255
 	MAXSIZE 4096
 	#

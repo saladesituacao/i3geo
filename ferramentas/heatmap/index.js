@@ -122,7 +122,7 @@ i3GEOF.heatmap = {
 		    raio: $i("i3GEOheatmapRaio").value
 	    };
 	    if(par.tema == ""){
-		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.centromassa.dicionario));
+		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.heatmap.dicionario));
 		return;
 	    }
 	    i3GEO.janela.abreAguarde();
@@ -139,7 +139,7 @@ i3GEOF.heatmap = {
 			i3GEO.janela.fechaAguarde();
 			btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
 			i3GEO.janela.snackBar({content: $trad('feito')});
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 		    }
 	    )
 	    .fail(

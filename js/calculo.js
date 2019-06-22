@@ -64,9 +64,9 @@ i3GEO.calculo =
 	 * {Numeric} - Coordenada em d&eacute;cimos de grau.
 	 */
 	dms2dd : function(cd, cm, cs) {
-	    cd = cd.replace(",",".");
-	    cm = cm.replace(",",".");
-	    cs = cs.replace(",",".");
+	    cd = ((cd+"").replace(",","."))*1;
+	    cm = ((cm+"").replace(",","."))*1;
+	    cs = ((cs+"").replace(",","."))*1;
 	    try {
 		// converte dms em dd
 		var sinal, spm, mpg, dd;
@@ -85,7 +85,6 @@ i3GEO.calculo =
 	    } catch (e) {
 		if (typeof (console) !== 'undefined')
 		    console.error(e.message)
-
 		    return (0);
 	    }
 	},
@@ -132,7 +131,7 @@ i3GEO.calculo =
 			];
 		}
 		if (arguments.length === 3) {
-		    ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		    ext = i3GEO.mapa.getExtent().geo;
 		    cellsize = i3GEO.parametros.pixelsize;
 		}
 		if (arguments.length === 4) {

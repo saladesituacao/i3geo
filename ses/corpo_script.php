@@ -204,15 +204,15 @@ var config = {
 		    loadTilesWhileInteracting : true,
 		    //os objetos devem ser comentados na interface googleMaps
 		    interactions : [
-                        new ol.interaction.DoubleClickZoom(),
-                        new ol.interaction.KeyboardPan(),
-                        new ol.interaction.KeyboardZoom(),
-                        new ol.interaction.MouseWheelZoom(),
-                        //new ol.interaction.PinchRotate(),
-                        new ol.interaction.PinchZoom(),
-                        //new ol.interaction.DragZoom(),
-                        i3GEO.navega.dragZoom(),
-                        new ol.interaction.DragPan() ]
+			new ol.interaction.DoubleClickZoom(),
+			new ol.interaction.KeyboardPan(),
+			new ol.interaction.KeyboardZoom(),
+			new ol.interaction.MouseWheelZoom(),
+			//new ol.interaction.PinchRotate(),
+			new ol.interaction.PinchZoom(),
+			//new ol.interaction.DragZoom(),
+			i3GEO.navega.dragZoom(),
+			new ol.interaction.DragPan() ]
 	    },
 	    //opcoes para o objeto view, que e uma instancia de MapOptions
 	    //ver https://openlayers.org/en/latest/apidoc/ol.View.html
@@ -278,4 +278,35 @@ var config = {
 		}
 	    }
 	}
+};
+//scripts para as ferramentas de analise em saude
+function open_fluxo(){
+    if (!$i("SESfluxo_css")) {
+	var css = $("<link>", {
+	    "rel" : "stylesheet",
+	    "type" :  "text/css",
+	    "id" : "SESfluxo_css",
+	    "href" : "codigo/dependenciascss.php?includes=fluxo"
+	})[0];
+	css.onload = function(){
+	    i3GEO.util.scriptTag("codigo/dependenciasjs.php?includes=fluxo.index,fluxo.tutorial", "fluxo.initTool()", "SESfluxo_js");
+	};
+	document.getElementsByTagName("head")[0].appendChild(css);
+    } else {
+	fluxo.initTool();
+    }
+};
+function open_timelinemap(nomeagravo,listOptions){
+    if(!nomeagravo || nomeagravo == undefined){
+	nomeagravo = "";
+	listOptions = true;
+    }
+    var temp = function(){
+	timelinemap.initTool(nomeagravo,listOptions);
+    };
+    if (!$i("SEStimelinemap_js")) {
+	i3GEO.util.scriptTag("codigo/dependenciasjs.php?includes=timelinemap.index,timelinemap.config,elasticsearch.15.3.1.min,d3.v4.min", temp, "SEStimelinemap_js");
+    } else {
+	temp();
+    }
 };

@@ -2,9 +2,9 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "ses"
+    CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom from (select * from geo.unidades_de_saude ) as foo using unique id using srid=4674"
+    DATA "geom from (SELECT st_x(geom) AS longitude, st_y(geom) AS latitude, CASE WHEN ba.porta_aberta = 't' THEN 'sim' ELSE 'nao' END AS porta_aberta,ba.cnes as cod_cnes,ba.cnes_desc as nome_estab_cnes,ba.cnes_desc_geral as nomecompleto,ba.cod_tipo_unidade::numeric,bb.desc_tipo_unidade_ses as tipo_unidade,ba.geom FROM dbauxiliares.tb_unidade ba LEFT JOIN dbauxiliares_cnes.tb_tipo_unidade bb ON bb.cod_tipo_unidade = ba.cod_tipo_unidade WHERE geom is not null AND ba.indica_sus = 'S' AND ba.cod_tipo_unidade IN (2,3,6,4,5,7,36,39,40,42,62,76,43,50,67,68,76,81,82,69,70,73,79,80)) as foo using unique cod_cnes using srid=4674"
     LABELMAXSCALEDENOM 35000
     METADATA
       "TIP"	"nome,regiao_de_saude,endereco"
@@ -28,7 +28,7 @@ MAP
       "ITENS"	"nome,regiao_de_saude,endereco"
       "permiteogc"	"SIM"
       "permitekml"	"SIM"
-      "TEMA"	"Unidades de saúde públicas por tipo"
+      "TEMA"	"Principais unidades de saúde públicas por tipo"
       "convcaracter"	"SIM"
       "cortepixels"	"25"
       "IDENTIFICA"	"sim"
@@ -42,9 +42,9 @@ MAP
     TYPE POINT
     UNITS METERS
     LABELCACHE ON
-    CLASS
+    CLASS #
       NAME "UPA"
-      EXPRESSION ('[tipo_unidade]'eq'UPA')
+      EXPRESSION ([cod_tipo_unidade] in "73")
       STYLE
         SIZE 25
         SYMBOL "upa"
@@ -52,9 +52,9 @@ MAP
       END # STYLE
       TITLE ""
     END # CLASS
-    CLASS
+    CLASS #
       NAME "UBS"
-      EXPRESSION ('[tipo_unidade]'eq'UBS' OR '[tipo_unidade]'eq'UBS Rural' OR '[tipo_unidade]'eq'UBS Prisional')
+      EXPRESSION ([cod_tipo_unidade] in "2,3,6")
       STYLE
         SIZE 25
         SYMBOL "ubs"
@@ -62,19 +62,9 @@ MAP
       END # STYLE
       TITLE ""
     END # CLASS
-    CLASS
-      NAME "VigilÃ¢ncia em SaÃºde"
-      EXPRESSION ('[tipo_unidade]'eq'VigilÃ¢ncia em SaÃºde')
-      STYLE
-        SIZE 25
-        SYMBOL "unidade1-azul"
-        OFFSET 0 -12
-      END # STYLE
-      TITLE ""
-    END # CLASS
-    CLASS
+    CLASS #
       NAME "Hospital"
-      EXPRESSION ('[tipo_unidade]'eq'Hospital')
+      EXPRESSION ([cod_tipo_unidade] in "5,7")
       STYLE
         SIZE 25
         SYMBOL "hospital-2"
@@ -82,13 +72,53 @@ MAP
       END # STYLE
       TITLE ""
     END # CLASS
-    CLASS
-      NAME "Outras"
+    CLASS #
+      NAME "Hospital Dia"
+      EXPRESSION ([cod_tipo_unidade] in "62")
       STYLE
-        SIZE 12
-        SYMBOL "ponto"
-        COLOR 255 100 100
-        OUTLINECOLOR 255 255 255
+        SIZE 25
+        SYMBOL "hospital-3"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Policlínica"
+      EXPRESSION ([cod_tipo_unidade] in "4")
+      STYLE
+        SIZE 25
+        SYMBOL "unidade2-laranja"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Centro de especialidade"
+      EXPRESSION ([cod_tipo_unidade] in "36")
+      STYLE
+        SIZE 25
+        SYMBOL "unidade1-laranja"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "CAPS"
+      EXPRESSION ([cod_tipo_unidade] in "70")
+      STYLE
+        SIZE 25
+        SYMBOL "sozialeeinrichtung"
+        OFFSET 0 -12
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS #
+      NAME "Unidade Móvel Terrestre"
+      EXPRESSION ([cod_tipo_unidade] in "49")
+      STYLE
+        SIZE 25
+        SYMBOL "ambulance3"
+        OFFSET 0 -12
       END # STYLE
       TITLE ""
     END # CLASS

@@ -7,16 +7,15 @@ MAP
     END # COMPOSITE
     CONNECTION "stage"
     CONNECTIONTYPE POSTGIS
-    DATA "geom FROM (select geom,ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_desc,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral') as foo USING UNIQUE ra_ses USING SRID=4674"
+    DATA "geom FROM (select geom,ra_ses,ra_prefixo||'-'||ra_ses_desc AS ra_ses_desc,ra_ses_desc AS ra_ses_nome,ra_prefixo from dbauxiliares.tb_ra_ses where id_sistema = 'geral' and ra_ses != '1') as foo USING UNIQUE ra_ses USING SRID=4674"
     METADATA
-      "cache"	"sim"
+      "cache"	"nao"
       "CLASSE"	"SIM"
       "permitekmz"	"NAO"
       "ITENSDESC"	"CÛdigo,Nome,Prefixo"
-      "TILES"	"SIM"
+      "TILES"	"NAO"
       "extensao"	"-48.285791068245 -16.050264262644 -47.308386987058 -15.500255153363"
       "permitedownload"	"NAO"
-      "UTFDATA"	""
       "ITENS"	"ra_ses,ra_ses_desc,ra_prefixo"
       "TIP" "ra_ses_desc,ra_prefixo"
       "permiteogc"	"NAO"
@@ -34,15 +33,6 @@ MAP
     TILEITEM "location"
     TYPE POLYGON
     UNITS METERS
-    CLASS
-      NAME "Bras√≠lia"
-      EXPRESSION ('[ra_ses]'eq'1')
-      STYLE
-        COLOR 233 37 17
-        OUTLINECOLOR 255 255 255
-      END # STYLE
-      TITLE ""
-    END # CLASS
     CLASS
       NAME "Asa Sul"
       EXPRESSION ('[ra_ses]'eq'100')
